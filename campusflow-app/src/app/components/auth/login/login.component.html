@@ -1,1 +1,30 @@
-<p>login works!</p>
+<form [formGroup]="formulario" style="padding: 20px">
+  <h2>Login</h2>
+  <mat-form-field>
+    <mat-label>Nombre de Usuario</mat-label>
+    <input matInput formControlName="username" />
+    <mat-error *ngIf="formulario.get('nombre')?.invalid"
+      >Entre 4 y 50 caracteres</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Contraseña</mat-label>
+    <input matInput formControlName="password" />
+    <!-- #validación contraseña 
+  <mat-error *ngIf="formulario.get('descripcion')?.invalid">Debe de ser de mínimo 20 caracteres</mat-error>
+  -->
+  </mat-form-field>
+
+  <div style="margin-top: 20px">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="formulario.invalid"
+      (click)="acceder()"
+    >
+      Aceptar
+    </button>
+    <button mat-raised-button routerLink="/listar" color="accent">Salir</button>
+  </div>
+</form>
