@@ -1,29 +1,26 @@
-<form [formGroup]="formulario" style="padding: 20px">
+<form [formGroup]="formulario" (ngSubmit)="acceder()" style="padding: 20px">
   <h2>Login</h2>
-  <mat-form-field>
-    <mat-label>Nombre de Usuario</mat-label>
-    <input matInput formControlName="username" />
-    <mat-error *ngIf="formulario.get('nombre')?.invalid"
-      >Entre 4 y 50 caracteres</mat-error
-    >
+
+  <mat-form-field appearance="fill"> <mat-label>Nombre de Usuario</mat-label>
+    <input matInput formControlName="username" required />
+    <mat-error *ngIf="formulario.get('username')?.invalid && formulario.get('username')?.touched">
+      El usuario es obligatorio y debe tener entre 4 y 50 caracteres.
+    </mat-error>
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Contraseña</mat-label>
-    <input matInput formControlName="password" />
-    <!-- #validación contraseña 
-  <mat-error *ngIf="formulario.get('descripcion')?.invalid">Debe de ser de mínimo 20 caracteres</mat-error>
-  -->
+  <mat-form-field appearance="fill"> <mat-label>Contraseña</mat-label>
+    <input matInput type="password" formControlName="password" required /> <mat-error *ngIf="formulario.get('password')?.invalid && formulario.get('password')?.touched">
+      La contraseña es obligatoria y debe tener al menos 6 caracteres.
+    </mat-error>
   </mat-form-field>
 
   <div style="margin-top: 20px">
     <button
       mat-raised-button
       color="primary"
-      [disabled]="formulario.invalid"
-      (click)="acceder()"
+      type="submit" [disabled]="formulario.invalid"
     >
-      Aceptar
+      Acceder
     </button>
     <button mat-raised-button routerLink="/listar" color="accent">Salir</button>
   </div>
