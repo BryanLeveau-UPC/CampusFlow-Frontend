@@ -2,23 +2,23 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegistroEstudianteComponent } from './components/auth/registro-estudiante/registro-estudiante.component';
 import { RegistroProfesorComponent } from './components/auth/registro-profesor/registro-profesor.component';
-import { AsignaturaComponent } from './pages/asignatura/asignatura.component';
-import { EstudiantesComponent } from './pages/estudiantes/estudiantes.component';
-import { EventoComponent } from './pages/evento/evento.component';
-import { GrupoForoComponent } from './pages/grupo-foro/grupo-foro.component';
-import { PublicacionComponent } from './pages/grupo-foro/publicacion/publicacion.component';
-import { RecursosComponent } from './pages/grupo-foro/recursos/recursos.component';
-import { HorarioComponent } from './pages/horario/horario.component';
-import { NotaComponent } from './pages/nota/nota.component';
-import { RecompensaComponent } from './pages/recompensa/recompensa.component';
-import { TareasComponent } from './pages/tareas/tareas.component';
+import { AsignaturaComponent } from './components/asignatura/asignatura.component';
+import { EventoComponent } from './components/evento/evento.component';
+import { GrupoForoComponent } from './components/grupo-foro/grupo-foro.component';
+import { EstudianteComponent } from './components/estudiante/estudiante.component';
+import { PublicacionComponent } from './components/publicacion/publicacion.component';
+import { RecursosComponent } from './components/recursos/recursos.component';
+import { HorarioComponent } from './components/horario/horario.component';
+import { NotaComponent } from './components/nota/nota.component';
+import { RecompensaComponent } from './components/recompensa/recompensa.component';
+import { TareasComponent } from './components/tareas/tareas.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registrar-estudiante', component: RegistroEstudianteComponent },
   { path: 'registrar-profesor', component: RegistroProfesorComponent },
   { path: 'asignatura', component: AsignaturaComponent },
-  { path: 'estudiantes', component: EstudiantesComponent },
+  { path: 'estudiantes', component: EstudianteComponent },
   { path: 'evento', component: EventoComponent },
   { path: 'grupo-foro', component: GrupoForoComponent },
   { path: 'grupo-foro/publicacion', component: PublicacionComponent },
