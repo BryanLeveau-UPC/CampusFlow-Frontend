@@ -1,1 +1,118 @@
-<p>registro-profesor works!</p>
+<!-- src/app/pages/registro-profesor/registro-profesor.component.html -->
+<div class="registration-container">
+  <form [formGroup]="formulario" (ngSubmit)="registrar()" class="registration-form">
+    <h2>Registro de Profesor</h2>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" />
+      <mat-error *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched">
+        <span *ngIf="formulario.get('nombre')?.hasError('required')">El nombre es obligatorio.</span>
+        <span *ngIf="formulario.get('nombre')?.hasError('minlength') || formulario.get('nombre')?.hasError('maxlength')">
+          Debe tener entre 2 y 50 caracteres.
+        </span>
+        <span *ngIf="formulario.get('nombre')?.hasError('pattern')">Solo se permiten letras y espacios.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="apellido" />
+      <mat-error *ngIf="formulario.get('apellido')?.invalid && formulario.get('apellido')?.touched">
+        <span *ngIf="formulario.get('apellido')?.hasError('required')">El apellido es obligatorio.</span>
+        <span *ngIf="formulario.get('apellido')?.hasError('minlength') || formulario.get('apellido')?.hasError('maxlength')">
+          Debe tener entre 2 y 50 caracteres.
+        </span>
+        <span *ngIf="formulario.get('apellido')?.hasError('pattern')">Solo se permiten letras y espacios.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" />
+      <mat-error *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched">
+        <span *ngIf="formulario.get('email')?.hasError('required')">El email es obligatorio.</span>
+        <span *ngIf="formulario.get('email')?.hasError('email')">Debe ser un email válido.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre de Usuario</mat-label>
+      <input matInput formControlName="username" />
+      <mat-error *ngIf="formulario.get('username')?.invalid && formulario.get('username')?.touched">
+        <span *ngIf="formulario.get('username')?.hasError('required')">El nombre de usuario es obligatorio.</span>
+        <span *ngIf="formulario.get('username')?.hasError('minlength') || formulario.get('username')?.hasError('maxlength')">
+          Debe tener entre 4 y 20 caracteres.
+        </span>
+        <span *ngIf="formulario.get('username')?.hasError('pattern')">Solo letras, números y guion bajo.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" type="password" />
+      <mat-error *ngIf="formulario.get('password')?.invalid && formulario.get('password')?.touched">
+        <span *ngIf="formulario.get('password')?.hasError('required')">La contraseña es obligatoria.</span>
+        <span *ngIf="formulario.get('password')?.hasError('minlength')">Debe tener al menos 6 caracteres.</span>
+        <span *ngIf="formulario.get('password')?.hasError('pattern')">
+          Debe contener al menos 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial.
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Confirmar Contraseña</mat-label>
+      <input matInput formControlName="confirmPassword" type="password" />
+      <mat-error *ngIf="formulario.get('confirmPassword')?.invalid && formulario.get('confirmPassword')?.touched">
+        <span *ngIf="formulario.get('confirmPassword')?.hasError('required')">Confirmar contraseña es obligatorio.</span>
+      </mat-error>
+      <mat-error *ngIf="formulario.errors?.['passwordMismatch'] && formulario.get('confirmPassword')?.touched">
+        Las contraseñas no coinciden.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Especialidad</mat-label>
+      <input matInput formControlName="especialidad" />
+      <mat-error *ngIf="formulario.get('especialidad')?.invalid && formulario.get('especialidad')?.touched">
+        <span *ngIf="formulario.get('especialidad')?.hasError('required')">La especialidad es obligatoria.</span>
+        <span *ngIf="formulario.get('especialidad')?.hasError('minlength') || formulario.get('especialidad')?.hasError('maxlength')">
+          Debe tener entre 3 y 100 caracteres.
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Número de Colegiatura</mat-label>
+      <input matInput formControlName="numColegiatura" />
+      <mat-error *ngIf="formulario.get('numColegiatura')?.invalid && formulario.get('numColegiatura')?.touched">
+        <span *ngIf="formulario.get('numColegiatura')?.hasError('required')">El número de colegiatura es obligatorio.</span>
+        <span *ngIf="formulario.get('numColegiatura')?.hasError('minlength') || formulario.get('numColegiatura')?.hasError('maxlength')">
+          Debe tener entre 5 y 20 caracteres y ser alfanumérico.
+        </span>
+        <span *ngIf="formulario.get('numColegiatura')?.hasError('pattern')">Solo se permiten letras y números.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Carrera Principal</mat-label>
+      <mat-select formControlName="idCarrera">
+        <mat-option *ngFor="let carrera of carreras" [value]="carrera.idCarrera">
+          {{ carrera.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formulario.get('idCarrera')?.invalid && formulario.get('idCarrera')?.touched">
+        La carrera es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid">
+        <mat-icon>how_to_reg</mat-icon> Registrar Profesor
+      </button>
+      <button mat-raised-button routerLink="/registro-Selector" color="accent">
+        <mat-icon>arrow_back</mat-icon> Volver a selección
+      </button>
+    </div>
+  </form>
+</div>
