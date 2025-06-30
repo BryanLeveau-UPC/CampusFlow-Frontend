@@ -1,1 +1,105 @@
-<p>registro-estudiante works!</p>
+<div class="registration-container">
+  <form [formGroup]="formulario" (ngSubmit)="registrar()" class="registration-form">
+    <h2>Registro de Estudiante</h2>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" />
+      <mat-error *ngIf="formulario.get('nombre')?.invalid && formulario.get('nombre')?.touched">
+        <span *ngIf="formulario.get('nombre')?.hasError('required')">El nombre es obligatorio.</span>
+        <span *ngIf="formulario.get('nombre')?.hasError('minlength') || formulario.get('nombre')?.hasError('maxlength')">
+          Debe tener entre 2 y 50 caracteres.
+        </span>
+        <span *ngIf="formulario.get('nombre')?.hasError('pattern')">Solo se permiten letras y espacios.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="apellido" />
+      <mat-error *ngIf="formulario.get('apellido')?.invalid && formulario.get('apellido')?.touched">
+        <span *ngIf="formulario.get('apellido')?.hasError('required')">El apellido es obligatorio.</span>
+        <span *ngIf="formulario.get('apellido')?.hasError('minlength') || formulario.get('apellido')?.hasError('maxlength')">
+          Debe tener entre 2 y 50 caracteres.
+        </span>
+        <span *ngIf="formulario.get('apellido')?.hasError('pattern')">Solo se permiten letras y espacios.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" />
+      <mat-error *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched">
+        <span *ngIf="formulario.get('email')?.hasError('required')">El email es obligatorio.</span>
+        <span *ngIf="formulario.get('email')?.hasError('email')">Debe ser un email válido.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre de Usuario</mat-label>
+      <input matInput formControlName="username" />
+      <mat-error *ngIf="formulario.get('username')?.invalid && formulario.get('username')?.touched">
+        <span *ngIf="formulario.get('username')?.hasError('required')">El nombre de usuario es obligatorio.</span>
+        <span *ngIf="formulario.get('username')?.hasError('minlength') || formulario.get('username')?.hasError('maxlength')">
+          Debe tener entre 4 y 20 caracteres.
+        </span>
+        <span *ngIf="formulario.get('username')?.hasError('pattern')">Solo letras, números y guion bajo.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" type="password" />
+      <mat-error *ngIf="formulario.get('password')?.invalid && formulario.get('password')?.touched">
+        <span *ngIf="formulario.get('password')?.hasError('required')">La contraseña es obligatoria.</span>
+        <span *ngIf="formulario.get('password')?.hasError('minlength')">Debe tener al menos 6 caracteres.</span>
+        <span *ngIf="formulario.get('password')?.hasError('pattern')">
+          Debe contener al menos 1 mayúscula, 1 minúscula, 1 número y 1 carácter especial.
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Confirmar Contraseña</mat-label>
+      <input matInput formControlName="confirmPassword" type="password" />
+      <mat-error *ngIf="formulario.get('confirmPassword')?.invalid && formulario.get('confirmPassword')?.touched">
+        <span *ngIf="formulario.get('confirmPassword')?.hasError('required')">Confirmar contraseña es obligatorio.</span>
+      </mat-error>
+      <!-- Error para la validación personalizada a nivel de formulario -->
+      <mat-error *ngIf="formulario.errors?.['passwordMismatch'] && formulario.get('confirmPassword')?.touched">
+        Las contraseñas no coinciden.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Ciclo</mat-label>
+      <input matInput formControlName="ciclo" type="number" min="1" />
+      <mat-error *ngIf="formulario.get('ciclo')?.invalid && formulario.get('ciclo')?.touched">
+        <span *ngIf="formulario.get('ciclo')?.hasError('required')">El ciclo es obligatorio.</span>
+        <span *ngIf="formulario.get('ciclo')?.hasError('min')">El ciclo debe ser al menos 1.</span>
+        <span *ngIf="formulario.get('ciclo')?.hasError('max')">El ciclo no debe exceder de 12.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Carrera</mat-label>
+      <mat-select formControlName="idCarrera">
+        <mat-option *ngFor="let carrera of carreras" [value]="carrera.idCarrera">
+          {{ carrera.Nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formulario.get('idCarrera')?.invalid && formulario.get('idCarrera')?.touched">
+        La carrera es obligatoria.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid">
+        <mat-icon>how_to_reg</mat-icon> Registrar
+      </button>
+      <button mat-raised-button routerLink="/register" color="accent">
+        <mat-icon>arrow_back</mat-icon> Volver a selección
+      </button>
+    </div>
+  </form>
+</div>

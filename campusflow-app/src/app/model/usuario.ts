@@ -4,7 +4,7 @@ export interface Usuario {
   apellido: string;
   email: string;
   username: string;
-  password: string;
+  password?: string;
   rolId: number; 
   Estado: boolean;
 }
