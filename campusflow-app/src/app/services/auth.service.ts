@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   login(authRequest: AuthRequest): Observable<AuthResponse> {
-   return this.http.post<AuthResponse>(`${this.BASE_API_URL}/auth/login`, authRequest).pipe(
+   return this.http.post<AuthResponse>(`${this.BASE_API_URL}/login`, authRequest).pipe(
       tap(response => {
         localStorage.setItem('jwt_token', response.token);
         console.log('Login successful, JWT token stored.');

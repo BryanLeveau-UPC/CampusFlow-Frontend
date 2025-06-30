@@ -1,4 +1,5 @@
 <div class="registration-container">
+  <!-- Asegúrate de que el formulario tenga [formGroup] y (ngSubmit) correctamente -->
   <form [formGroup]="formulario" (ngSubmit)="registrar()" class="registration-form">
     <h2>Registro de Estudiante</h2>
 
@@ -94,7 +95,8 @@
     </mat-form-field>
 
     <div class="form-actions">
-      <button mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid" routerLink="/login">
+      <!-- ELIMINADO routerLink del botón de tipo submit -->
+      <button mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid">
         <mat-icon>how_to_reg</mat-icon> Registrar
       </button>
       <button mat-raised-button routerLink="/registro-Selector" color="accent">

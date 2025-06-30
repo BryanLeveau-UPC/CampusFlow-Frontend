@@ -143,11 +143,9 @@ export class RegistroEstudianteComponent implements OnInit {
         this.carreras = data;
         console.log('Carreras cargadas exitosamente:', this.carreras); // <-- Añadir este log para depurar
         if (this.carreras.length === 0) {
-          console.warn(
-            'La lista de carreras está vacía. Asegúrate de que el backend esté devolviendo datos.'
-          );
+            console.warn('La lista de carreras está vacía. Asegúrate de que el backend esté devolviendo datos.');
         } else {
-          console.log('Primera carrera en la lista:', this.carreras[0]); // <-- Log para ver la estructura de un objeto Carrera
+            console.log('Primera carrera en la lista:', this.carreras[0]); // <-- Log para ver la estructura de un objeto Carrera
         }
       },
       error: (err) => {
