@@ -85,7 +85,7 @@
       <mat-label>Carrera</mat-label>
       <mat-select formControlName="idCarrera">
         <mat-option *ngFor="let carrera of carreras" [value]="carrera.idCarrera">
-          {{ carrera.Nombre }}
+          {{ carrera.nombre }}
         </mat-option>
       </mat-select>
       <mat-error *ngIf="formulario.get('idCarrera')?.invalid && formulario.get('idCarrera')?.touched">
