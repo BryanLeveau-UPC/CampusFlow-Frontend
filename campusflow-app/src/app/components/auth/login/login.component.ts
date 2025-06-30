@@ -38,13 +38,12 @@ import { AuthRequest } from '../../../model/Auth';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit { // Implement OnInit for consistency
+export class LoginComponent implements OnInit { 
   formulario!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    // private usuarioService: UsuarioService, // You might not need this for login directly
-    private authService: AuthService, // <--- INJECT AUTHSERVICE
+    private authService: AuthService, 
     private snackBar: MatSnackBar,
     private ruta: ActivatedRoute,
     private router: Router
