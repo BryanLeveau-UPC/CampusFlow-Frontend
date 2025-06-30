@@ -21,6 +21,7 @@ import { Carrera } from '../../../model/carrera'; // Asegúrate de que este path
 import { CarreraService } from '../../../services/carrera.service'; // Asegúrate de que este path sea correcto
 import { RegisterEstudiantePayload } from '../../../model/RegisterEstudiantePayload'; // Asegúrate de que este path sea correcto
 import { HttpClientModule } from '@angular/common/http'; // Asegúrate de importar HttpClientModule
+import { EstudianteService } from '../../../services/estudiante.service';
 
 @Component({
   selector: 'app-registro-estudiante',
@@ -42,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http'; // Asegúrate de import
   templateUrl: './registro-estudiante.component.html',
   styleUrl: './registro-estudiante.component.css',
 })
-export class RegistroEstudianteComponent implements OnInit { // Implementar OnInit
+export class RegistroEstudianteComponent implements OnInit {
+  // Implementar OnInit
   formulario!: FormGroup;
   id?: number;
   carreras: Carrera[] = [];
@@ -50,6 +52,7 @@ export class RegistroEstudianteComponent implements OnInit { // Implementar OnIn
   constructor(
     private fb: FormBuilder,
     private carreraService: CarreraService,
+    private estudianteSerivce: EstudianteService,
     private snackBar: MatSnackBar,
     private ruta: ActivatedRoute,
     private router: Router
@@ -97,11 +100,7 @@ export class RegistroEstudianteComponent implements OnInit { // Implementar OnIn
         confirmPassword: ['', [Validators.required]],
         ciclo: [
           null,
-          [
-            Validators.required,
-            Validators.min(1),
-            Validators.max(12),
-          ],
+          [Validators.required, Validators.min(1), Validators.max(12)],
         ],
         idCarrera: [null, [Validators.required]],
       },
@@ -144,9 +143,11 @@ export class RegistroEstudianteComponent implements OnInit { // Implementar OnIn
         this.carreras = data;
         console.log('Carreras cargadas exitosamente:', this.carreras); // <-- Añadir este log para depurar
         if (this.carreras.length === 0) {
-            console.warn('La lista de carreras está vacía. Asegúrate de que el backend esté devolviendo datos.');
+          console.warn(
+            'La lista de carreras está vacía. Asegúrate de que el backend esté devolviendo datos.'
+          );
         } else {
-            console.log('Primera carrera en la lista:', this.carreras[0]); // <-- Log para ver la estructura de un objeto Carrera
+          console.log('Primera carrera en la lista:', this.carreras[0]); // <-- Log para ver la estructura de un objeto Carrera
         }
       },
       error: (err) => {
@@ -193,5 +194,28 @@ export class RegistroEstudianteComponent implements OnInit { // Implementar OnIn
     };
 
     console.log('Iniciando registro con payload:', payload);
+
+    // Llama al nuevo servicio para registrar al estudiante
+    this.estudianteSerivce.registerEstudiante(payload).subscribe({
+      next: (response) => {
+        console.log('Registro exitoso:', response);
+        this.snackBar.open('¡Registro de estudiante exitoso!', 'Cerrar', {
+          duration: 3000,
+          panelClass: ['success-snackbar'],
+        });
+        this.router.navigate(['/login']); // Redirige al usuario a la página de login
+      },
+      error: (err) => {
+        console.error('Error en el registro de estudiante:', err);
+        this.snackBar.open(
+          err.message || 'Error en el registro. Inténtelo de nuevo.',
+          'Cerrar',
+          {
+            duration: 5000,
+            panelClass: ['error-snackbar'],
+          }
+        );
+      },
+    });
   }
 }
