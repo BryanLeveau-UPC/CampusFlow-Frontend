@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/auth/login/login.component';
-import { RegistroEstudianteComponent } from './components/auth/registro-estudiante/registro-estudiante.component';
-import { RegistroProfesorComponent } from './components/auth/registro-profesor/registro-profesor.component';
+import { RegistroEstudianteComponent } from './components/registro/registro-estudiante/registro-estudiante.component';
+import { RegistroProfesorComponent } from './components/registro/registro-profesor/registro-profesor.component';
 import { AsignaturaComponent } from './components/asignatura/asignatura.component';
 import { EventoComponent } from './components/evento/evento.component';
 import { GrupoForoComponent } from './components/grupo-foro/grupo-foro.component';
@@ -12,9 +12,11 @@ import { HorarioComponent } from './components/horario/horario.component';
 import { NotaComponent } from './components/nota/nota.component';
 import { RecompensaComponent } from './components/recompensa/recompensa.component';
 import { TareasComponent } from './components/tareas/tareas.component';
+import { RegistroSelectorComponent } from './components/registro/registro-selector/registro-selector.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'registro-Selector', component: RegistroSelectorComponent },
   { path: 'registrar-estudiante', component: RegistroEstudianteComponent },
   { path: 'registrar-profesor', component: RegistroProfesorComponent },
   { path: 'asignatura', component: AsignaturaComponent },
