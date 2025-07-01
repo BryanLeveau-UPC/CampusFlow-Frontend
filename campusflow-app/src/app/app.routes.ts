@@ -18,6 +18,7 @@ import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { MarcasComponent } from './pages/marcas/marcas.component';
 import { EstudianteDashboardComponent } from './components/dashboard/estudiante-dashboard/estudiante-dashboard.component';
 import { ProfesorDashboardComponent } from './components/dashboard/profesor-dashboard/profesor-dashboard.component';
+import { ErrorDashboardComponent } from './components/dashboard/dasboard-error/dasboard-error.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -40,4 +41,5 @@ export const routes: Routes = [
   { path: 'marcas', component: MarcasComponent },
   { path: 'dashboard-estudiante', component: EstudianteDashboardComponent },
   { path: 'dashboard-profesor', component: ProfesorDashboardComponent },
+  { path: 'error-de-carga', component: ErrorDashboardComponent },
 ];
