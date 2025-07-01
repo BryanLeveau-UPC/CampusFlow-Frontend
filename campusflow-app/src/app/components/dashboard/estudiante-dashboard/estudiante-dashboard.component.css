@@ -1,0 +1,420 @@
+/* src/app/components/estudiante-dashboard/estudiante-dashboard.component.css */
+.dashboard-sidenav-container {
+  height: 100vh; /* Make the container take full viewport height */
+  background-color: #f0f2f5;
+}
+
+.dashboard-sidenav {
+  width: 250px; /* Fixed width for the sidebar */
+  background-color: #ffffff; /* El color de fondo del sidenav, el SidebarComponent tendrá su propio fondo */
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+  /* padding: 20px 0; -- Quitado, el padding lo manejará el SidebarComponent */
+  /* display: flex; -- Quitado, el SidebarComponent ya es flex */
+  /* flex-direction: column; -- Quitado */
+}
+
+/* Ocultar el botón de alternancia de sidenav en escritorio */
+.sidenav-toggle-button.desktop-only {
+  display: none;
+}
+
+/* Mostrar el botón de alternancia de sidenav en móvil */
+.sidenav-toggle-button.mobile-only {
+  display: block; /* Por defecto para móviles */
+  margin-right: 10px; /* Espacio entre el botón y la barra de búsqueda */
+}
+
+.dashboard-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Top Bar / Search Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background-color: #ffffff;
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.search-section {
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 500px;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #333;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+}
+
+.user-name {
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+/* Main Content Layout */
+.main-content {
+  display: flex;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.left-panel {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card Styles */
+.section-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+}
+
+.greeting-card h2 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.greeting-card p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.new-assignment-button {
+  background-color: #4285F4;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+}
+
+.new-assignment-button mat-icon {
+  margin-right: 5px;
+}
+
+.assignments-card .mat-card-title {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.active-assignments {
+  font-size: 0.9em;
+  color: #999;
+  margin-bottom: 15px;
+}
+
+.assignment-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 1em;
+  color: #555;
+}
+
+.assignment-item:last-child {
+  border-bottom: none;
+}
+
+.assignment-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  margin-right: 15px;
+}
+
+.assignment-item span:first-of-type {
+  flex-grow: 1;
+}
+
+.assignment-status {
+  font-size: 0.9em;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.due-today {
+  background-color: #ffe0b2;
+  color: #fb8c00;
+}
+
+.due-tomorrow {
+  background-color: #c8e6c9;
+  color: #43a047;
+}
+
+.view-all-button {
+  width: 100%;
+  margin-top: 20px;
+  color: #4285F4;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.study-chart-placeholder {
+  width: 100%;
+  height: 200px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 0.9em;
+  overflow: hidden;
+}
+
+.study-chart-placeholder .chart-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.calendar-card .mat-card-title {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.day-header {
+  font-weight: 600;
+  color: #777;
+  padding-bottom: 8px;
+}
+
+.calendar-grid div {
+  padding: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.calendar-grid div:hover {
+  background-color: #f0f0f0;
+}
+
+.highlighted-day {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  font-weight: 600;
+}
+
+.upcoming-events-card .mat-card-title {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.event-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+.event-day {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #4285F4;
+  margin-right: 15px;
+  line-height: 1;
+}
+
+.event-details {
+  flex-grow: 1;
+}
+
+.event-title {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.event-time {
+  font-size: 0.9em;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.event-description {
+  font-size: 0.85em;
+  color: #999;
+}
+
+.highlighted-event {
+  background-color: #e3f2fd;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.view-full-calendar-button {
+  width: 100%;
+  margin-top: 20px;
+  color: #4285F4;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .dashboard-sidenav {
+    width: 200px;
+  }
+  .dashboard-sidenav-content {
+    padding: 15px;
+  }
+  .main-content {
+    flex-direction: column;
+  }
+  .left-panel,
+  .right-panel {
+    flex: none;
+    width: 100%;
+  }
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .search-section {
+    margin-right: 0;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  .user-section {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  /* Mostrar el botón de alternancia de sidenav en pantallas más pequeñas */
+  .sidenav-toggle-button.mobile-only {
+    display: block;
+  }
+  /* Ocultar el botón de alternancia de escritorio */
+  .sidenav-toggle-button.desktop-only {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 15px;
+  }
+  .top-bar {
+    padding: 10px 15px;
+  }
+  .section-card {
+    padding: 20px;
+  }
+  .greeting-card h2 {
+    font-size: 1.5em;
+  }
+  .assignments-card .mat-card-title,
+  .calendar-card .mat-card-title,
+  .upcoming-events-card .mat-card-title {
+    font-size: 1.2em;
+  }
+  .calendar-grid div {
+    padding: 6px 0;
+  }
+  .event-day {
+    font-size: 1.5em;
+  }
+  .dashboard-sidenav {
+    width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 10px;
+  }
+  .top-bar {
+    padding: 8px 10px;
+  }
+  .user-section {
+    font-size: 1em;
+  }
+  .user-avatar {
+    width: 35px;
+    height: 35px;
+  }
+  .section-card {
+    padding: 15px;
+  }
+  .new-assignment-button {
+    font-size: 0.9em;
+    padding: 8px 15px;
+  }
+  .assignment-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .assignment-icon {
+    margin-bottom: 10px;
+  }
+  .assignment-item span:first-of-type {
+    margin-bottom: 5px;
+  }
+  .assignment-status {
+    width: fit-content;
+  }
+  .event-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .event-day {
+    margin-bottom: 10px;
+  }
+}

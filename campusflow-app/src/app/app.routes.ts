@@ -16,9 +16,11 @@ import { RegistroSelectorComponent } from './components/registro/registro-select
 import { IndexComponent } from './pages/index/index.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 import { MarcasComponent } from './pages/marcas/marcas.component';
+import { EstudianteDashboardComponent } from './components/dashboard/estudiante-dashboard/estudiante-dashboard.component';
+import { ProfesorDashboardComponent } from './components/dashboard/profesor-dashboard/profesor-dashboard.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/index', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard-estudiante', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registro-Selector', component: RegistroSelectorComponent },
   { path: 'registrar-estudiante', component: RegistroEstudianteComponent },
@@ -36,4 +38,6 @@ export const routes: Routes = [
   { path: 'index', component: IndexComponent },
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'marcas', component: MarcasComponent },
+  { path: 'dashboard-estudiante', component: EstudianteDashboardComponent },
+  { path: 'dashboard-profesor', component: ProfesorDashboardComponent },
 ];

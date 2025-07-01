@@ -1,0 +1,146 @@
+<!-- src/app/components/estudiante-dashboard/estudiante-dashboard.component.html -->
+<div class="dashboard-container">
+  <!-- Top Bar / Search Bar -->
+  <div class="top-bar">
+    <div class="search-section">
+      <mat-form-field appearance="outline" class="search-input">
+        <mat-label>Buscar cursos, eventos, y foros</mat-label>
+        <input matInput placeholder="Buscar...">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="user-section">
+      <img src="assets/images/user-avatar.png" alt="User Avatar" class="user-avatar">
+      <span>Welcome,</span>
+      <span class="user-name">Usuario</span> <!-- Placeholder para el nombre del usuario -->
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <!-- Left Section -->
+    <div class="left-panel">
+      <mat-card class="section-card greeting-card">
+        <mat-card-content>
+          <h2>Buen día, Estudiante</h2>
+          <p>Rastrea tus asignaciones y progreso académico.</p>
+          <button mat-flat-button color="primary" class="new-assignment-button">
+            <mat-icon>add</mat-icon> Nueva asignación
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="section-card assignments-card">
+        <mat-card-header>
+          <mat-card-title>Tus asignaciones</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="active-assignments">3 activas</p>
+          <div class="assignment-item">
+            <img src="assets/images/student-icon.png" alt="Student Icon" class="assignment-icon">
+            <span>Presentación de proyecto</span>
+            <span class="assignment-status due-today">Vence hoy</span>
+          </div>
+          <div class="assignment-item">
+            <img src="assets/images/student-icon.png" alt="Student Icon" class="assignment-icon">
+            <span>Examen de medio término</span>
+            <span class="assignment-status due-tomorrow">Vence mañana</span>
+          </div>
+          <div class="assignment-item">
+            <img src="assets/images/student-icon.png" alt="Student Icon" class="assignment-icon">
+            <span>Sesión de estudio en grupo</span>
+            <span class="assignment-status due-today">Vence hoy</span>
+          </div>
+          <button mat-button class="view-all-button">Ver todas las asignaciones</button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="section-card study-hours-card">
+        <mat-card-header>
+          <mat-card-title>Total de horas de estudio</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <!-- Placeholder para el gráfico de horas de estudio -->
+          <div class="study-chart-placeholder">
+            <!-- Aquí iría un componente de gráfico real, por ejemplo, con Chart.js o D3.js -->
+            <img src="assets/images/study-chart-placeholder.png" alt="Gráfico de Horas de Estudio" class="chart-image">
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Right Section (Calendar and Upcoming Events) -->
+    <div class="right-panel">
+      <mat-card class="section-card calendar-card">
+        <mat-card-header>
+          <mat-card-title>Octubre 2023</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="calendar-grid">
+            <div class="day-header">Lun</div>
+            <div class="day-header">Mar</div>
+            <div class="day-header">Mié</div>
+            <div class="day-header">Jue</div>
+            <div class="day-header">Vie</div>
+            <div class="day-header">Sáb</div>
+            <div class="day-header">Dom</div>
+            <!-- Días del calendario (ejemplo) -->
+            <div></div><div></div><div></div><div></div><div></div><div></div><div>1</div>
+            <div>2</div><div class="highlighted-day">3</div><div>4</div><div class="highlighted-day">5</div><div>6</div><div>7</div><div>8</div>
+            <div class="highlighted-day">9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div>
+            <!-- ... más días -->
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="section-card upcoming-events-card">
+        <mat-card-header>
+          <mat-card-title>Próximos eventos</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="event-item">
+            <span class="event-day">2</span>
+            <div class="event-details">
+              <p class="event-title">Conferencia de Invitados</p>
+              <p class="event-time">10:00-11:00</p>
+              <p class="event-description">5 de 5 sesiones, Dr. Smith</p>
+            </div>
+          </div>
+          <div class="event-item highlighted-event">
+            <span class="event-day">5</span>
+            <div class="event-details">
+              <p class="event-title">Feria de Carreras</p>
+              <p class="event-time">13:00-16:00</p>
+              <p class="event-description">Abierto a todos los estudiantes</p>
+            </div>
+          </div>
+          <div class="event-item">
+            <span class="event-day">8</span>
+            <div class="event-details">
+              <p class="event-title">Taller</p>
+              <p class="event-time">14:00-15:30</p>
+              <p class="event-description">3 de 5 sesiones, Ms. Taylor</p>
+            </div>
+          </div>
+          <div class="event-item">
+            <span class="event-day">1</span>
+            <div class="event-details">
+              <p class="event-title">Reunión de equipo</p>
+              <p class="event-time">09:00-10:00</p>
+              <p class="event-description">Evento recurrente</p>
+            </div>
+          </div>
+          <div class="event-item">
+            <span class="event-day">9</span>
+            <div class="event-details">
+              <p class="event-title">Grupo de estudio semanal</p>
+              <p class="event-time">17:00-18:30</p>
+              <p class="event-description">Cada miércoles</p>
+            </div>
+          </div>
+          <button mat-button class="view-full-calendar-button">Ver calendario completo</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
