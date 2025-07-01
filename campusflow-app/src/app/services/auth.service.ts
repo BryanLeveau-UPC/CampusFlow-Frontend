@@ -12,22 +12,37 @@ import { Estudiante } from '../model/estudiante';
   providedIn: 'root'
 })
 export class AuthService {
-   private BASE_API_URL = environment.apiUrl + '/auth';
+  private BASE_API_URL = environment.apiUrl + '/auth';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   login(authRequest: AuthRequest): Observable<AuthResponse> {
-   return this.http.post<AuthResponse>(`${this.BASE_API_URL}/login`, authRequest).pipe(
+    return this.http.post<AuthResponse>(`${this.BASE_API_URL}/login`, authRequest).pipe(
       tap(response => {
+        // Almacenar el token, el rol y el ID del usuario en localStorage
         localStorage.setItem('jwt_token', response.token);
-        console.log('Login successful, JWT token stored.');
-        this.router.navigate(['/dashboard']);
+        localStorage.setItem('user_role', response.role); // Almacena el rol
+        localStorage.setItem('user_id', response.userId.toString()); // Almacena el ID (como string)
+
+        console.log('Login successful, JWT token, role, and user ID stored.');
+        console.log(response.role)
+        console.log(response.userId)
+
+        // Redirigir basado en el rol del usuario
+        if (response.role === 'ROLE_ESTUDIANTE') { // Usa el nombre de rol exacto de tu backend (ej. "ESTUDIANTE", "ROLE_ESTUDIANTE")
+          this.router.navigate(['/dashboard-estudiante']);
+        } else if (response.role === 'ROLE_PROFESOR') { // Si tienes un dashboard para profesores
+          this.router.navigate(['/dashboard-profesor']); // Asegúrate de tener esta ruta y componente
+        } else {
+          // Redirección por defecto si el rol no es reconocido o es otro
+          this.router.navigate(['/default-dashboard']); // Crea una página de dashboard genérica si es necesario
+        }
       }),
-      catchError(this.handleError) 
+      catchError(this.handleError)
     );
   }
 
-      /**
+  /**
    * Registra un nuevo estudiante, creando primero el Usuario y luego el Estudiante.
    * Corresponde a las llamadas POST /usuarios y POST /estudiante en tu backend.
    * @param payload Los datos combinados de usuario y estudiante para el registro.
@@ -77,8 +92,20 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('jwt_token');
-    console.log('Logged out, token removed.');
+    localStorage.removeItem('user_role'); // Elimina el rol al cerrar sesión
+    localStorage.removeItem('user_id');   // Elimina el ID al cerrar sesión
+    console.log('Logged out, token and user info removed.');
     this.router.navigate(['/login']);
+  }
+
+  // Nuevos métodos para obtener el rol y el ID del usuario desde localStorage
+  getUserRole(): string | null {
+    return localStorage.getItem('user_role');
+  }
+
+  getUserId(): number | null {
+    const userId = localStorage.getItem('user_id');
+    return userId ? +userId : null; // Convierte la cadena a número
   }
 
   // Manejador de errores centralizado
