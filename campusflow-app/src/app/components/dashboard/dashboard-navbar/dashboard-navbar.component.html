@@ -1,0 +1,38 @@
+<!-- src/app/components/dashboard-navbar/dashboard-navbar.component.html -->
+<mat-toolbar class="dashboard-top-bar">
+  <div class="search-section">
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Buscar cursos, eventos, y foros</mat-label>
+      <input matInput placeholder="Buscar...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <!-- Nueva sección de navegación para el dashboard -->
+  <div class="dashboard-nav-links">
+    <a mat-button routerLink="/estudiante-dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+      <mat-icon>dashboard</mat-icon> Dashboard
+    </a>
+    <a mat-button routerLink="/tareas" routerLinkActive="active-link">
+      <mat-icon>assignment</mat-icon> Tareas
+    </a>
+    <a mat-button routerLink="/evento" routerLinkActive="active-link">
+      <mat-icon>event</mat-icon> Eventos
+    </a>
+    <a mat-button routerLink="/grupo-foro" routerLinkActive="active-link">
+      <mat-icon>forum</mat-icon> Foro
+    </a>
+    <a mat-button routerLink="/horario" routerLinkActive="active-link">
+      <mat-icon>schedule</mat-icon> Horario
+    </a>
+  </div>
+
+  <span class="spacer"></span> <!-- Empuja la sección de usuario a la derecha -->
+
+  <div class="user-section">
+    <img src="img/user_profile2.jpg" alt="User Avatar" class="user-avatar">
+    <span>Bienvenido,</span>
+    <span class="user-name">Estudiante</span>
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </div>
+</mat-toolbar>

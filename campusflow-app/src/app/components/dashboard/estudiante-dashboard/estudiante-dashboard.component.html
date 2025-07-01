@@ -1,22 +1,9 @@
 <!-- src/app/components/estudiante-dashboard/estudiante-dashboard.component.html -->
-<div class="dashboard-container">
-  <!-- Top Bar / Search Bar -->
-  <div class="top-bar">
-    <div class="search-section">
-      <mat-form-field appearance="outline" class="search-input">
-        <mat-label>Buscar cursos, eventos, y foros</mat-label>
-        <input matInput placeholder="Buscar...">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-    </div>
-    <div class="user-section">
-      <img src="assets/images/user-avatar.png" alt="User Avatar" class="user-avatar">
-      <span>Welcome,</span>
-      <span class="user-name">Usuario</span> <!-- Placeholder para el nombre del usuario -->
-      <mat-icon>keyboard_arrow_down</mat-icon>
-    </div>
-  </div>
+<div class="dashboard-layout">
+  <!-- Aquí se referencia el nuevo componente de la barra de navegación del dashboard -->
+  <app-dashboard-navbar></app-dashboard-navbar>
 
+  <!-- El resto del contenido del dashboard va aquí -->
   <div class="main-content">
     <!-- Left Section -->
     <div class="left-panel">
@@ -60,9 +47,7 @@
           <mat-card-title>Total de horas de estudio</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <!-- Placeholder para el gráfico de horas de estudio -->
           <div class="study-chart-placeholder">
-            <!-- Aquí iría un componente de gráfico real, por ejemplo, con Chart.js o D3.js -->
             <img src="assets/images/study-chart-placeholder.png" alt="Gráfico de Horas de Estudio" class="chart-image">
           </div>
         </mat-card-content>
@@ -84,11 +69,9 @@
             <div class="day-header">Vie</div>
             <div class="day-header">Sáb</div>
             <div class="day-header">Dom</div>
-            <!-- Días del calendario (ejemplo) -->
             <div></div><div></div><div></div><div></div><div></div><div></div><div>1</div>
             <div>2</div><div class="highlighted-day">3</div><div>4</div><div class="highlighted-day">5</div><div>6</div><div>7</div><div>8</div>
             <div class="highlighted-day">9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div>
-            <!-- ... más días -->
           </div>
         </mat-card-content>
       </mat-card>

@@ -1,95 +1,32 @@
 /* src/app/components/estudiante-dashboard/estudiante-dashboard.component.css */
-.dashboard-sidenav-container {
-  height: 100vh; /* Make the container take full viewport height */
-  background-color: #f0f2f5;
-}
-
-.dashboard-sidenav {
-  width: 250px; /* Fixed width for the sidebar */
-  background-color: #ffffff; /* El color de fondo del sidenav, el SidebarComponent tendrá su propio fondo */
-  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
-  /* padding: 20px 0; -- Quitado, el padding lo manejará el SidebarComponent */
-  /* display: flex; -- Quitado, el SidebarComponent ya es flex */
-  /* flex-direction: column; -- Quitado */
-}
-
-/* Ocultar el botón de alternancia de sidenav en escritorio */
-.sidenav-toggle-button.desktop-only {
-  display: none;
-}
-
-/* Mostrar el botón de alternancia de sidenav en móvil */
-.sidenav-toggle-button.mobile-only {
-  display: block; /* Por defecto para móviles */
-  margin-right: 10px; /* Espacio entre el botón y la barra de búsqueda */
-}
-
-.dashboard-sidenav-content {
+.dashboard-layout {
   display: flex;
   flex-direction: column;
+  background-color: #f0f2f5; /* Un gris claro para el fondo del dashboard */
+  min-height: 100vh;
   padding: 20px;
+  font-family: 'Roboto', sans-serif;
 }
 
-/* Top Bar / Search Bar */
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  background-color: #ffffff;
-  padding: 15px 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
+/* El .top-bar (ahora dashboard-top-bar) y sus sub-estilos están en dashboard-navbar.component.css */
+/* Por lo tanto, se eliminan de aquí */
 
-.search-section {
-  flex-grow: 1;
-  margin-right: 20px;
-}
 
-.search-input {
-  width: 100%;
-  max-width: 500px;
-}
-
-.user-section {
-  display: flex;
-  align-items: center;
-  font-size: 1.1em;
-  font-weight: 500;
-  color: #333;
-}
-
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-  object-fit: cover;
-  border: 2px solid #e0e0e0;
-}
-
-.user-name {
-  font-weight: 700;
-  margin-left: 5px;
-}
-
-/* Main Content Layout */
 .main-content {
   display: flex;
-  gap: 20px;
+  gap: 20px; /* Espacio entre las columnas */
   flex-grow: 1;
 }
 
 .left-panel {
-  flex: 2;
+  flex: 2; /* Ocupa más espacio en la izquierda */
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
 .right-panel {
-  flex: 1;
+  flex: 1; /* Ocupa menos espacio en la derecha */
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -115,7 +52,7 @@
 }
 
 .new-assignment-button {
-  background-color: #4285F4;
+  background-color: #4285F4; /* Color azul de Google */
   color: white;
   border-radius: 8px;
   padding: 10px 20px;
@@ -156,7 +93,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: #e0e0e0;
+  background-color: #e0e0e0; /* Color de fondo para el icono de estudiante */
   margin-right: 15px;
 }
 
@@ -172,13 +109,13 @@
 }
 
 .due-today {
-  background-color: #ffe0b2;
-  color: #fb8c00;
+  background-color: #ffe0b2; /* Naranja claro */
+  color: #fb8c00; /* Naranja oscuro */
 }
 
 .due-tomorrow {
-  background-color: #c8e6c9;
-  color: #43a047;
+  background-color: #c8e6c9; /* Verde claro */
+  color: #43a047; /* Verde oscuro */
 }
 
 .view-all-button {
@@ -191,7 +128,7 @@
 
 .study-chart-placeholder {
   width: 100%;
-  height: 200px;
+  height: 200px; /* Altura fija para el placeholder del gráfico */
   background-color: #f5f5f5;
   border-radius: 8px;
   display: flex;
@@ -199,13 +136,13 @@
   justify-content: center;
   color: #aaa;
   font-size: 0.9em;
-  overflow: hidden;
+  overflow: hidden; /* Asegura que la imagen no se desborde */
 }
 
 .study-chart-placeholder .chart-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: contain; /* Ajusta la imagen dentro del contenedor */
 }
 
 .calendar-card .mat-card-title {
@@ -241,8 +178,8 @@
 }
 
 .highlighted-day {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #e3f2fd; /* Azul claro para días con eventos */
+  color: #1976d2; /* Azul más oscuro */
   font-weight: 600;
 }
 
@@ -269,7 +206,7 @@
   font-weight: 700;
   color: #4285F4;
   margin-right: 15px;
-  line-height: 1;
+  line-height: 1; /* Alineación vertical */
 }
 
 .event-details {
@@ -310,12 +247,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-  .dashboard-sidenav {
-    width: 200px;
-  }
-  .dashboard-sidenav-content {
-    padding: 15px;
-  }
   .main-content {
     flex-direction: column;
   }
@@ -324,35 +255,11 @@
     flex: none;
     width: 100%;
   }
-  .top-bar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .search-section {
-    margin-right: 0;
-    margin-bottom: 15px;
-    width: 100%;
-  }
-  .user-section {
-    width: 100%;
-    justify-content: flex-end;
-  }
-  /* Mostrar el botón de alternancia de sidenav en pantallas más pequeñas */
-  .sidenav-toggle-button.mobile-only {
-    display: block;
-  }
-  /* Ocultar el botón de alternancia de escritorio */
-  .sidenav-toggle-button.desktop-only {
-    display: none;
-  }
 }
 
 @media (max-width: 768px) {
-  .dashboard-container {
+  .dashboard-layout {
     padding: 15px;
-  }
-  .top-bar {
-    padding: 10px 15px;
   }
   .section-card {
     padding: 20px;
@@ -371,24 +278,11 @@
   .event-day {
     font-size: 1.5em;
   }
-  .dashboard-sidenav {
-    width: 180px;
-  }
 }
 
 @media (max-width: 480px) {
-  .dashboard-container {
+  .dashboard-layout {
     padding: 10px;
-  }
-  .top-bar {
-    padding: 8px 10px;
-  }
-  .user-section {
-    font-size: 1em;
-  }
-  .user-avatar {
-    width: 35px;
-    height: 35px;
   }
   .section-card {
     padding: 15px;
