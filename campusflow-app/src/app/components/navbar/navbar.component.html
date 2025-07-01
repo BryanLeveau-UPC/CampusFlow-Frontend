@@ -1,11 +1,34 @@
 <mat-toolbar color="primary">
-    <mat-icon>book</mat-icon>
-    <span style="margin-left: 10px;">CampusFlow</span>
-    <span class="spacer"></span>
-    <button mat-icon-button [routerLink]="['/login']" matTooltip="Login">
-        <mat-icon>list</mat-icon>
-    </button>
-    <button mat-icon-button [routerLink]="['/registro-Selector']" matTooltip="Registrate">
-        <mat-icon>add_circle</mat-icon>
-    </button>
+  <mat-icon>book</mat-icon>
+  <span style="margin-left: 10px">CampusFlow</span>
+  <span class="spacer"></span>
+  <!-- Botón de Inicio -->
+  <button mat-button [routerLink]="['/index']" matTooltip="Inicio">
+    <mat-icon>home</mat-icon>
+    <!-- Icono de casa para inicio -->
+    Inicio
+  </button>
+  <!-- Botón para Nosotros -->
+  <button mat-button [routerLink]="['/nosotros']" matTooltip="Sobre Nosotros">
+    <mat-icon>group</mat-icon>
+    <!-- Icono de grupo/personas -->
+    Nosotros
+  </button>
+  <!-- Botón para Marcas -->
+  <button mat-button [routerLink]="['/marcas']" matTooltip="Nuestras Marcas">
+    <mat-icon>business</mat-icon>
+    <!-- Icono de negocio/empresa -->
+    Marcas
+  </button>
+
+  <button mat-icon-button [routerLink]="['/login']" matTooltip="Login">
+    <mat-icon>list</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    [routerLink]="['/registro-Selector']"
+    matTooltip="Registrate"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
 </mat-toolbar>

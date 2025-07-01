@@ -14,6 +14,8 @@ import { RecompensaComponent } from './components/recompensa/recompensa.componen
 import { TareasComponent } from './components/tareas/tareas.component';
 import { RegistroSelectorComponent } from './components/registro/registro-selector/registro-selector.component';
 import { IndexComponent } from './pages/index/index.component';
+import { NosotrosComponent } from './pages/nosotros/nosotros.component';
+import { MarcasComponent } from './pages/marcas/marcas.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -32,4 +34,6 @@ export const routes: Routes = [
   { path: 'recompensa', component: RecompensaComponent },
   { path: 'tareas', component: TareasComponent },
   { path: 'index', component: IndexComponent },
+  { path: 'nosotros', component: NosotrosComponent },
+  { path: 'marcas', component: MarcasComponent },
 ];
