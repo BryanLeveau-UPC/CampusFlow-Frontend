@@ -30,9 +30,11 @@
   <span class="spacer"></span> <!-- Empuja la sección de usuario a la derecha -->
 
   <div class="user-section">
-    <img src="img/user_profile2.jpg" alt="User Avatar" class="user-avatar">
+    <!-- Usar la propiedad userAvatar del componente -->
+    <img [src]="userAvatar" alt="User Avatar" class="user-avatar">
     <span>Bienvenido,</span>
-    <span class="user-name">Estudiante</span>
+    <!-- Mostrar el nombre de usuario dinámicamente -->
+    <span class="user-name">{{ userName }}</span>
     <mat-icon>keyboard_arrow_down</mat-icon>
   </div>
 </mat-toolbar>

@@ -20,7 +20,7 @@ import { EstudianteDashboardComponent } from './components/dashboard/estudiante-
 import { ProfesorDashboardComponent } from './components/dashboard/profesor-dashboard/profesor-dashboard.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/dashboard-estudiante', pathMatch: 'full' },
+  { path: '', redirectTo: '/index', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registro-Selector', component: RegistroSelectorComponent },
   { path: 'registrar-estudiante', component: RegistroEstudianteComponent },
