@@ -13,8 +13,10 @@ import { NotaComponent } from './components/nota/nota.component';
 import { RecompensaComponent } from './components/recompensa/recompensa.component';
 import { TareasComponent } from './components/tareas/tareas.component';
 import { RegistroSelectorComponent } from './components/registro/registro-selector/registro-selector.component';
+import { IndexComponent } from './pages/index/index.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/index', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registro-Selector', component: RegistroSelectorComponent },
   { path: 'registrar-estudiante', component: RegistroEstudianteComponent },
@@ -28,5 +30,6 @@ export const routes: Routes = [
   { path: 'horario', component: HorarioComponent },
   { path: 'nota', component: NotaComponent },
   { path: 'recompensa', component: RecompensaComponent },
-  { path: 'tareas', component: TareasComponent }
+  { path: 'tareas', component: TareasComponent },
+  { path: 'index', component: IndexComponent },
 ];

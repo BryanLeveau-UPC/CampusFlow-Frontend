@@ -1,0 +1,35 @@
+<!-- index.component.html -->
+<!-- Este archivo contendrá el diseño principal de tu página de inicio -->
+<section class="home">
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <!-- Ruta corregida para el Logo.png. Debe estar en src/assets/img/Logo.png -->
+      <img src="img/Logo.png" alt="Logo CampusFlow">
+    </div>
+    <ul class="navbar-menu">
+      <li><a routerLink="/conoce" class="nav-link">Conoce</a></li>
+      <li><a routerLink="/membresia" class="nav-link">Membresía</a></li>
+      <li><a routerLink="/marcas" class="nav-link">Marcas</a></li>
+      <li><a routerLink="/nosotros" class="nav-link">Nosotros</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+    <!-- Rutas corregidas para las imágenes. Deben estar en src/assets/images/ -->
+    <img src="img/Titulo1.png" alt="Título Principal" class="content-title-image">
+    <img src="img/Texto1.png" alt="Texto Descriptivo" class="content-text-image">
+
+    <div class="app-store-buttons">
+      <a mat-button href="https://play.google.com/store" target="_blank" class="app-button google-play">
+        <img src="img/Playstore.png" alt="Google Play" class="app-icon">
+      </a>
+      <a mat-button href="https://www.apple.com/app-store/" target="_blank" class="app-button app-store">
+        <img src="img/Appstore.png" alt="App Store" class="app-icon">
+      </a>
+    </div>
+
+    <div class="right-image-container">
+      <img src="img/right-image.png" alt="Imagen Derecha" class="right-image">
+    </div>
+  </div>
+</section>

@@ -1,0 +1,194 @@
+/* index.component.css */
+/* Mueve aquí todos los estilos que estaban en app.component.css y que son específicos de esta página */
+body {
+  background-color: #DFE1E0;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #DFE1E0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.navbar-logo img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-left: 20px;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 2.5vw;
+  color: rgba(27, 120, 175, 0.67);
+  padding: 20px;
+}
+
+.navbar-menu li {
+  list-style: none;
+  margin-left: 2vw;
+}
+
+.navbar-menu li a {
+  color: rgba(27, 120, 175, 0.67);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar-menu li a:hover {
+  color: rgba(27, 120, 175, 1);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 165px;
+  margin-left: 70px;
+  position: relative;
+}
+
+.right-image-container {
+  position: absolute;
+  top: 50%;
+  right: 450px;
+  transform: translate(50%, -50%);
+  max-width: 100%;
+  height: auto;
+}
+
+.content-title-image,
+.content-text-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 40px;
+}
+
+.app-store-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 40px;
+}
+
+.app-button {
+  margin: 0 10px;
+  padding: 0;
+  min-width: unset;
+  line-height: unset;
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.app-button img.app-icon {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Estilos para las imágenes que no están en el layout principal */
+.center-image1,
+.center-image2,
+.center-image3,
+.center-image4 {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  height: auto;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.back-button img {
+  width: 50px;
+  height: auto;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 1024px) {
+  .navbar-menu {
+    font-size: 3vw;
+  }
+  .right-image-container {
+    right: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 20px;
+  }
+  .navbar-logo {
+    margin-bottom: 10px;
+  }
+  .navbar-logo img {
+    margin-left: 0;
+    max-width: 250px;
+  }
+  .navbar-menu {
+    font-size: 4vw;
+    padding: 10px 0;
+  }
+  .navbar-menu li {
+    margin: 0 1vw;
+  }
+  .content {
+    margin-top: 50px;
+    margin-left: 20px;
+    align-items: center;
+  }
+  .right-image-container {
+    position: static;
+    transform: none;
+    margin-top: 40px;
+    text-align: center;
+  }
+  .right-image {
+    max-width: 80%;
+  }
+  .app-store-buttons {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .app-button {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-menu {
+    font-size: 5vw;
+  }
+  .navbar-logo img {
+    max-width: 180px;
+  }
+  .content-title-image,
+  .content-text-image {
+    max-width: 90%;
+  }
+  .app-button img.app-icon {
+    width: 80%;
+  }
+}
