@@ -10,9 +10,17 @@
 
   <!-- Nueva sección de navegación para el dashboard -->
   <div class="dashboard-nav-links">
-    <a mat-button routerLink="/estudiante-dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+    <a mat-button routerLink="/estudiante-dashboard/home" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
       <mat-icon>dashboard</mat-icon> Dashboard
     </a>
+    <!-- ¡Nuevo botón de Notas! -->
+    <a mat-button routerLink="/nota" routerLinkActive="active-link">
+      <mat-icon>grade</mat-icon> Notas
+    </a>
+
+        <a mat-button routerLink="/estudiante-dashboard/recompensa" routerLinkActive="active-link">
+      <mat-icon>emoji_events</mat-icon> Recompensas <!-- ¡Nuevo botón de Recompensas! -->
+        </a>
     <a mat-button routerLink="/tareas" routerLinkActive="active-link">
       <mat-icon>assignment</mat-icon> Tareas
     </a>

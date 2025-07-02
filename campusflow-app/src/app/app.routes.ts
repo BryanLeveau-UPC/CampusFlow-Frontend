@@ -55,6 +55,6 @@ export const routes: Routes = [
   { path: 'listar-recompenza', component: RecompensaListarComponent },
   { path: 'registrar-recurso', component: RecursoRegistrarComponent },
   { path: 'listar-recurso', component: RecursoListarComponent },
-  { path: 'notas', component: NotasAsignaturaComponent },
+  { path: 'nota', component: NotasAsignaturaComponent },
   { path: '**', redirectTo: '/index' },
 ];

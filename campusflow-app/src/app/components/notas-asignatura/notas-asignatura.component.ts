@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -20,7 +20,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
     MatCardModule,
     MatTableModule,
-    MatExpansionModule,
+    // MatExpansionModule, // Removido
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule
@@ -28,11 +28,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './notas-asignatura.component.html',
   styleUrl: './notas-asignatura.component.css'
 })
-export class NotasAsignaturaComponent {
-  notasAgrupadas: NotasAgrupadasDTO[] = [];
+export class NotasAsignaturaComponent implements OnInit {
+  // Cambiado para contener todas las notas en una lista plana
+  allNotas: Nota[] = [];
   isLoading: boolean = true;
-  displayedColumns: string[] = ['tipo', 'puntaje', 'peso'];
-constructor(
+  // Columnas para la tabla única, incluyendo 'nombreAsignatura'
+  displayedColumns: string[] = ['nombreAsignatura', 'tipo', 'puntaje', 'peso'];
+
+  constructor(
     private authService: AuthService,
     private estudianteService: EstudianteService,
     private notaService: NotaService,
@@ -53,14 +56,16 @@ constructor(
       return;
     }
 
+    // Paso 1: Obtener el IdEstudiante a partir del userId
     this.estudianteService.getEstudianteByUserId(userId).subscribe({
       next: (estudiante: Estudiante) => {
         if (estudiante && estudiante.IdEstudiante) {
           console.log('Estudiante ID encontrado:', estudiante.IdEstudiante);
+          // Paso 2: Obtener todas las notas para ese IdEstudiante
           this.notaService.getNotasByEstudianteId(estudiante.IdEstudiante).subscribe({
             next: (notas: Nota[]) => {
               console.log('Notas recibidas:', notas);
-              this.notasAgrupadas = this.groupAndCalculatePromedio(notas);
+              this.allNotas = notas; // Asigna directamente todas las notas al dataSource
               this.isLoading = false;
             },
             error: (err) => {
@@ -80,45 +85,5 @@ constructor(
         this.isLoading = false;
       }
     });
-  }
-
-  private groupAndCalculatePromedio(notas: Nota[]): NotasAgrupadasDTO[] {
-    const grouped: { [key: number]: NotasAgrupadasDTO } = {};
-
-    notas.forEach(nota => {
-      if (nota.id_asignatura && nota.nombreAsignatura) {
-        if (!grouped[nota.id_asignatura]) {
-          grouped[nota.id_asignatura] = {
-            nombreAsignatura: nota.nombreAsignatura,
-            idAsignatura: nota.id_asignatura,
-            notas: [],
-            promedio: 0,
-            Estado: false
-          };
-        }
-        grouped[nota.id_asignatura].notas.push(nota);
-      }
-    });
-
-    return Object.values(grouped).map(grupo => {
-      let sumatoriaPonderada = 0;
-      let sumatoriaPesos = 0;
-      grupo.notas.forEach(nota => {
-        sumatoriaPonderada += nota.Puntaje * nota.Peso_Nota;
-        sumatoriaPesos += nota.Peso_Nota;
-      });
-      grupo.promedio = sumatoriaPesos > 0 ? sumatoriaPonderada / sumatoriaPesos : 0;
-      return grupo;
-    }).sort((a, b) => a.nombreAsignatura.localeCompare(b.nombreAsignatura));
-  }
-
-  getPromedioColor(promedio: number): string {
-    if (promedio >= 14) {
-      return 'text-green-600';
-    } else if (promedio >= 11) {
-      return 'text-yellow-600';
-    } else {
-      return 'text-red-600';
-    }
   }
 }

@@ -25,7 +25,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class DashboardNavbarComponent implements OnInit {
   userName: string = 'Usuario'; // Propiedad para almacenar el nombre del usuario
-  userAvatar: string = 'assets/images/user-avatar.png'; // Ruta por defecto del avatar
+  userAvatar: string = 'img/user_profile1.png'; // Ruta por defecto del avatar
 
   constructor(private authService: AuthService) { } // Inyectar AuthService
 
