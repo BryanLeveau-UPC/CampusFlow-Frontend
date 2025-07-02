@@ -25,6 +25,7 @@ import { RecompensaRegistrarComponent } from './components/recompensa/recompensa
 import { RecompensaListarComponent } from './components/recompensa/recompensa-listar/recompensa-listar.component';
 import { RecursoRegistrarComponent } from './components/recurso/recurso-registrar/recurso-registrar.component';
 import { RecursoListarComponent } from './components/recurso/recurso-listar/recurso-listar.component';
+import { NotasAsignaturaComponent } from './components/notas-asignatura/notas-asignatura.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -36,10 +37,10 @@ export const routes: Routes = [
   { path: 'estudiantes', component: EstudianteComponent },
   { path: 'registrar-evento', component: EventoRegistrarComponent },
   { path: 'listar-evento', component: EventoListarComponent },
-  { path: 'listar-grupo-foro', component: ForoListarComponent  },
-  { path: 'registrar-publicacion', component: PublicacionRegistrarComponent  },
-  { path: 'listar-publicacion', component: PublicacionListarComponent  },
-  { path: 'listar-publicacion', component: PublicacionaListarComponent  },
+  { path: 'listar-grupo-foro', component: ForoListarComponent },
+  { path: 'registrar-publicacion', component: PublicacionRegistrarComponent },
+  { path: 'listar-publicacion', component: PublicacionListarComponent },
+  { path: 'listar-publicacion', component: PublicacionaListarComponent },
   { path: 'listar-horario', component: HorarioListarComponent },
   { path: 'listar-nota', component: NotaListarComponent },
   { path: 'listar-tareas', component: TareaListarComponent },
@@ -50,8 +51,10 @@ export const routes: Routes = [
   { path: 'dashboard-estudiante', component: EstudianteDashboardComponent },
   { path: 'dashboard-profesor', component: ProfesorDashboardComponent },
   { path: 'error-carga', component: ErrorDashboardComponent },
-  { path: 'registrar-recompenza', component: RecompensaRegistrarComponent  },
-  { path: 'listar-recompenza', component: RecompensaListarComponent  },
-  { path: 'registrar-recurso', component: RecursoRegistrarComponent  },
-  { path: 'listar-recurso', component: RecursoListarComponent  },
+  { path: 'registrar-recompenza', component: RecompensaRegistrarComponent },
+  { path: 'listar-recompenza', component: RecompensaListarComponent },
+  { path: 'registrar-recurso', component: RecursoRegistrarComponent },
+  { path: 'listar-recurso', component: RecursoListarComponent },
+  { path: 'notas', component: NotasAsignaturaComponent },
+  { path: '**', redirectTo: '/index' },
 ];

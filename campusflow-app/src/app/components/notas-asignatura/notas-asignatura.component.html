@@ -1,0 +1,57 @@
+<div class="notas-container">
+  <mat-card class="notas-card">
+    <mat-card-header>
+      <mat-card-title>Mis Notas por Asignatura</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="isLoading" class="loading-spinner">
+        <mat-spinner></mat-spinner>
+        <p>Cargando notas...</p>
+      </div>
+
+      <div *ngIf="!isLoading && notasAgrupadas.length === 0" class="no-notas-message">
+        <mat-icon>info</mat-icon>
+        <p>No hay notas disponibles para mostrar en este momento.</p>
+      </div>
+
+      <mat-accordion *ngIf="!isLoading && notasAgrupadas.length > 0" class="notas-accordion">
+        <mat-expansion-panel *ngFor="let grupo of notasAgrupadas" [(expanded)]="grupo.Estado">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="asignatura-title">
+              {{ grupo.nombreAsignatura }}
+            </mat-panel-title>
+            <mat-panel-description class="promedio-description">
+              Promedio: <span [ngClass]="getPromedioColor(grupo.promedio)">{{ grupo.promedio | number:'1.2-2' }}</span>
+              <mat-icon>{{ grupo.Estado ? 'expand_less' : 'expand_more' }}</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div class="notas-table-container">
+            <table mat-table [dataSource]="grupo.notas" class="full-width-table">
+              <!-- Columna Tipo -->
+              <ng-container matColumnDef="tipo">
+                <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                <td mat-cell *matCellDef="let nota"> {{ nota.Tipo }} </td>
+              </ng-container>
+
+              <!-- Columna Puntaje -->
+              <ng-container matColumnDef="puntaje">
+                <th mat-header-cell *matHeaderCellDef> Puntaje </th>
+                <td mat-cell *matCellDef="let nota"> {{ nota.Puntaje | number:'1.2-2' }} </td>
+              </ng-container>
+
+              <!-- Columna Peso_Nota -->
+              <ng-container matColumnDef="peso">
+                <th mat-header-cell *matHeaderCellDef> Peso </th>
+                <td mat-cell *matCellDef="let nota"> {{ nota.Peso_Nota | number:'1.2-2' }} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>
