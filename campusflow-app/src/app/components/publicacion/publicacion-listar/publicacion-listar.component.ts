@@ -19,7 +19,7 @@ import { PublicacionService } from '../../../services/publicacion.service';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    RouterModule,
+    RouterModule, 
   ],
   templateUrl: './publicacion-listar.component.html',
   styleUrl: './publicacion-listar.component.css',
@@ -76,10 +76,20 @@ export class PublicacionListarComponent implements OnInit {
    */
   verRecursos(idPublicacion: number | undefined): void {
     if (idPublicacion) {
-      // Navega a la ruta de recursos, pasando el ID de la publicación
       this.router.navigate(['/estudiante-dashboard/publicacion', idPublicacion, 'recursos']);
     } else {
       this.snackBar.open('ID de publicación no disponible.', 'Cerrar', { duration: 3000 });
+    }
+  }
+
+  /**
+   * Navega a la pantalla de registro de una nueva publicación para el foro actual.
+   */
+  registrarNuevaPublicacion(): void {
+    if (this.idGrupoForo) {
+      this.router.navigate(['/estudiante-dashboard/foro', this.idGrupoForo, 'publicaciones', 'registrar']);
+    } else {
+      this.snackBar.open('No se puede registrar una publicación sin un ID de foro válido.', 'Cerrar', { duration: 3000 });
     }
   }
 

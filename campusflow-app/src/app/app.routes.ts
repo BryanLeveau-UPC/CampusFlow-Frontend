@@ -14,18 +14,17 @@ import { ErrorDashboardComponent } from './components/dashboard/dasboard-error/d
 import { EventoRegistrarComponent } from './components/evento/evento-registrar/evento-registrar.component';
 import { EventoListarComponent } from './components/evento/evento-listar/evento-listar.component';
 import { ForoListarComponent } from './components/foro/foro-listar/foro-listar.component';
-import { PublicacionaListarComponent } from './components/publicacion/publicaciona-listar/publicaciona-listar.component';
 import { HorarioListarComponent } from './components/horario/horario-listar/horario-listar.component';
 import { NotaListarComponent } from './components/nota/nota-listar/nota-listar.component';
 import { TareaListarComponent } from './components/tarea/tarea-listar/tarea-listar.component';
 import { TareaRegistrarComponent } from './components/tarea/tarea-registrar/tarea-registrar.component';
-import { PublicacionRegistrarComponent } from './components/publicacion/publicacion-registrar/publicacion-registrar.component';
 import { PublicacionListarComponent } from './components/publicacion/publicacion-listar/publicacion-listar.component';
 import { RecompensaRegistrarComponent } from './components/recompensa/recompensa-registrar/recompensa-registrar.component';
 import { RecompensaListarComponent } from './components/recompensa/recompensa-listar/recompensa-listar.component';
 import { RecursoRegistrarComponent } from './components/recurso/recurso-registrar/recurso-registrar.component';
 import { RecursoListarComponent } from './components/recurso/recurso-listar/recurso-listar.component';
 import { NotasAsignaturaComponent } from './components/notas-asignatura/notas-asignatura.component';
+import { PublicacionRegistroComponent } from './components/publicacion/publicacion-registrar/publicacion-registrar.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -38,9 +37,9 @@ export const routes: Routes = [
   { path: 'registrar-evento', component: EventoRegistrarComponent },
   { path: 'listar-evento', component: EventoListarComponent },
   { path: 'listar-grupo-foro', component: ForoListarComponent },
-  { path: 'registrar-publicacion', component: PublicacionRegistrarComponent },
+  { path: 'registrar-publicacion', component: PublicacionRegistroComponent },
   { path: 'listar-publicacion', component: PublicacionListarComponent },
-  { path: 'listar-publicacion', component: PublicacionaListarComponent },
+  { path: 'listar-publicacion', component: PublicacionListarComponent },
   { path: 'listar-horario', component: HorarioListarComponent },
   { path: 'listar-nota', component: NotaListarComponent },
   { path: 'listar-tareas', component: TareaListarComponent },

@@ -9,10 +9,10 @@
         <button mat-flat-button color="accent" (click)="goBackToForos()">
           <mat-icon>arrow_back</mat-icon> Volver a Foros
         </button>
-        <!-- Puedes añadir un botón para crear nueva publicación aquí -->
-        <!-- <button mat-flat-button color="primary" style="margin-left: 10px;">
+        <!-- Botón para registrar nueva publicación -->
+        <button mat-flat-button color="primary" (click)="registrarNuevaPublicacion()" style="margin-left: 10px;">
           <mat-icon>add</mat-icon> Nueva Publicación
-        </button> -->
+        </button>
       </div>
 
       <div *ngIf="isLoading" class="loading-spinner">
