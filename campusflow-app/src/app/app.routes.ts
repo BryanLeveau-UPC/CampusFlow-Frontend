@@ -58,7 +58,11 @@ export const routes: Routes = [
   { path: 'nota', component: NotasAsignaturaComponent },
   { path: 'notas', component: NotasAsignaturaComponent },
   { path: 'recompensa', component: RecompensaListarComponent }, // Asegúrate de que esta ruta esté aquí
-  // { path: 'grupoForo', component: GrupoForoComponent }
+  {path: 'recurso', component: RecursoListarComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'publicacion', component: PublicacionListarComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'tarea', component: TareaListarComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'horario', component: HorarioListarComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'grupo-foro', component: ForoListarComponent }, // Asegúrate de que esta ruta esté aquí
 
   { path: '**', redirectTo: '/index' },
 ];

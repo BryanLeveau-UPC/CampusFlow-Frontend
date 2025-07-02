@@ -17,6 +17,7 @@ export class GrupoForoService {
    * @returns Un Observable con un array de GrupoForoDTO.
    */
   getGruposForo(): Observable<GrupoForo[]> {
+    // Asumimos que el backend ya está devolviendo 'nombreAsignatura' en el DTO
     return this.http.get<GrupoForo[]>(this.apiUrl).pipe(
       catchError(this.handleError)
     );
