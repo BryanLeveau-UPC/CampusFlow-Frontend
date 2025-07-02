@@ -41,5 +41,5 @@ export const routes: Routes = [
   { path: 'marcas', component: MarcasComponent },
   { path: 'dashboard-estudiante', component: EstudianteDashboardComponent },
   { path: 'dashboard-profesor', component: ProfesorDashboardComponent },
-  { path: 'error-de-carga', component: ErrorDashboardComponent },
+  { path: 'error-carga', component: ErrorDashboardComponent },
 ];
