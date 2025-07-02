@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations'; // Importar
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'; // Importar
@@ -17,7 +17,11 @@ export const appConfig: ApplicationConfig = {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true // Permite que haya múltiples interceptores en la aplicación
+      multi: true, // Permite que haya múltiples interceptores en la aplicación
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'es'
     }
   ]
 };

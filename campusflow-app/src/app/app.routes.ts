@@ -50,13 +50,12 @@ export const routes: Routes = [
   { path: 'dashboard-estudiante', component: EstudianteDashboardComponent },
   { path: 'dashboard-profesor', component: ProfesorDashboardComponent },
   { path: 'error-carga', component: ErrorDashboardComponent },
-  { path: 'registrar-recompenza', component: RecompensaRegistrarComponent },
-  { path: 'listar-recompenza', component: RecompensaListarComponent },
+  { path: 'registrar-recompensa', component: RecompensaRegistrarComponent },
+  { path: 'listar-recompensa', component: RecompensaListarComponent },
   { path: 'registrar-recurso', component: RecursoRegistrarComponent },
   { path: 'listar-recurso', component: RecursoListarComponent },
   { path: 'nota', component: NotasAsignaturaComponent },
   { path: 'notas', component: NotasAsignaturaComponent },
-  { path: 'recompensa', component: RecompensaListarComponent }, // Asegúrate de que esta ruta esté aquí
   {path: 'recurso', component: RecursoListarComponent }, // Asegúrate de que esta ruta esté aquí
   {path: 'publicacion', component: PublicacionListarComponent }, // Asegúrate de que esta ruta esté aquí
   {path: 'tarea', component: TareaListarComponent }, // Asegúrate de que esta ruta esté aquí

@@ -28,6 +28,7 @@ import { DashboardNavbarComponent } from '../dashboard-navbar/dashboard-navbar.c
   styleUrl: './estudiante-dashboard.component.css'
 })
 export class EstudianteDashboardComponent implements OnInit {
+  fechaActual: Date = new Date();
   constructor() { }
 
   ngOnInit(): void {
