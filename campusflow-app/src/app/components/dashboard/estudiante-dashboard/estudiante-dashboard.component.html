@@ -69,9 +69,9 @@
             <div class="day-header">Vie</div>
             <div class="day-header">Sáb</div>
             <div class="day-header">Dom</div>
-            <div></div><div></div><div></div><div></div><div></div><div></div><div>1</div>
-            <div>2</div><div class="highlighted-day">3</div><div>4</div><div class="highlighted-day">5</div><div>6</div><div>7</div><div>8</div>
-            <div class="highlighted-day">9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div>
+            <div *ngFor="let diaInfo of diasDelCalendario" [ngClass]="{ 'current-day': diaInfo.esHoy }">
+              {{ diaInfo.dia }}
+            </div>
           </div>
         </mat-card-content>
       </mat-card>

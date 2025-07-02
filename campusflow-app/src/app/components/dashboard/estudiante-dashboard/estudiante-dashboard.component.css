@@ -177,6 +177,14 @@
   background-color: #f0f0f0;
 }
 
+/* Estilo para resaltar el día actual en el calendario */
+.current-day {
+  background-color: #1976d2 !important; /* Un azul fuerte para el día actual */
+  color: white !important;
+  font-weight: bold;
+  border-radius: 50%; /* Para que sea un círculo */
+}
+
 .highlighted-day {
   background-color: #e3f2fd; /* Azul claro para días con eventos */
   color: #1976d2; /* Azul más oscuro */
