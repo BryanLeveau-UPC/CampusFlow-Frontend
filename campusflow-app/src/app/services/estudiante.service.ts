@@ -23,7 +23,6 @@ export class EstudianteService {
       catchError(this.handleError)
     );
   }
-
   /**
    * Obtiene los detalles de un estudiante por el ID de su usuario asociado.
    * Este es el método clave para obtener el IdEstudiante del usuario logueado.
@@ -31,7 +30,8 @@ export class EstudianteService {
    * @returns Un Observable con el objeto EstudianteDTO.
    */
   getEstudianteByUserId(idUsuario: number): Observable<Estudiante> {
-    return this.http.get<Estudiante>(`${this.apiUrl}/estudiantes/by-user/${idUsuario}`).pipe(
+    // Se ha actualizado la ruta para que coincida con el nuevo endpoint del backend
+    return this.http.get<Estudiante>(`${this.apiUrl}/estudiante/busca-por-usuario/${idUsuario}`).pipe(
       catchError(this.handleError)
     );
   }

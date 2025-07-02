@@ -1,1 +1,80 @@
-<p>evento-listar works!</p>
+<div class="evento-listar-container">
+  <mat-card class="evento-listar-card">
+    <mat-card-header>
+      <mat-card-title>Eventos Disponibles para tu Carrera</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="actions-row">
+        <button mat-flat-button color="accent" (click)="goBackToDashboard()">
+          <mat-icon>arrow_back</mat-icon> Volver al Dashboard
+        </button>
+      </div>
+
+      <div *ngIf="isLoading" class="loading-spinner">
+        <mat-spinner></mat-spinner>
+        <p>Cargando eventos...</p>
+      </div>
+
+      <div *ngIf="!isLoading && eventos.length > 0" class="evento-table-container">
+        <table mat-table [dataSource]="eventos" class="full-width-table mat-elevation-z8">
+
+          <!-- Columna: Nombre -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let evento"> {{ evento.Nombre }} </td>
+          </ng-container>
+
+          <!-- Columna: Fecha Inicio -->
+          <ng-container matColumnDef="fechaInicio">
+            <th mat-header-cell *matHeaderCellDef> Fecha Inicio </th>
+            <td mat-cell *matCellDef="let evento"> {{ evento.FechaInicio | date:'dd/MM/yyyy' }} </td>
+          </ng-container>
+
+          <!-- Columna: Fecha Fin -->
+          <ng-container matColumnDef="fechaFin">
+            <th mat-header-cell *matHeaderCellDef> Fecha Fin </th>
+            <td mat-cell *matCellDef="let evento"> {{ evento.FechaFin | date:'dd/MM/yyyy' }} </td>
+          </ng-container>
+
+          <!-- Columna: Descripción -->
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef> Descripción </th>
+            <td mat-cell *matCellDef="let evento"> {{ evento.Descripcion }} </td>
+          </ng-container>
+
+          <!-- Columna: Puntaje Recompensa -->
+          <ng-container matColumnDef="puntajeRecompensa">
+            <th mat-header-cell *matHeaderCellDef> Recompensa </th>
+            <td mat-cell *matCellDef="let evento"> {{ evento.PuntajeRecompensa }} </td>
+          </ng-container>
+
+          <!-- Columna: Acciones -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let evento">
+              <button mat-flat-button color="primary" (click)="unirseAEvento(evento.IdEvento)">
+                <mat-icon>person_add</mat-icon> Unirse
+              </button>
+            </td>
+          </ng-container>
+
+          <!-- Definición de la fila de encabezado -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <!-- Definición de las filas de datos -->
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <!-- Fila que se muestra cuando no hay datos -->
+          <tr class="mat-row no-data-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+              No hay eventos disponibles para tu carrera en este momento.
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div *ngIf="!isLoading && eventos.length === 0" class="no-data-message">
+        <p>No hay eventos disponibles para tu carrera en este momento.</p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
