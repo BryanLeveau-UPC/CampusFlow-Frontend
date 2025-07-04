@@ -18,7 +18,7 @@ import { AuthService } from '../../../services/auth.service';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule, // Añadir MatToolbarModule aquí
-    RouterModule, 
+    RouterModule,
   ],
   templateUrl: './dashboard-navbar.component.html',
   styleUrl: './dashboard-navbar.component.css',
@@ -27,7 +27,7 @@ export class DashboardNavbarComponent implements OnInit {
   userName: string = 'Usuario'; // Propiedad para almacenar el nombre del usuario
   userAvatar: string = 'img/user_profile1.png'; // Ruta por defecto del avatar
 
-  constructor(private authService: AuthService) { } // Inyectar AuthService
+  constructor(private authService: AuthService) {} // Inyectar AuthService
 
   ngOnInit(): void {
     this.loadUserName();
@@ -42,7 +42,7 @@ export class DashboardNavbarComponent implements OnInit {
           // Opcional: Si tu Usuario tiene un campo para la URL del avatar, lo actualizarías aquí
           // this.userAvatar = usuario.avatarUrl || 'assets/images/user-avatar.png';
         },
-        error => {
+        (error) => {
           console.error('Error al cargar los detalles del usuario:', error);
           this.userName = 'Error al cargar'; // Mostrar un mensaje de error
         }

@@ -1,48 +1,27 @@
-<!-- src/app/components/dashboard-navbar/dashboard-navbar.component.html -->
-<mat-toolbar class="dashboard-top-bar">
-  <div class="search-section">
-    <mat-form-field appearance="outline" class="search-input">
-      <mat-label>Buscar cursos, eventos, y foros</mat-label>
-      <input matInput placeholder="Buscar...">
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
+<mat-toolbar color="primary" class="dashboard-toolbar">
+  <div class="toolbar-left">
+    <button mat-button routerLink="/dashboard-estudiante/home">
+      <mat-icon>home</mat-icon>
+      <span>Inicio</span>
+    </button>
+    <button mat-button routerLink="/dashboard-estudiante/notas">
+      <mat-icon>assessment</mat-icon>
+      <span>Mis Notas</span>
+    </button>
+    <button mat-button routerLink="/dashboard-estudiante/tareas">
+      <mat-icon>assignment</mat-icon>
+      <span>Tareas</span>
+    </button>
+    <button mat-button routerLink="/dashboard-estudiante/horario">
+      <mat-icon>schedule</mat-icon>
+      <span>Horario</span>
+    </button>
+    <button mat-button routerLink="/dashboard-estudiante/foro">
+      <mat-icon>forum</mat-icon>
+      <span>Foros</span>
+    </button>
   </div>
-
-  <!-- Nueva sección de navegación para el dashboard -->
-  <div class="dashboard-nav-links">
-    <a mat-button routerLink="/estudiante-dashboard/home" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
-      <mat-icon>dashboard</mat-icon> Dashboard
-    </a>
-    <!-- ¡Nuevo botón de Notas! -->
-    <a mat-button routerLink="/nota" routerLinkActive="active-link">
-      <mat-icon>grade</mat-icon> Notas
-    </a>
-
-        <a mat-button routerLink="/listar-recompensa" routerLinkActive="active-link">
-      <mat-icon>emoji_events</mat-icon> Recompensas <!-- ¡Nuevo botón de Recompensas! -->
-        </a>
-    <a mat-button routerLink="/tarea" routerLinkActive="active-link">
-      <mat-icon>assignment</mat-icon> Tareas
-    </a>
-    <a mat-button routerLink="/listar-evento" routerLinkActive="active-link">
-      <mat-icon>event</mat-icon> Eventos
-    </a>
-    <a mat-button routerLink="/grupo-foro" routerLinkActive="active-link">
-      <mat-icon>forum</mat-icon> Foro
-    </a>
-    <a mat-button routerLink="/horario" routerLinkActive="active-link">
-      <mat-icon>schedule</mat-icon> Horario
-    </a>
-  </div>
-
-  <span class="spacer"></span> <!-- Empuja la sección de usuario a la derecha -->
-
-  <div class="user-section">
-    <!-- Usar la propiedad userAvatar del componente -->
-    <img [src]="userAvatar" alt="User Avatar" class="user-avatar">
-    <span>Bienvenido,</span>
-    <!-- Mostrar el nombre de usuario dinámicamente -->
-    <span class="user-name">{{ userName }}</span>
-    <mat-icon>keyboard_arrow_down</mat-icon>
+  <div class="toolbar-right">
+    <span>{{ userName }}</span>
   </div>
 </mat-toolbar>
