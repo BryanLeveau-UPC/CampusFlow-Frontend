@@ -1,11 +1,11 @@
 // src/app/services/auth.service.ts
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, switchMap, tap, throwError } from 'rxjs';
+import { catchError, Observable, switchMap, tap, throwError, of, map } from 'rxjs';
 import { AuthRequest, AuthResponse } from '../model/Auth';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
-import { Usuario } from '../model/usuario';
+import { Usuario } from '../model/usuario'; // Asegúrate de que este modelo pueda incluir idCarrera
 import { RegisterEstudiantePayload } from '../model/RegisterEstudiantePayload';
 import { Estudiante } from '../model/estudiante';
 import { JwtRequest } from '../model/jwtRequest';
@@ -121,6 +121,33 @@ export class AuthService {
     return this.http.get<Usuario>(`${this.BASE_API_URL}/usuarios/${userId}`).pipe(
       catchError(this.handleError)
     );
+  }
+
+  /**
+   * Obtiene el ID de la carrera del profesor actual directamente del JWT.
+   * Asume que el 'idCarrera' está incluido en el payload del token.
+   * @returns Observable<number | null> El ID de la carrera del profesor, o null si no se encuentra o el token no es válido.
+   */
+  getProfesorCarreraId(): Observable<number | null> {
+    const token = this.getToken();
+    if (!token || this.jwtHelper.isTokenExpired(token)) {
+      console.warn('No hay token o el token ha expirado. No se puede obtener idCarrera del JWT.');
+      return of(null);
+    }
+
+    try {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      // *** IMPORTANTE: Asegúrate de que tu backend incluya 'idCarrera' en el payload del JWT. ***
+      // Si tu backend usa un nombre diferente para la propiedad, ajústalo aquí (ej. decodedToken.carreraId)
+      const idCarrera = decodedToken?.idCarrera || null;
+      if (idCarrera === null) {
+        console.warn('La propiedad "idCarrera" no se encontró en el payload del JWT.');
+      }
+      return of(idCarrera);
+    } catch (error) {
+      console.error('Error al decodificar el token JWT para obtener idCarrera:', error);
+      return of(null);
+    }
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
