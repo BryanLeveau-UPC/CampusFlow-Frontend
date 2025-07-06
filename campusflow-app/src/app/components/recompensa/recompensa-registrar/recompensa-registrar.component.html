@@ -1,1 +1,43 @@
-<p>recompensa-registrar works!</p>
+<div class="register-recompensa-container">
+  <mat-card class="register-recompensa-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Registrar Nueva Recompensa</h2>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="recompensaForm" (ngSubmit)="onSubmit()" class="recompensa-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Plataforma</mat-label>
+          <input matInput formControlName="Plataforma" placeholder="Ej. Twitch, YouTube, Discord">
+          <mat-error *ngIf="recompensaForm.get('Plataforma')?.hasError('required') && recompensaForm.get('Plataforma')?.touched">
+            La plataforma es requerida.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>URL</mat-label>
+          <input matInput formControlName="URL" placeholder="Ej. https://www.ejemplo.com/recompensa">
+          <mat-error *ngIf="recompensaForm.get('URL')?.hasError('required') && recompensaForm.get('URL')?.touched">
+            La URL es requerida.
+          </mat-error>
+          <mat-error *ngIf="recompensaForm.get('URL')?.hasError('pattern') && recompensaForm.get('URL')?.touched">
+            Por favor, ingrese una URL válida.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-stroked-button color="warn" type="button" (click)="goBackToList()" [disabled]="loading">
+            <mat-icon>cancel</mat-icon> Cancelar
+          </button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="!recompensaForm.valid || loading">
+            <mat-icon>save</mat-icon>
+            <span *ngIf="!loading">Registrar Recompensa</span>
+            <span *ngIf="loading">Guardando...</span>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
