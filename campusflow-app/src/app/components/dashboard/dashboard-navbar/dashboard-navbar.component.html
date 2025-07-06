@@ -27,12 +27,14 @@
 
   <span class="spacer"></span> <!-- Empuja la sección de usuario a la derecha -->
 
-  <div class="user-section">
-    <!-- Usar la propiedad userAvatar del componente -->
-    <img [src]="userAvatar" alt="User Avatar" class="user-avatar">
-    <span>Bienvenido,</span>
-    <!-- Mostrar el nombre de usuario dinámicamente -->
-    <span class="user-name">{{ userName }}</span>
-    <mat-icon>keyboard_arrow_down</mat-icon>
-  </div>
+<div class="user-section">
+  <img [src]="userAvatar" alt="User Avatar" class="user-avatar">
+  <span>Bienvenido,</span>
+  <span class="user-name">{{ userName }}</span>
+
+  <!-- Botón de logout -->
+  <button mat-icon-button matTooltip="Cerrar sesión" (click)="logout()" class="logout-button">
+    <mat-icon>logout</mat-icon>
+  </button>
+</div>
 </mat-toolbar>

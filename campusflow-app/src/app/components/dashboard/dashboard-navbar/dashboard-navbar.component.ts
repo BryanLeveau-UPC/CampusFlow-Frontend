@@ -31,6 +31,7 @@ export class DashboardNavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserName();
+    
   }
 
   loadUserName(): void {
@@ -49,5 +50,8 @@ export class DashboardNavbarComponent implements OnInit {
       console.warn('ID de usuario no encontrado en localStorage.');
       this.userName = 'Invitado';
     }
+  }
+    logout(): void {
+    this.authService.logout();
   }
 }
