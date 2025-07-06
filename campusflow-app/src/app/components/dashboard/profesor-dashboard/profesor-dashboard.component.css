@@ -104,6 +104,15 @@
   font-weight: 600;
   border-radius: 8px;
 }
+.assignments-card .mat-card-title {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+  .assignments-card .mat-card-title {
+    font-size: 1.2em;
+  }
 
 .view-all-button {
   width: 100%;

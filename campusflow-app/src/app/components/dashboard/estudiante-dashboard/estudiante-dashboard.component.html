@@ -17,28 +17,33 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="section-card assignments-card">
+  <mat-card class="section-card assignments-card">
         <mat-card-header>
-          <mat-card-title>Tus tareas</mat-card-title>
+          <mat-card-title>Gestión Rápida</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p class="active-assignments">3 activas</p>
-          <div class="assignment-item">
-            <img src="assets/images/student-icon.png" alt="Student Icon" class="assignment-icon">
-            <span>Presentación de proyecto</span>
-            <span class="assignment-status due-today">Vence hoy</span>
+          <div class="quick-action-item">
+            <mat-icon class="action-icon">assignment_turned_in</mat-icon>
+            <span>Ver Notas</span>
+            <!-- Usando routerLink directamente en el botón -->
+            <button mat-button class="action-button" routerLink="/notas">Ir</button>
           </div>
-          <div class="assignment-item">
-            <img src="assets/images/student-icon.png" alt="Student Icon" class="assignment-icon">
-            <span>Examen de medio término</span>
-            <span class="assignment-status due-tomorrow">Vence mañana</span>
+          <div class="quick-action-item">
+            <mat-icon class="action-icon">people</mat-icon>
+            <span>Ver eventos</span>
+            <!-- Usando routerLink directamente en el botón -->
+            <button mat-button class="action-button" routerLink="/evento">Ir</button>
           </div>
-          <div class="assignment-item">
-            <img src="assets/images/student-icon.png" alt="Student Icon" class="assignment-icon">
-            <span>Sesión de estudio en grupo</span>
-            <span class="assignment-status due-today">Vence hoy</span>
+          <div class="quick-action-item">
+            <mat-icon class="action-icon">forum</mat-icon>
+            <span>Participar en Foro</span>
+            <!-- Usando routerLink directamente en el botón -->
+            <button mat-button class="action-button" routerLink="/foro">Ir</button>
           </div>
-          <button mat-button class="view-all-button">Ver todas las asignaciones</button>
+          <!-- Usando routerLink directamente en los botones -->
+          <button mat-button class="view-all-button" routerLink="/notass">Ver Notas</button>
+          <button mat-button class="view-all-button" routerLink="/dashboard-profesor/recursos/registrar">Ver Eventos</button>
+          <button mat-button class="view-all-button" routerLink="/dashboard-profesor/recompensas/registrar">Participar en foro</button>
         </mat-card-content>
       </mat-card>
 
