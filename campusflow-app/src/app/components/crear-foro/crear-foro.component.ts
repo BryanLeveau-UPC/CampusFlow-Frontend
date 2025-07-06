@@ -16,6 +16,7 @@ import { Carrera } from '../../model/carrera';
 import { AsignaturaService } from '../../services/asignatura.service';
 import { GrupoForoService } from '../../services/grupo-foro.service';
 import { AuthService } from '../../services/auth.service';
+import { CarreraService } from '../../services/carrera.service';
 
 @Component({
   selector: 'app-crear-foro',
@@ -36,35 +37,33 @@ export class CrearForoProfesorComponent implements OnInit {
 
   foroForm!: FormGroup;
 
-  // Ya no necesitamos la lista de carreras, solo el ID de la carrera del profesor
-  profesorCarreraId: number | null = null; // ID de la carrera del profesor logueado
-  // isLoadingCarreras: boolean = false; // Ya no es necesario
-
+  carreras: Carrera[] = []; // List of careers to be loaded
   ciclos: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   asignaturas: Asignatura[] = [];
 
+  isLoadingCarreras: boolean = false; // New: for career loading state
   isLoadingAsignaturas: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private asignaturaService: AsignaturaService,
     private grupoForoService: GrupoForoService,
-    // private carreraService: CarreraService, // Ya no inyectamos CarreraService
-    private authService: AuthService, // <-- Inyectar AuthService
+    private carreraService: CarreraService, // Re-inject CarreraService
     private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.loadProfesorCarreraAndAsignaturas(); // <-- Nueva función para cargar carrera del profesor y asignaturas
+    this.loadCarreras(); // Load careers from backend
 
-    // Solo necesitamos escuchar los cambios del ciclo, ya que la carrera del profesor es fija
-    this.foroForm.get('selectedCiclo')?.valueChanges.subscribe(() => this.onCicloChange());
+    // Listen to changes in both career and cycle selectors
+    this.foroForm.get('selectedCarreraId')?.valueChanges.subscribe(() => this.onCarreraCicloChange());
+    this.foroForm.get('selectedCiclo')?.valueChanges.subscribe(() => this.onCarreraCicloChange());
   }
 
   private initForm(): void {
     this.foroForm = this.fb.group({
-      // selectedCarreraId: [null, Validators.required], // Ya no es necesario este control
+      selectedCarreraId: [null, Validators.required], // Re-add career control
       selectedCiclo: [null, Validators.required],
       selectedAsignaturaId: [null, Validators.required],
       Titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
@@ -74,70 +73,58 @@ export class CrearForoProfesorComponent implements OnInit {
   }
 
   /**
-   * Obtiene el ID de la carrera del profesor y luego carga las asignaturas.
+   * Loads careers from the backend using CarreraService.
    */
-  private loadProfesorCarreraAndAsignaturas(): void {
-    const userId = this.authService.getUserId();
-    if (userId) {
-      // Simulación: En una aplicación real, obtendrías el ID de la carrera
-      // del profesor desde su perfil de usuario o un servicio de profesor.
-      // Aquí, asumiré un ID de carrera fijo para demostración.
-      // **DEBES REEMPLAZAR ESTO CON LA LÓGICA REAL PARA OBTENER EL idCarrera DEL PROFESOR**
-      this.authService.getUserDetails(userId).subscribe({
-        next: (usuario) => {
-          // Si el objeto 'usuario' tuviera un campo 'idCarrera':
-          // this.profesorCarreraId = usuario.idCarrera;
-
-          // ******************************************************************
-          // TEMPORAL: Asumo un idCarrera para el profesor para que el código funcione.
-          // Reemplaza '1' con el idCarrera real del profesor logueado.
-          // Este 'idCarrera' debería venir de la información del perfil del profesor.
-          this.profesorCarreraId = 1; // EJEMPLO: Profesor asociado a Ingeniería de Sistemas
-          // ******************************************************************
-
-          if (!this.profesorCarreraId) {
-            this.snackBar.open('No se pudo obtener la carrera del profesor. Contacte soporte.', 'Cerrar', { duration: 5000 });
-            return;
+  private loadCarreras(): void {
+    this.isLoadingCarreras = true;
+    this.carreraService.listar() // Assuming 'listar()' is the correct method in CarreraService
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.snackBar.open(`Error loading careers: ${error.message || 'Unknown error'}`, 'Close', { duration: 5000 });
+          this.isLoadingCarreras = false;
+          return throwError(() => new Error(error.message || 'Unknown error loading careers.'));
+        })
+      )
+      .subscribe(
+        (data: Carrera[]) => {
+          this.carreras = data;
+          this.isLoadingCarreras = false;
+          if (this.carreras.length === 0) {
+            this.snackBar.open('No careers found.', 'Close', { duration: 3000 });
           }
-          // Una vez que tenemos el profesorCarreraId, podemos cargar asignaturas
-          // si el ciclo ya está seleccionado (por ejemplo, si el usuario vuelve al formulario)
-          this.onCicloChange();
-        },
-        error: (err) => {
-          this.snackBar.open(`Error al obtener perfil del profesor: ${err.message || 'Error desconocido'}`, 'Cerrar', { duration: 5000 });
-          console.error('Error al obtener detalles del profesor:', err);
         }
-      });
-
-    } else {
-      this.snackBar.open('ID de usuario no encontrado. Por favor, inicie sesión.', 'Cerrar', { duration: 5000 });
-    }
+      );
   }
 
-  // Lógica para cargar asignaturas cuando cambia solo el ciclo
-  onCicloChange(): void {
+  /**
+   * Logic to load subjects when career or cycle changes.
+   * Uses the selected career ID and the selected cycle.
+   */
+  onCarreraCicloChange(): void {
+    const selectedCarreraId = this.foroForm.get('selectedCarreraId')?.value;
     const selectedCiclo = this.foroForm.get('selectedCiclo')?.value;
 
-    this.asignaturas = []; // Limpiar asignaturas anteriores
-    this.foroForm.get('selectedAsignaturaId')?.patchValue(null); // Limpiar selección de asignatura
+    this.asignaturas = []; // Clear previous subjects
+    this.foroForm.get('selectedAsignaturaId')?.patchValue(null); // Clear subject selection
 
-    // Solo cargamos asignaturas si tenemos la carrera del profesor Y un ciclo seleccionado
-    if (this.profesorCarreraId && selectedCiclo) {
+    // Load subjects only if both career and cycle are selected
+    if (selectedCarreraId && selectedCiclo) {
       this.isLoadingAsignaturas = true;
-      this.asignaturaService.obtenerPorCarreraYCiclo(selectedCiclo, this.profesorCarreraId)
+      this.asignaturaService.obtenerPorCarreraYCiclo(selectedCiclo, selectedCarreraId)
         .pipe(
           catchError((error: HttpErrorResponse) => {
-            this.snackBar.open(`Error al cargar asignaturas: ${error.message || 'Error desconocido'}`, 'Cerrar', { duration: 5000 });
+            this.snackBar.open(`Error loading subjects: ${error.message || 'Unknown error'}`, 'Close', { duration: 5000 });
             this.isLoadingAsignaturas = false;
-            return throwError(() => new Error(error.message || 'Error desconocido al cargar asignaturas.'));
+            return throwError(() => new Error(error.message || 'Unknown error loading subjects.'));
           })
         )
         .subscribe(
           (data: Asignatura[]) => {
+            console.log('Asignaturas recibidas del backend:', data); // DEBUGGING: Check data structure
             this.asignaturas = data;
             this.isLoadingAsignaturas = false;
             if (this.asignaturas.length === 0) {
-              this.snackBar.open('No se encontraron asignaturas para este ciclo en su carrera.', 'Cerrar', { duration: 3000 });
+              this.snackBar.open('No subjects found for the selected career and cycle.', 'Close', { duration: 3000 });
             }
           }
         );
@@ -145,7 +132,7 @@ export class CrearForoProfesorComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.foroForm.valid && this.profesorCarreraId) { // Asegurarse de que tenemos el idCarrera del profesor
+    if (this.foroForm.valid) { // No longer checking profesorCarreraId
       const newGrupoForo: GrupoForo = {
         Titulo: this.foroForm.value.Titulo,
         Descripcion: this.foroForm.value.Descripcion,
@@ -157,29 +144,29 @@ export class CrearForoProfesorComponent implements OnInit {
 
       this.grupoForoService.createGrupoForo(newGrupoForo).subscribe({
         next: (response: GrupoForo) => {
-          this.snackBar.open(`Grupo de foro "${response.Titulo}" creado exitosamente!`, 'Cerrar', { duration: 3000 });
+          this.snackBar.open(`Forum group "${response.Titulo}" created successfully!`, 'Close', { duration: 3000 });
           this.resetForm();
         },
         error: (err) => {
-          console.error('Error al crear grupo de foro:', err);
-          let errorMessage = 'Error al crear grupo de foro.';
-          if (err.message && err.message.includes('llave duplicada')) {
-             errorMessage = 'Ya existe un grupo de foro para esta asignatura.';
+          console.error('Error creating forum group:', err);
+          let errorMessage = 'Error creating forum group.';
+          if (err.message && err.message.includes('duplicate key')) { // Adjusted message for backend error
+             errorMessage = 'A forum group already exists for this subject.';
           } else {
-             errorMessage = err.message || 'Error desconocido.';
+             errorMessage = err.message || 'Unknown error.';
           }
-          this.snackBar.open(errorMessage, 'Cerrar', { duration: 5000 });
+          this.snackBar.open(errorMessage, 'Close', { duration: 5000 });
         }
       });
     } else {
       this.foroForm.markAllAsTouched();
-      this.snackBar.open('Por favor, completa todos los campos requeridos y corrige los errores.', 'Cerrar', { duration: 4000 });
+      this.snackBar.open('Please complete all required fields and correct errors.', 'Close', { duration: 4000 });
     }
   }
 
   resetForm(): void {
     this.foroForm.reset({
-      // selectedCarreraId: null, // Ya no es necesario resetear este
+      selectedCarreraId: null, // Reset career selection
       selectedCiclo: null,
       selectedAsignaturaId: null,
       Titulo: '',

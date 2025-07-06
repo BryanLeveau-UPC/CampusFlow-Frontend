@@ -1,7 +1,7 @@
 <!-- src/app/components/dashboard/profesor-dashboard/profesor-dashboard.component.html -->
 <div class="dashboard-layout">
   <!-- Aquí se referencia el componente de la barra de navegación del dashboard -->
-  <app-dashboard-navbar></app-dashboard-navbar>
+  <app-dashboard-navbar-profesor></app-dashboard-navbar-profesor>
 
   <!-- El resto del contenido del dashboard va aquí -->
   <div class="main-content">
@@ -12,9 +12,6 @@
           <h2>Buen día, Profesor</h2>
           <p>Gestiona tus asignaturas, notas y eventos.</p>
           <!-- Usando routerLink directamente en el botón -->
-          <button mat-flat-button color="primary" class="dashboard-action-button" routerLink="/dashboard-profesor/eventos/registrar">
-            <mat-icon>add</mat-icon> Registrar Evento
-          </button>
         </mat-card-content>
       </mat-card>
 
@@ -48,26 +45,7 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="section-card study-hours-card">
-        <mat-card-header>
-          <mat-card-title>Últimas Publicaciones en Foro</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div *ngIf="ultimasPublicacionesForo.length > 0; else noPublicaciones">
-            <div class="forum-post-item" *ngFor="let post of ultimasPublicacionesForo">
-              <p class="post-title">{{ post.Titulo }}</p>
-              <p class="post-meta">por {{ post.Autor }} el {{ post.Fecha | date:'shortDate' }}</p>
-              <p class="post-content">{{ post.Contenido | slice:0:70 }}...</p>
-            </div>
-          </div>
-          <ng-template #noPublicaciones>
-            <p class="no-data-message">No hay publicaciones recientes en el foro.</p>
-          </ng-template>
-          <!-- Usando routerLink directamente en el botón -->
-          <button mat-button class="view-all-button" routerLink="/dashboard-profesor/foro">Ver todo el Foro</button>
-        </mat-card-content>
-      </mat-card>
-    </div>
+
 
     <!-- Right Section (Calendar and Upcoming Events) -->
     <div class="right-panel">
@@ -91,28 +69,7 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="section-card upcoming-events-card">
-        <mat-card-header>
-          <mat-card-title>Próximos eventos que impartes</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div *ngIf="proximosEventosImpartidos.length > 0; else noEventsMessage">
-            <div class="event-item" *ngFor="let evento of proximosEventosImpartidos">
-              <span class="event-day">{{ evento.FechaInicio | date:'d' }}</span>
-              <div class="event-details">
-                <p class="event-title">{{ evento.Nombre }}</p>
-                <p class="event-time">{{ evento.FechaInicio | date:'shortTime' }} - {{ evento.FechaFin | date:'shortTime' }}</p>
-                <p class="event-description">{{ evento.Descripcion }}</p>
-              </div>
-            </div>
-          </div>
-          <ng-template #noEventsMessage>
-            <p class="no-events-message">No tienes eventos próximos programados.</p>
-          </ng-template>
-          <!-- Usando routerLink directamente en el botón -->
-          <button mat-button class="view-full-calendar-button" routerLink="/dashboard-profesor/eventos/registrar">Ver/Registrar Eventos</button>
-        </mat-card-content>
-      </mat-card>
+
     </div>
   </div>
 </div>

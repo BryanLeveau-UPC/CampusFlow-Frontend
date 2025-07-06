@@ -4,11 +4,6 @@
       <mat-card-title>Eventos Disponibles para tu Carrera</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div class="actions-row">
-        <button mat-flat-button color="accent" (click)="goBackToDashboard()">
-          <mat-icon>arrow_back</mat-icon> Volver al Dashboard
-        </button>
-      </div>
 
       <div *ngIf="isLoading" class="loading-spinner">
         <mat-spinner></mat-spinner>

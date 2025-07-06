@@ -6,8 +6,25 @@
     <mat-card-content>
       <form [formGroup]="foroForm" (ngSubmit)="onSubmit()">
 
+        <!-- Selectores de Carrera y Ciclo -->
         <div class="row">
-          <div class="col-md-12"> <mat-form-field appearance="outline" class="full-width-input">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="full-width-input">
+              <mat-label>Carrera</mat-label>
+              <mat-select formControlName="selectedCarreraId" required [disabled]="isLoadingCarreras">
+                <mat-option>-- Seleccione una carrera --</mat-option>
+                <mat-option *ngFor="let carrera of carreras" [value]="carrera.idCarrera">
+                  {{ carrera.nombre }}
+                </mat-option>
+              </mat-select>
+              <mat-hint *ngIf="isLoadingCarreras">Cargando carreras...</mat-hint>
+              <mat-error *ngIf="fc['selectedCarreraId'].hasError('required') && fc['selectedCarreraId'].touched">
+                La carrera es requerida.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="full-width-input">
               <mat-label>Ciclo</mat-label>
               <mat-select formControlName="selectedCiclo" required>
                 <mat-option>-- Seleccione un ciclo --</mat-option>
@@ -22,11 +39,12 @@
           </div>
         </div>
 
+        <!-- Selector de Asignatura -->
         <mat-form-field appearance="outline" class="full-width-input">
           <mat-label>Asignatura</mat-label>
           <mat-select
             formControlName="selectedAsignaturaId"
-            [disabled]="isLoadingAsignaturas || asignaturas.length === 0 || !profesorCarreraId"
+            [disabled]="isLoadingAsignaturas || asignaturas.length === 0 || !fc['selectedCarreraId'].value || !fc['selectedCiclo'].value"
             required
           >
             <mat-option>-- Seleccione una asignatura --</mat-option>
@@ -35,14 +53,15 @@
             </mat-option>
           </mat-select>
           <mat-hint *ngIf="isLoadingAsignaturas">Cargando asignaturas...</mat-hint>
-          <mat-hint *ngIf="!isLoadingAsignaturas && asignaturas.length === 0 && fc['selectedCiclo'].value && profesorCarreraId">
-            No hay asignaturas disponibles para este ciclo en su carrera.
+          <mat-hint *ngIf="!isLoadingAsignaturas && asignaturas.length === 0 && fc['selectedCarreraId'].value && fc['selectedCiclo'].value">
+            No hay asignaturas disponibles para la carrera y ciclo seleccionados.
           </mat-hint>
           <mat-error *ngIf="fc['selectedAsignaturaId'].hasError('required') && fc['selectedAsignaturaId'].touched">
             La asignatura es requerida.
           </mat-error>
         </mat-form-field>
 
+        <!-- Campos del Foro -->
         <mat-form-field appearance="outline" class="full-width-input">
           <mat-label>Título del Foro</mat-label>
           <input matInput formControlName="Titulo" placeholder="Ej. Foro de Discusión Unidad 1" required>
@@ -80,7 +99,7 @@
         </mat-form-field>
 
         <div class="form-actions">
-          <button mat-flat-button color="primary" type="submit" [disabled]="foroForm.invalid || !profesorCarreraId">
+          <button mat-flat-button color="primary" type="submit" [disabled]="foroForm.invalid">
             <mat-icon>add</mat-icon> Crear Foro
           </button>
           <button mat-stroked-button color="accent" type="button" (click)="resetForm()" style="margin-left: 10px;">
