@@ -1,0 +1,98 @@
+/* src/app/components/listar-estudiantes/listar-estudiantes.component.scss */
+.estudiantes-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 64px); /* Asumiendo una toolbar de 64px de alto */
+  background-color: #f5f5f5;
+}
+
+.estudiantes-card {
+  width: 100%;
+  max-width: 1200px; /* Ancho máximo para la tarjeta */
+  margin-bottom: 20px;
+}
+
+.filters-section, .date-range-filter {
+  margin-bottom: 20px;
+  padding: 15px 0;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #3f51b5; /* Color primario de Material */
+  }
+
+  button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.date-range-filter {
+  display: flex;
+  flex-wrap: wrap; 
+  align-items: center;
+
+  .date-picker-field {
+    margin-right: 15px;
+    margin-bottom: 10px;
+    min-width: 300px; 
+  }
+}
+
+
+.full-width-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #3f51b5;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffe0b2; /* Naranja claro */
+  border: 1px solid #ff9800; /* Naranja más oscuro */
+  color: #d32f2f; /* Rojo para texto de error */
+  border-radius: 4px;
+  mat-icon {
+    margin-right: 10px;
+  }
+}
+
+/* Estilos de la tabla de Material */
+.mat-elevation-z8 {
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+              0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+              0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-header-cell {
+  background-color: #3f51b5; /* Color de fondo para las cabeceras */
+  color: white; /* Color del texto de las cabeceras */
+}
+
+.mat-paginator {
+  background: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Estilos para filas pares/impares para mejor legibilidad */
+tr.mat-row:nth-child(even) {
+  background-color: #f7f7f7;
+}

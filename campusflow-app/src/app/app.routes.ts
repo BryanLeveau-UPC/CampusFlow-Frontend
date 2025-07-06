@@ -3,7 +3,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegistroEstudianteComponent } from './components/registro/registro-estudiante/registro-estudiante.component';
 import { RegistroProfesorComponent } from './components/registro/registro-profesor/registro-profesor.component';
 import { AsignaturaComponent } from './components/asignatura/asignatura.component';
-import { EstudianteComponent } from './components/estudiante/estudiante.component';
+import { ListarEstudiantesComponent } from './components/estudiante/estudiante.component';
 import { RegistroSelectorComponent } from './components/registro/registro-selector/registro-selector.component';
 import { IndexComponent } from './pages/index/index.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
@@ -34,7 +34,7 @@ export const routes: Routes = [
   { path: 'registrar-estudiante', component: RegistroEstudianteComponent },
   { path: 'registrar-profesor', component: RegistroProfesorComponent },
   { path: 'asignatura', component: AsignaturaComponent },
-  { path: 'estudiantes', component: EstudianteComponent },
+  { path: 'estudiantes', component: ListarEstudiantesComponent },
   { path: 'registrar-evento', component: EventoRegistrarComponent },
   { path: 'listar-evento', component: EventoListarComponent },
   { path: 'listar-grupo-foro', component: ForoListarComponent },
