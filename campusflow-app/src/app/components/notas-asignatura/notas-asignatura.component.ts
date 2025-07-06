@@ -2,11 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
-import { NotasAgrupadasDTO } from '../../model/NotasAgrupadas';
 import { Nota } from '../../model/nota';
 import { Estudiante } from '../../model/estudiante';
 import { AuthService } from '../../services/auth.service';
@@ -43,7 +41,6 @@ export class NotasAsignaturaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadNotas();
   }
 
   loadNotas(): void {

@@ -39,8 +39,6 @@ export class DashboardNavbarComponent implements OnInit {
       this.authService.getUserDetails(userId).subscribe(
         (usuario: Usuario) => {
           this.userName = `${usuario.nombre} ${usuario.apellido}`;
-          // Opcional: Si tu Usuario tiene un campo para la URL del avatar, lo actualizarías aquí
-          // this.userAvatar = usuario.avatarUrl || 'assets/images/user-avatar.png';
         },
         (error) => {
           console.error('Error al cargar los detalles del usuario:', error);

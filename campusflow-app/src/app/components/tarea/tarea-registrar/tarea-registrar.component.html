@@ -1,1 +1,72 @@
-<p>tarea-registrar works!</p>
+<!-- src/app/components/tarea/tarea-registrar/tarea-registrar.component.html -->
+<div class="register-tarea-container">
+  <mat-card class="register-tarea-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Registrar Nueva Tarea</h2>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="tareaForm" (ngSubmit)="onSubmit()" class="tarea-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Título</mat-label>
+          <input matInput formControlName="titulo" placeholder="Ej. Preparar presentación de proyecto">
+          <mat-error *ngIf="tareaForm.get('titulo')?.hasError('required') && tareaForm.get('titulo')?.touched">
+            El título es requerido.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="descripcion" placeholder="Detalles de la tarea..."></textarea>
+          <mat-error *ngIf="tareaForm.get('descripcion')?.hasError('required') && tareaForm.get('descripcion')?.touched">
+            La descripción es requerida.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fecha Límite</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fechaLimite" readonly>
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="tareaForm.get('fechaLimite')?.hasError('required') && tareaForm.get('fechaLimite')?.touched">
+            La fecha límite es requerida.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Prioridad</mat-label>
+          <mat-select formControlName="prioridad">
+            <mat-option *ngFor="let p of prioridades" [value]="p">{{ p }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="tareaForm.get('prioridad')?.hasError('required') && tareaForm.get('prioridad')?.touched">
+            La prioridad es requerida.
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Campo id_horario (opcional o requerido según tu lógica de negocio) -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>ID Horario (Opcional)</mat-label>
+          <input matInput type="number" formControlName="id_horario" placeholder="Ej. 1">
+          <!-- Puedes añadir validación si id_horario es requerido -->
+          <!-- <mat-error *ngIf="tareaForm.get('id_horario')?.hasError('required') && tareaForm.get('id_horario')?.touched">
+            El ID de horario es requerido.
+          </mat-error> -->
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-stroked-button color="warn" type="button" (click)="goBackToList()" [disabled]="loading">
+            <mat-icon>cancel</mat-icon> Cancelar
+          </button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="!tareaForm.valid || loading">
+            <mat-icon>save</mat-icon>
+            <span *ngIf="!loading">Registrar Tarea</span>
+            <span *ngIf="loading">Guardando...</span>
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

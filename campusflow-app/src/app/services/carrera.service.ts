@@ -18,4 +18,16 @@ export class CarreraService {
       })
     );
   }
+    listar(): Observable<Carrera[]> {
+      return this.http.get<Carrera[]>(this.apiUrl);
+    }
+    registrar(asignatura: Carrera): Observable<Carrera> {
+      return this.http.post<Carrera>(this.apiUrl, asignatura);
+    }
+    eliminar(id: number): Observable<void> {
+      return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    }
+    obtenerPorId(id: number): Observable<Carrera> {
+      return this.http.get<Carrera>(`${this.apiUrl}/${id}`);
+    }
 }

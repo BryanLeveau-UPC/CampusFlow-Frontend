@@ -43,7 +43,7 @@ export const routes: Routes = [
   { path: 'listar-horario', component: HorarioListarComponent },
   { path: 'listar-nota', component: NotaListarComponent },
   { path: 'listar-tareas', component: TareaListarComponent },
-  { path: 'registrar-tareas', component: TareaRegistrarComponent },
+  { path: 'tarea/registrar', component: TareaRegistrarComponent },
   { path: 'index', component: IndexComponent },
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'marcas', component: MarcasComponent },
