@@ -15,7 +15,7 @@ import { EventoRegistrarComponent } from './components/evento/evento-registrar/e
 import { EventoListarComponent } from './components/evento/evento-listar/evento-listar.component';
 import { ForoListarComponent } from './components/foro/foro-listar/foro-listar.component';
 import { HorarioListarComponent } from './components/horario/horario-listar/horario-listar.component';
-import { NotaListarComponent } from './components/nota/nota-listar/nota-listar.component';
+//import { NotaListarComponent } from './components/nota/nota-listar/nota-listar.component';
 import { TareaListarComponent } from './components/tarea/tarea-listar/tarea-listar.component';
 import { TareaRegistrarComponent } from './components/tarea/tarea-registrar/tarea-registrar.component';
 import { PublicacionListarComponent } from './components/publicacion/publicacion-listar/publicacion-listar.component';
@@ -42,7 +42,7 @@ export const routes: Routes = [
   { path: 'listar-publicacion', component: PublicacionListarComponent },
   { path: 'listar-publicacion', component: PublicacionListarComponent },
   { path: 'listar-horario', component: HorarioListarComponent },
-  { path: 'listar-nota', component: NotaListarComponent },
+  //{ path: 'listar-nota', component: NotaListarComponent },
   { path: 'listar-tareas', component: TareaListarComponent },
   { path: 'tarea/registrar', component: TareaRegistrarComponent },
   { path: 'index', component: IndexComponent },
@@ -62,6 +62,6 @@ export const routes: Routes = [
   {path: 'horario', component: HorarioListarComponent }, // Asegúrate de que esta ruta esté aquí
   {path: 'grupo-foro', component: ForoListarComponent }, // Asegúrate de que esta ruta esté aquí
   {path: 'nuevo/grupo-foro', component: CrearForoProfesorComponent }, // Asegúrate de que esta ruta esté aquí
-
+  {path: 'registrar-notas', component: NotasAsignaturaComponent }, 
   { path: '**', redirectTo: '/index' },
 ];
