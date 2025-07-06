@@ -1,0 +1,143 @@
+/* src/app/components/recompensa/recompensa-listar/recompensa-listar.component.css */
+.recompensa-listar-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinea al inicio para que la tarjeta no se centre verticalmente si es pequeña */
+  min-height: calc(100vh - 80px); /* Ajusta según la altura de tu navbar */
+  background-color: #f0f2f5;
+  font-family: 'Roboto', sans-serif;
+}
+
+.recompensa-card {
+  width: 100%;
+  max-width: 900px; /* Limita el ancho máximo de la tarjeta */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+}
+
+.recompensa-card-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.recompensa-card-header h2 {
+  color: #3f51b5; /* Color primario de Material Design */
+  font-size: 1.8em;
+  margin-bottom: 5px;
+}
+
+.recompensa-card-header mat-card-subtitle {
+  color: #757575;
+  font-size: 0.9em;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  color: #616161;
+}
+
+.no-recompensas-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  color: #616161;
+  background-color: #e3f2fd; /* Un azul claro */
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.no-recompensas-message .info-icon {
+  font-size: 48px;
+  color: #2196f3; /* Azul Material Design */
+  margin-bottom: 15px;
+}
+
+.full-width-table {
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden; /* Asegura que los bordes redondeados se apliquen */
+}
+
+.mat-header-cell {
+  background-color: #3f51b5; /* Color primario para el encabezado */
+  color: white;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.mat-cell {
+  color: #424242;
+  font-size: 0.95em;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #f5f5f5; /* Color de fondo para filas pares */
+}
+
+.mat-row:hover {
+  background-color: #e0e0e0; /* Color al pasar el ratón */
+}
+
+.recompensa-link {
+  color: #1976d2; /* Un azul más oscuro para los enlaces */
+  text-decoration: none;
+  word-break: break-all; /* Permite que las URLs largas se rompan */
+}
+
+.recompensa-link:hover {
+  text-decoration: underline;
+}
+
+/* SnackBar Custom Styles */
+.success-snackbar {
+  background-color: #4CAF50 !important; /* Verde */
+  color: white !important;
+}
+
+.error-snackbar {
+  background-color: #f44336 !important; /* Rojo */
+  color: white !important;
+}
+
+.info-snackbar {
+  background-color: #2196F3 !important; /* Azul */
+  color: white !important;
+}
+
+.warn-snackbar {
+  background-color: #ff9800 !important; /* Naranja */
+  color: white !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .recompensa-listar-container {
+    padding: 10px;
+  }
+
+  .recompensa-card {
+    padding: 15px;
+  }
+
+  .recompensa-card-header h2 {
+    font-size: 1.5em;
+  }
+
+  .mat-table {
+    font-size: 0.8em; /* Reduce el tamaño de fuente de la tabla en móviles */
+  }
+
+  .mat-icon-button {
+    padding: 6px; /* Ajusta el padding de los botones de icono */
+  }
+}

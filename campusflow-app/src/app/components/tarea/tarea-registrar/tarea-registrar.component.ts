@@ -14,6 +14,7 @@ import { Router, RouterModule } from '@angular/router';
 import { Tarea } from '../../../model/tarea';
 import { AuthService } from '../../../services/auth.service';
 import { TareaService } from '../../../services/tarea.service';
+import { EstudianteService } from '../../../services/estudiante.service';
 
 @Component({
   selector: 'app-tarea-registrar',
@@ -44,6 +45,7 @@ export class TareaRegistrarComponent implements OnInit {
     private fb: FormBuilder,
     private tareaService: TareaService,
     private authService: AuthService,
+    private estudianteService: EstudianteService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
@@ -59,13 +61,25 @@ export class TareaRegistrarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.idEstudiante = this.authService.getUserId();
-    if (!this.idEstudiante) {
-      this.snackBar.open('No se pudo obtener el ID del estudiante. Por favor, inicie sesión.', 'Cerrar', { duration: 5000 });
+ngOnInit(): void {
+  const idUsuario = this.authService.getUserId(); // Este es el ID del usuario
+  if (!idUsuario) {
+    this.snackBar.open('No se pudo obtener el ID del usuario. Inicie sesión.', 'Cerrar', { duration: 5000 });
+    this.router.navigate(['/login']);
+    return;
+  }
+
+  // Aquí haces la llamada para obtener el ID del estudiante asociado
+  this.estudianteService.getEstudianteByUserId(idUsuario).subscribe({
+    next: (estudiante) => {
+      this.idEstudiante = estudiante.IdEstudiante !== undefined ? estudiante.IdEstudiante : null;
+    },
+    error: () => {
+      this.snackBar.open('No se pudo obtener el estudiante vinculado al usuario.', 'Cerrar', { duration: 5000 });
       this.router.navigate(['/login']);
     }
-  }
+  });
+}
 
   /**
    * Maneja el envío del formulario para registrar una nueva tarea.
