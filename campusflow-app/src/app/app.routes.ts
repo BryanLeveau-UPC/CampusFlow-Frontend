@@ -25,6 +25,7 @@ import { RecursoRegistrarComponent } from './components/recurso/recurso-registra
 import { RecursoListarComponent } from './components/recurso/recurso-listar/recurso-listar.component';
 import { NotasAsignaturaComponent } from './components/notas-asignatura/notas-asignatura.component';
 import { PublicacionRegistroComponent } from './components/publicacion/publicacion-registrar/publicacion-registrar.component';
+import { CrearForoProfesorComponent } from './components/crear-foro/crear-foro.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/index', pathMatch: 'full' },
@@ -60,6 +61,7 @@ export const routes: Routes = [
   {path: 'tarea', component: TareaListarComponent }, // Asegúrate de que esta ruta esté aquí
   {path: 'horario', component: HorarioListarComponent }, // Asegúrate de que esta ruta esté aquí
   {path: 'grupo-foro', component: ForoListarComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'nuevo/grupo-foro', component: CrearForoProfesorComponent }, // Asegúrate de que esta ruta esté aquí
 
   { path: '**', redirectTo: '/index' },
 ];

@@ -47,35 +47,35 @@ export class PublicacionService {
     );
   }
 
-  // 🔄 Obtener publicaciones por grupo de foro
+
   getPublicacionesByGrupoForo(idGrupoForo: number): Observable<Publicacion[]> {
     return this.http.get<Publicacion[]>(`${this.apiUrl}/grupo/${idGrupoForo}`).pipe(
       catchError(this.handleError)
     );
   }
 
-  // 🔄 Obtener publicaciones por grupo y etiqueta (label)
+
   getPublicacionesByGrupoForoAndLabel(idGrupoForo: number, label: string): Observable<Publicacion[]> {
     return this.http.get<Publicacion[]>(`${this.apiUrl}/grupo/${idGrupoForo}/label/${label}`).pipe(
       catchError(this.handleError)
     );
   }
 
-  // 🔄 Obtener publicaciones por grupo y fecha
+
   getPublicacionesByGrupoForoAndFecha(idGrupoForo: number, fecha: string): Observable<Publicacion[]> {
     return this.http.get<Publicacion[]>(`${this.apiUrl}/grupo/${idGrupoForo}/fecha/${fecha}`).pipe(
       catchError(this.handleError)
     );
   }
 
-  // 📊 Obtener resumen por etiqueta
+
   getResumenPorLabel(): Observable<{ [label: string]: number }> {
     return this.http.get<{ [label: string]: number }>(`${this.apiUrl}/resumen/label`).pipe(
       catchError(this.handleError)
     );
   }
 
-  // Manejo de errores centralizado
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Ha ocurrido un error inesperado en PublicacionService.';
     if (error.error instanceof ErrorEvent) {
