@@ -23,5 +23,13 @@ export class AsignaturaService {
   obtenerPorId(id: number): Observable<Asignatura> {
     return this.http.get<Asignatura>(`${this.API}/${id}`);
   }
+  obtenerPorCarreraYCiclo(ciclo: number, idCarrera: number): Observable<Asignatura[]> {
+  return this.http.get<Asignatura[]>(`${this.API}/filtro-carrera-ciclo`, {
+    params: {
+      ciclo: ciclo.toString(),
+      idCarrera: idCarrera.toString()
+    }
+  });
+}
   
 }

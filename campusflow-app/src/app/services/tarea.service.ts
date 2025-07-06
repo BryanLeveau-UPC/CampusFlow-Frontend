@@ -14,12 +14,33 @@ export class TareaService {
   constructor(private http: HttpClient) { }
 
   /**
+   * Obtiene todas las tareas.
+   * @returns Un Observable con un array de Tarea.
+   */
+  getTareas(): Observable<Tarea[]> {
+    return this.http.get<Tarea[]>(this.apiUrl).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
    * Obtiene todas las tareas activas para un estudiante específico.
    * @param idEstudiante El ID del estudiante.
    * @returns Un Observable con un array de Tarea.
    */
   getTareasActivasPorEstudiante(idEstudiante: number): Observable<Tarea[]> {
     return this.http.get<Tarea[]>(`${this.apiUrl}/estudiante/${idEstudiante}/activas`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Obtiene tareas por prioridad y las ordena por fecha límite.
+   * @param prioridad La prioridad ('Alta', 'Media', 'Baja').
+   * @returns Un Observable con un array de Tarea.
+   */
+  getTareasPorPrioridad(prioridad: string): Observable<Tarea[]> {
+    return this.http.get<Tarea[]>(`${this.apiUrl}/prioridad/${prioridad}`).pipe(
       catchError(this.handleError)
     );
   }
@@ -70,11 +91,10 @@ export class TareaService {
       errorMessage = `Error de cliente: ${error.error.message}`;
     } else {
       // El backend devolvió un código de respuesta de error.
-      // El cuerpo de la respuesta puede contener más detalles.
       if (typeof error.error === 'string') {
-        errorMessage = error.error; // Si el backend envía un mensaje de error simple
+        errorMessage = error.error; // Mensaje simple
       } else if (error.error && error.error.message) {
-        errorMessage = error.error.message; // Si el backend envía un objeto con una propiedad 'message'
+        errorMessage = error.error.message; // Objeto con campo message
       } else {
         errorMessage = `Error del servidor: Código ${error.status}, Mensaje: ${error.message}`;
       }
