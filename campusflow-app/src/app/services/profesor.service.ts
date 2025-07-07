@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { RegisterProfesorPayload } from '../model/RegisterProfesorPayload';
 import { Profesor } from '../model/profesor';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfesorService {
-  private apiUrl = 'http://localhost:8080'; // La URL base de tu backend
+  private apiUrl = environment.apiUrl; // La URL base de tu backend
 
   constructor(private http: HttpClient) { }
   

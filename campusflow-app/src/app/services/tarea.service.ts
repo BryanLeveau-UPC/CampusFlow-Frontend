@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TareaService {
-  private API = 'http://localhost:8080/api/campusflow/tarea';
+  private API = 'https://campusflow-wchk.onrender.com/api/campusflow/tarea';
 
   constructor(private http: HttpClient) {}
   listar(): Observable<Tarea[]> {

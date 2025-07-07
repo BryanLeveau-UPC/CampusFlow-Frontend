@@ -7,7 +7,7 @@ import { Usuario } from '../../app/model/usuario';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private API = 'http://localhost:8080/api/campusflow/usuarios';
+  private API = 'https://campusflow-wchk.onrender.com/api/campusflow/usuarios';
 
   constructor(private http: HttpClient) {}
   listar(): Observable<Usuario[]> {

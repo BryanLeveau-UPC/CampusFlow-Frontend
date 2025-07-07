@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Carrera } from '../model/carrera';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarreraService {
-  private apiUrl = 'http://localhost:8080'
+  private apiUrl = environment.apiUrl; // La URL base de tu backend
   constructor(private http: HttpClient) { }
 
   getAllCarreras(): Observable<Carrera[]> {
