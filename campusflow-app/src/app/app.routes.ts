@@ -36,7 +36,9 @@ export const routes: Routes = [
   { path: 'registrar-profesor', component: RegistroProfesorComponent },
   { path: 'asignatura', component: AsignaturaComponent },
   { path: 'estudiantes', component: ListarEstudiantesComponent },
+
   { path: 'registrar-evento', component: EventoRegistrarComponent },
+  
   { path: 'listar-evento', component: EventoListarComponent },
   { path: 'listar-grupo-foro', component: ForoListarComponent },
   { path: 'registrar-publicacion', component: PublicacionRegistroComponent },
