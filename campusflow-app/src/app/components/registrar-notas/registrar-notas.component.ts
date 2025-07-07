@@ -17,11 +17,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
+import { ErrorDashboardComponent } from "../dashboard/dasboard-error/dasboard-error.component";
 
 @Component({
   selector: 'app-registrar-notas',
   imports: [
-    
     CommonModule,
     ReactiveFormsModule,
     MatCardModule,
@@ -31,7 +31,8 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatSnackBarModule,
     RouterModule,
-  ],
+    ErrorDashboardComponent
+],
   templateUrl: './registrar-notas.component.html',
   styleUrl: './registrar-notas.component.css',
 })
