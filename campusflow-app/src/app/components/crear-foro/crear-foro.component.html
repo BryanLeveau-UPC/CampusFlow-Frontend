@@ -1,0 +1,112 @@
+<div class="crear-foro-container">
+  <mat-card class="crear-foro-card">
+    <mat-card-header>
+      <mat-card-title>Crear Nuevo Grupo de Foro</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="foroForm" (ngSubmit)="onSubmit()">
+
+        <!-- Selectores de Carrera y Ciclo -->
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="full-width-input">
+              <mat-label>Carrera</mat-label>
+              <mat-select formControlName="selectedCarreraId" required [disabled]="isLoadingCarreras">
+                <mat-option>-- Seleccione una carrera --</mat-option>
+                <mat-option *ngFor="let carrera of carreras" [value]="carrera.idCarrera">
+                  {{ carrera.nombre }}
+                </mat-option>
+              </mat-select>
+              <mat-hint *ngIf="isLoadingCarreras">Cargando carreras...</mat-hint>
+              <mat-error *ngIf="fc['selectedCarreraId'].hasError('required') && fc['selectedCarreraId'].touched">
+                La carrera es requerida.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="full-width-input">
+              <mat-label>Ciclo</mat-label>
+              <mat-select formControlName="selectedCiclo" required>
+                <mat-option>-- Seleccione un ciclo --</mat-option>
+                <mat-option *ngFor="let ciclo of ciclos" [value]="ciclo">
+                  Ciclo {{ ciclo }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="fc['selectedCiclo'].hasError('required') && fc['selectedCiclo'].touched">
+                El ciclo es requerido.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Selector de Asignatura -->
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Asignatura</mat-label>
+          <mat-select
+            formControlName="selectedAsignaturaId"
+            [disabled]="isLoadingAsignaturas || asignaturas.length === 0 || !fc['selectedCarreraId'].value || !fc['selectedCiclo'].value"
+            required
+          >
+            <mat-option>-- Seleccione una asignatura --</mat-option>
+            <mat-option *ngFor="let asignatura of asignaturas" [value]="asignatura.idAsignatura">
+              {{ asignatura.Nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-hint *ngIf="isLoadingAsignaturas">Cargando asignaturas...</mat-hint>
+          <mat-hint *ngIf="!isLoadingAsignaturas && asignaturas.length === 0 && fc['selectedCarreraId'].value && fc['selectedCiclo'].value">
+            No hay asignaturas disponibles para la carrera y ciclo seleccionados.
+          </mat-hint>
+          <mat-error *ngIf="fc['selectedAsignaturaId'].hasError('required') && fc['selectedAsignaturaId'].touched">
+            La asignatura es requerida.
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Campos del Foro -->
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Título del Foro</mat-label>
+          <input matInput formControlName="Titulo" placeholder="Ej. Foro de Discusión Unidad 1" required>
+          <mat-error *ngIf="fc['Titulo'].hasError('required') && fc['Titulo'].touched">
+            El título es requerido.
+          </mat-error>
+          <mat-error *ngIf="fc['Titulo'].hasError('minlength') && fc['Titulo'].touched">
+            El título debe tener al menos 3 caracteres.
+          </mat-error>
+          <mat-error *ngIf="fc['Titulo'].hasError('maxlength') && fc['Titulo'].touched">
+            El título no puede exceder los 100 caracteres.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="Descripcion" rows="5" placeholder="Escribe la descripción del foro..." required></textarea>
+          <mat-error *ngIf="fc['Descripcion'].hasError('required') && fc['Descripcion'].touched">
+            La descripción es requerida.
+          </mat-error>
+          <mat-error *ngIf="fc['Descripcion'].hasError('minlength') && fc['Descripcion'].touched">
+            La descripción debe tener al menos 10 caracteres.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Campo (Categoría/Tema)</mat-label>
+          <input matInput formControlName="Campo" placeholder="Ej. General, Tarea, Proyecto" required>
+          <mat-error *ngIf="fc['Campo'].hasError('required') && fc['Campo'].touched">
+            El campo es requerido.
+          </mat-error>
+          <mat-error *ngIf="fc['Campo'].hasError('minlength') && fc['Campo'].touched">
+            El campo debe tener al menos 3 caracteres.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-flat-button color="primary" type="submit" [disabled]="foroForm.invalid">
+            <mat-icon>add</mat-icon> Crear Foro
+          </button>
+          <button mat-stroked-button color="accent" type="button" (click)="resetForm()" style="margin-left: 10px;">
+            <mat-icon>refresh</mat-icon> Limpiar
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { DashboardNavbarComponent } from '../dashboard-navbar/dashboard-navbar.component';
+import { DashboardNavbarProfesorComponent } from "../../dashboard-navbar-profesor/dashboard-navbar-profesor.component";
 
 @Component({
   selector: 'app-profesor-dashboard',
@@ -18,8 +19,8 @@ import { DashboardNavbarComponent } from '../dashboard-navbar/dashboard-navbar.c
     MatIconModule,
     MatButtonModule,
     RouterModule,
-    DashboardNavbarComponent,
-  ],
+    DashboardNavbarProfesorComponent
+],
   templateUrl: './profesor-dashboard.component.html',
   styleUrl: './profesor-dashboard.component.css',
 })

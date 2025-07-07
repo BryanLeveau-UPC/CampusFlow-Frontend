@@ -8,77 +8,51 @@ import { Recurso } from '../model/recurso';
   providedIn: 'root'
 })
 export class RecursoService {
-  private apiUrl = `${environment.apiUrl}/recurso`; // Ajusta la ruta de tu API para Recurso
+  private apiUrl = `${environment.apiUrl}/recurso`; // usa /recurso o /recursos, pero igual al backend
 
   constructor(private http: HttpClient) { }
 
-  /**
-   * Obtiene la lista de todos los recursos activos.
-   * @returns Un Observable con un array de RecursoDTO.
-   */
+  // Listar todos los recursos
   getRecursos(): Observable<Recurso[]> {
     return this.http.get<Recurso[]>(this.apiUrl).pipe(
       catchError(this.handleError)
     );
   }
 
-  /**
-   * Obtiene un recurso por su ID.
-   * @param id El ID del recurso.
-   * @returns Un Observable con el RecursoDTO.
-   */
+  // Obtener un recurso por ID
   getRecursoById(id: number): Observable<Recurso> {
     return this.http.get<Recurso>(`${this.apiUrl}/${id}`).pipe(
       catchError(this.handleError)
     );
   }
 
-  /**
-   * Crea un nuevo recurso.
-   * @param recurso El RecursoDTO a crear.
-   * @returns Un Observable con el RecursoDTO creado.
-   */
+  // Crear un nuevo recurso
   createRecurso(recurso: Recurso): Observable<Recurso> {
     return this.http.post<Recurso>(this.apiUrl, recurso).pipe(
       catchError(this.handleError)
     );
   }
 
-  /**
-   * Actualiza un recurso existente.
-   * @param id El ID del recurso a actualizar.
-   * @param recurso Los datos actualizados del RecursoDTO.
-   * @returns Un Observable con el RecursoDTO actualizado.
-   */
+  // Modificar un recurso
   updateRecurso(id: number, recurso: Recurso): Observable<Recurso> {
     return this.http.put<Recurso>(`${this.apiUrl}/${id}`, recurso).pipe(
       catchError(this.handleError)
     );
   }
 
-  /**
-   * Elimina lógicamente un recurso.
-   * @param id El ID del recurso a eliminar.
-   * @returns Un Observable con el RecursoDTO eliminado (lógicamente).
-   */
+  // Eliminar lógicamente un recurso
   deleteRecurso(id: number): Observable<Recurso> {
     return this.http.delete<Recurso>(`${this.apiUrl}/${id}`).pipe(
       catchError(this.handleError)
     );
   }
 
-  /**
-   * Maneja los errores de las peticiones HTTP.
-   * @param error El error HTTP.
-   * @returns Un Observable con un error.
-   */
+  // Manejo centralizado de errores
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'Ha ocurrido un error inesperado en RecursoService.';
     if (error.error instanceof ErrorEvent) {
-      // Error del lado del cliente
-      errorMessage = `Error de cliente: ${error.error.message}`;
+      errorMessage = `Error del cliente: ${error.error.message}`;
     } else {
-      // Error del lado del servidor
       if (typeof error.error === 'string') {
         errorMessage = error.error;
       } else if (error.error && error.error.message) {

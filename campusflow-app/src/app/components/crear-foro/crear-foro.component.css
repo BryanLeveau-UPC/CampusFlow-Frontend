@@ -1,0 +1,50 @@
+.crear-foro-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px); /* Ajusta si tienes un navbar, etc. */
+  background-color: #f0f2f5;
+  padding: 20px;
+}
+
+.crear-foro-card {
+  width: 100%;
+  max-width: 700px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3f51b5; /* Color primario de Material Design */
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 20px; /* Espacio entre columnas */
+  margin-bottom: 20px;
+}
+
+.col-md-12 { /* Asegura que ocupe todo el ancho si es la única columna */
+  flex: 1;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+mat-error {
+  font-size: 0.75rem;
+}
+
+/* Estilos para que los selects y inputs de Material se vean bien */
+mat-form-field {
+  margin-bottom: 15px; /* Espacio entre campos */
+}

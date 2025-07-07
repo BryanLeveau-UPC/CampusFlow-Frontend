@@ -1,49 +1,124 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Estudiante } from '../model/estudiante';
 import { RegisterEstudiantePayload } from '../model/RegisterEstudiantePayload';
-import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstudianteService {
-  private apiUrl = environment.apiUrl; // La URL base de tu backend
+  private apiUrl = `${environment.apiUrl}/estudiante`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
- /**
-   * Envía los datos de registro de un nuevo estudiante al backend.
-   * @param payload Los datos del formulario de registro.
-   * @returns Un Observable con el EstudianteDTO del estudiante registrado.
+  /**
+   * Registro de estudiante + usuario (nuevo endpoint: /estudiante/register)
    */
-  registerEstudiante(payload: RegisterEstudiantePayload): Observable<Estudiante> { // Asegúrate de que el tipo de retorno sea EstudianteDTO
-    return this.http.post<Estudiante>(`${this.apiUrl}/estudiantes/register`, payload).pipe( // Ruta ajustada a '/estudiantes/register'
+  registerEstudiante(payload: RegisterEstudiantePayload): Observable<Estudiante> {
+    return this.http.post<Estudiante>(`${this.apiUrl}/register`, payload).pipe(
       catchError(this.handleError)
     );
   }
+
   /**
-   * Obtiene los detalles de un estudiante por el ID de su usuario asociado.
-   * Este es el método clave para obtener el IdEstudiante del usuario logueado.
-   * @param idUsuario El ID del usuario.
-   * @returns Un Observable con el objeto EstudianteDTO.
+   * Obtener todos los estudiantes
+   */
+  listar(): Observable<Estudiante[]> {
+    return this.http.get<Estudiante[]>(this.apiUrl).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Obtener estudiante por su ID
+   */
+  buscarPorId(id: number): Observable<Estudiante> {
+    return this.http.get<Estudiante>(`${this.apiUrl}/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Guardar un estudiante (POST simple)
+   */
+  guardar(estudiante: Estudiante): Observable<Estudiante> {
+    return this.http.post<Estudiante>(this.apiUrl, estudiante).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Modificar un estudiante
+   */
+  modificar(id: number, estudiante: Estudiante): Observable<Estudiante> {
+    return this.http.put<Estudiante>(`${this.apiUrl}/${id}`, estudiante).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Eliminar lógico de estudiante
+   */
+  eliminar(id: number): Observable<Estudiante> {
+    return this.http.delete<Estudiante>(`${this.apiUrl}/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Obtener estudiantes con promedio menor a 11
+   */
+  obtenerEstudiantesConNotaBaja(): Observable<Estudiante[]> {
+    return this.http.get<Estudiante[]>(`${this.apiUrl}/promedio/menor-a-11`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Obtener top 10% estudiantes
+   */
+  obtenerTopDecimo(): Observable<Estudiante[]> {
+    return this.http.get<Estudiante[]>(`${this.apiUrl}/top-decimo`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Obtener estudiantes por rango de fechas de eventos
+   */
+  obtenerPorFechas(inicio: string, fin: string): Observable<Estudiante[]> {
+    return this.http.get<Estudiante[]>(`${this.apiUrl}/estudiantes/eventos`, {
+      params: {
+        inicio,
+        fin
+      }
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+   * Obtener estudiante por ID de usuario
    */
   getEstudianteByUserId(idUsuario: number): Observable<Estudiante> {
-    // Se ha actualizado la ruta para que coincida con el nuevo endpoint del backend
-    return this.http.get<Estudiante>(`${this.apiUrl}/estudiante/busca-por-usuario/${idUsuario}`).pipe(
+    return this.http.get<Estudiante>(`${this.apiUrl}/busca-por-usuario/${idUsuario}`).pipe(
       catchError(this.handleError)
     );
   }
 
+  /**
+   * Manejo de errores HTTP
+   */
   private handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'Ha ocurrido un error inesperado en EstudianteService.';
+    let errorMessage = 'Ha ocurrido un error inesperado.';
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Error de cliente: ${error.error.message}`;
     } else {
       if (typeof error.error === 'string') {
         errorMessage = error.error;
-      } else if (error.error && error.error.message) {
+      } else if (error.error?.message) {
         errorMessage = error.error.message;
       } else {
         errorMessage = `Error del servidor: Código ${error.status}, Mensaje: ${error.message}`;

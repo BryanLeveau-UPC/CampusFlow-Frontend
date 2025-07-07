@@ -1,0 +1,33 @@
+<mat-toolbar class="dashboard-top-bar">
+
+  <div class="dashboard-nav-links">
+    <a mat-button routerLink="/dashboard-estudiante" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+      <mat-icon>dashboard</mat-icon> Dashboard
+    </a>
+    <a mat-button routerLink="/estudiantes" routerLinkActive="active-link">
+      <mat-icon>people</mat-icon> Estudiantes
+    </a>
+    <a mat-button routerLink="/notas" routerLinkActive="active-link">
+      <mat-icon>grade</mat-icon> Notas
+    </a>
+    <a mat-button routerLink="/registrar-recompensa" routerLinkActive="active-link">
+      <mat-icon>emoji_events</mat-icon> Recompensa
+    </a>
+    <a mat-button routerLink="/eventos" routerLinkActive="active-link">
+      <mat-icon>event</mat-icon> Eventos
+    </a>
+    <a mat-button routerLink="/nuevo/grupo-foro" routerLinkActive="active-link">
+      <mat-icon>forum</mat-icon> Foro
+    </a>
+  </div>
+
+  <span class="spacer"></span> <div class="user-section">
+    <img [src]="userAvatar" alt="User Avatar" class="user-avatar">
+    <span>Bienvenido,</span>
+    <span class="user-name">{{ userName }}</span>
+
+    <button mat-icon-button matTooltip="Cerrar sesión" (click)="logout()" class="logout-button">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

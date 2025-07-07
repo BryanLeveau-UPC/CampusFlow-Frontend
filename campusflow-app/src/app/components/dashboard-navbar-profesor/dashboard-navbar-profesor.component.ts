@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from '../../model/usuario';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar'; // ¡Importar MatToolbarModule!
-import { RouterModule } from '@angular/router'; // Para routerLink
-import { Usuario } from '../../../model/usuario';
-import { AuthService } from '../../../services/auth.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard-navbar',
+  selector: 'app-dashboard-navbar-profesor',
   imports: [
+    
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -20,10 +21,10 @@ import { AuthService } from '../../../services/auth.service';
     MatToolbarModule, // Añadir MatToolbarModule aquí
     RouterModule,
   ],
-  templateUrl: './dashboard-navbar.component.html',
-  styleUrl: './dashboard-navbar.component.css',
+  templateUrl: './dashboard-navbar-profesor.component.html',
+  styleUrl: './dashboard-navbar-profesor.component.css'
 })
-export class DashboardNavbarComponent implements OnInit {
+export class DashboardNavbarProfesorComponent  implements OnInit {
   userName: string = 'Usuario'; // Propiedad para almacenar el nombre del usuario
   userAvatar: string = 'img/user_profile1.png'; // Ruta por defecto del avatar
 

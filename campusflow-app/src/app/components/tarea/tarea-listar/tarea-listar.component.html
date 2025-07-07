@@ -1,1 +1,51 @@
-<p>tarea-listar works!</p>
+<!-- src/app/components/tarea/tarea-listar/tarea-listar.component.html -->
+<div class="tareas-container">
+  <mat-card class="tareas-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Tus Tareas Activas</h2>
+      </mat-card-title>
+      <span class="spacer"></span>
+      <button mat-flat-button color="primary" (click)="goToRegisterTarea()">
+        <mat-icon>add</mat-icon> Nueva Tarea
+      </button>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div *ngIf="loading" class="loading-spinner">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Cargando tareas...</p>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        <mat-icon color="warn">error</mat-icon>
+        <p>{{ errorMessage }}</p>
+      </div>
+
+      <div *ngIf="!loading && !errorMessage">
+        <div *ngIf="tareas.length === 0" class="no-tareas">
+          <p>No tienes tareas activas en este momento. ¡Es un buen momento para añadir una!</p>
+        </div>
+
+        <mat-list *ngIf="tareas.length > 0" class="tarea-list">
+          <mat-list-item *ngFor="let tarea of tareas" class="tarea-item">
+            <mat-icon matListItemIcon [ngClass]="{'priority-high': tarea.prioridad === 'Alta', 'priority-medium': tarea.prioridad === 'Media', 'priority-low': tarea.prioridad === 'Baja'}">
+              {{ tarea.prioridad === 'Alta' ? 'warning' : (tarea.prioridad === 'Media' ? 'info' : 'check_circle') }}
+            </mat-icon>
+            <div matListItemTitle class="tarea-title">{{ tarea.titulo }}</div>
+            <div matListItemLine class="tarea-description">{{ tarea.descripcion }}</div>
+            <div matListItemLine class="tarea-details">
+              <span>Fecha Límite: {{ formatDate(tarea.fechaLimite) }}</span>
+              <span>Prioridad: {{ tarea.prioridad }}</span>
+            </div>
+            <span></span>
+            
+            <button mat-icon-button matListItemMeta (click)="markAsCompleted(tarea)" aria-label="Marcar como completada">
+              <mat-icon color="accent">done_all</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

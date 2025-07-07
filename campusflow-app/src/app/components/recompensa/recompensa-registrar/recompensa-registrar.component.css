@@ -1,0 +1,45 @@
+.register-recompensa-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px); /* Adjust based on your toolbar/header height */
+  padding: 20px;
+  background-color: #f0f2f5; /* A soft background color */
+}
+
+.register-recompensa-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.register-recompensa-card mat-card-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3f51b5; /* Material Design primary color */
+}
+
+.recompensa-form .full-width {
+  width: 100%;
+  margin-bottom: 15px; /* Space between fields */
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Space between buttons */
+  margin-top: 20px;
+}
+
+.form-actions button {
+  padding: 8px 20px;
+  font-size: 16px;
+}
+
+/* Styles for Material error messages */
+mat-error {
+  font-size: 12px;
+  margin-top: 5px;
+}

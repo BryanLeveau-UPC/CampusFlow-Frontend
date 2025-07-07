@@ -1,0 +1,179 @@
+/* src/app/components/tarea/tarea-listar/tarea-listar.component.css */
+.tareas-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 100px); /* Ajusta según la altura de tu navbar */
+  background-color: #f0f2f5;
+  font-family: 'Roboto', sans-serif;
+}
+
+.tareas-card {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  background-color: #ffffff;
+}
+
+.mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0; /* Override default card header padding */
+}
+
+.spacer {
+  /* Esto hace que el elemento ocupe todo el espacio disponible */
+  flex: 1 1 auto;
+}
+
+.mat-card-title h2 {
+  font-size: 1.8em;
+  color: #333;
+  margin: 0;
+  font-weight: 600;
+  line-height: 1; /* Añade esto para ajustar la altura y mejorar la alineación */
+}
+
+.mat-flat-button {
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.loading-spinner, .no-tareas, .error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  color: #666;
+}
+
+.error-message mat-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.no-tareas p {
+  font-size: 1.1em;
+  color: #777;
+}
+
+.tarea-list {
+  padding: 0;
+  margin: 0;
+}
+
+.tarea-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+}
+
+.tarea-item:last-child {
+  border-bottom: none;
+}
+
+.tarea-item:hover {
+  background-color: #f9f9f9;
+}
+
+.tarea-item .mat-icon {
+  margin-right: 15px;
+  font-size: 28px;
+  color: #555;
+}
+
+.tarea-item .priority-high {
+  color: #f44336; /* Rojo */
+}
+
+.tarea-item .priority-medium {
+  color: #ff9800; /* Naranja */
+}
+
+.tarea-item .priority-low {
+  color: #4caf50; /* Verde */
+}
+
+.tarea-title {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.tarea-description {
+  color: #666;
+  font-size: 0.95em;
+  margin-top: 4px;
+}
+
+.tarea-details {
+  display: flex;
+  gap: 20px;
+  font-size: 0.85em;
+  color: #888;
+  margin-top: 8px;
+}
+
+.tarea-item .mat-icon-button {
+  margin-left: auto; /* Empuja el botón a la derecha */
+  color: #4285F4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tareas-container {
+    padding: 10px;
+  }
+
+  .tareas-card {
+    padding: 15px;
+  }
+
+  .mat-card-title h2 {
+    font-size: 1.5em;
+  }
+
+  .mat-flat-button {
+    font-size: 0.8em;
+    padding: 6px 12px;
+  }
+
+  .tarea-item {
+    flex-wrap: wrap;
+    padding: 10px 0;
+  }
+
+  .tarea-item .mat-icon {
+    margin-right: 10px;
+    font-size: 24px;
+  }
+
+  .tarea-title, .tarea-description, .tarea-details {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+
+  .tarea-details {
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+  }
+
+  .tarea-item .mat-icon-button {
+    margin-top: 10px;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

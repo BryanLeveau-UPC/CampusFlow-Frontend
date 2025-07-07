@@ -10,35 +10,37 @@
       <mat-card class="section-card greeting-card">
         <mat-card-content>
           <h2>Buen día, Estudiante</h2>
-          <p>Rastrea progreso académico con las notas de tus asignaciones.</p>
-          <button mat-flat-button color="primary" class="new-assignment-button">
-            <mat-icon>add</mat-icon> Ver notas
-          </button>
+          <p>Rastrea tus actividades para mejorar.</p>
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="section-card assignments-card">
+  <mat-card class="section-card assignments-card">
         <mat-card-header>
-          <mat-card-title>Tus tareas</mat-card-title>
+          <mat-card-title>Gestión Rápida</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p class="active-assignments">3 activas</p>
-          <div class="assignment-item">
-            <img src="assets/images/student-icon.png" alt="Student Icon" class="assignment-icon">
-            <span>Presentación de proyecto</span>
-            <span class="assignment-status due-today">Vence hoy</span>
+          <div class="quick-action-item">
+            <mat-icon class="action-icon">assignment_turned_in</mat-icon>
+            <span>Ver Notas</span>
+            <!-- Usando routerLink directamente en el botón -->
+            <button mat-button class="action-button" routerLink="/notas">Ir</button>
           </div>
-          <div class="assignment-item">
-            <img src="assets/images/student-icon.png" alt="Student Icon" class="assignment-icon">
-            <span>Examen de medio término</span>
-            <span class="assignment-status due-tomorrow">Vence mañana</span>
+          <div class="quick-action-item">
+            <mat-icon class="action-icon">people</mat-icon>
+            <span>Ver eventos</span>
+            <!-- Usando routerLink directamente en el botón -->
+            <button mat-button class="action-button" routerLink="/listar-evento">Ir</button>
           </div>
-          <div class="assignment-item">
-            <img src="assets/images/student-icon.png" alt="Student Icon" class="assignment-icon">
-            <span>Sesión de estudio en grupo</span>
-            <span class="assignment-status due-today">Vence hoy</span>
+          <div class="quick-action-item">
+            <mat-icon class="action-icon">forum</mat-icon>
+            <span>Participar en Foro</span>
+            <!-- Usando routerLink directamente en el botón -->
+            <button mat-button class="action-button" routerLink="/grupo-foro">Ir</button>
           </div>
-          <button mat-button class="view-all-button">Ver todas las asignaciones</button>
+          <!-- Usando routerLink directamente en los botones -->
+          <button mat-button class="view-all-button" routerLink="/notas">Ver Notas</button>
+          <button mat-button class="view-all-button" routerLink="/listar-evento">Ver Eventos</button>
+          <button mat-button class="view-all-button" routerLink="/grupo-foro">Participar en foro</button>
         </mat-card-content>
       </mat-card>
 
@@ -76,54 +78,7 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="section-card upcoming-events-card">
-        <mat-card-header>
-          <mat-card-title>Próximos eventos</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="event-item">
-            <span class="event-day">2</span>
-            <div class="event-details">
-              <p class="event-title">Conferencia de Invitados</p>
-              <p class="event-time">10:00-11:00</p>
-              <p class="event-description">5 de 5 sesiones, Dr. Smith</p>
-            </div>
-          </div>
-          <div class="event-item highlighted-event">
-            <span class="event-day">5</span>
-            <div class="event-details">
-              <p class="event-title">Feria de Carreras</p>
-              <p class="event-time">13:00-16:00</p>
-              <p class="event-description">Abierto a todos los estudiantes</p>
-            </div>
-          </div>
-          <div class="event-item">
-            <span class="event-day">8</span>
-            <div class="event-details">
-              <p class="event-title">Taller</p>
-              <p class="event-time">14:00-15:30</p>
-              <p class="event-description">3 de 5 sesiones, Ms. Taylor</p>
-            </div>
-          </div>
-          <div class="event-item">
-            <span class="event-day">1</span>
-            <div class="event-details">
-              <p class="event-title">Reunión de equipo</p>
-              <p class="event-time">09:00-10:00</p>
-              <p class="event-description">Evento recurrente</p>
-            </div>
-          </div>
-          <div class="event-item">
-            <span class="event-day">9</span>
-            <div class="event-details">
-              <p class="event-title">Grupo de estudio semanal</p>
-              <p class="event-time">17:00-18:30</p>
-              <p class="event-description">Cada miércoles</p>
-            </div>
-          </div>
-          <button mat-button class="view-full-calendar-button">Ver calendario completo</button>
-        </mat-card-content>
-      </mat-card>
+
     </div>
   </div>
 </div>

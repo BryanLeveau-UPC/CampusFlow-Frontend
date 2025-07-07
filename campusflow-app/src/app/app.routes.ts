@@ -3,7 +3,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegistroEstudianteComponent } from './components/registro/registro-estudiante/registro-estudiante.component';
 import { RegistroProfesorComponent } from './components/registro/registro-profesor/registro-profesor.component';
 import { AsignaturaComponent } from './components/asignatura/asignatura.component';
-import { EstudianteComponent } from './components/estudiante/estudiante.component';
+import { ListarEstudiantesComponent } from './components/estudiante/estudiante.component';
 import { RegistroSelectorComponent } from './components/registro/registro-selector/registro-selector.component';
 import { IndexComponent } from './pages/index/index.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
@@ -15,7 +15,7 @@ import { EventoRegistrarComponent } from './components/evento/evento-registrar/e
 import { EventoListarComponent } from './components/evento/evento-listar/evento-listar.component';
 import { ForoListarComponent } from './components/foro/foro-listar/foro-listar.component';
 import { HorarioListarComponent } from './components/horario/horario-listar/horario-listar.component';
-import { NotaListarComponent } from './components/nota/nota-listar/nota-listar.component';
+//import { NotaListarComponent } from './components/nota/nota-listar/nota-listar.component';
 import { TareaListarComponent } from './components/tarea/tarea-listar/tarea-listar.component';
 import { TareaRegistrarComponent } from './components/tarea/tarea-registrar/tarea-registrar.component';
 import { PublicacionListarComponent } from './components/publicacion/publicacion-listar/publicacion-listar.component';
@@ -25,76 +25,46 @@ import { RecursoRegistrarComponent } from './components/recurso/recurso-registra
 import { RecursoListarComponent } from './components/recurso/recurso-listar/recurso-listar.component';
 import { NotasAsignaturaComponent } from './components/notas-asignatura/notas-asignatura.component';
 import { PublicacionRegistroComponent } from './components/publicacion/publicacion-registrar/publicacion-registrar.component';
+import { CrearForoProfesorComponent } from './components/crear-foro/crear-foro.component';
+import { RegistrarNotasComponent } from './components/registrar-notas/registrar-notas.component';
 
 export const routes: Routes = [
-  // Rutas públicas o de autenticación
-  { path: '', redirectTo: '/index', pathMatch: 'full' }, // Redirección por defecto
-  { path: 'index', component: IndexComponent },
-  { path: 'nosotros', component: NosotrosComponent },
-  { path: 'marcas', component: MarcasComponent },
+  { path: '', redirectTo: '/index', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'registro-selector', component: RegistroSelectorComponent },
+  { path: 'registro-Selector', component: RegistroSelectorComponent },
   { path: 'registrar-estudiante', component: RegistroEstudianteComponent },
   { path: 'registrar-profesor', component: RegistroProfesorComponent },
-  { path: 'error-carga', component: ErrorDashboardComponent }, // Página de error genérica
+  { path: 'asignatura', component: AsignaturaComponent },
+  { path: 'estudiantes', component: ListarEstudiantesComponent },
 
-  // Rutas de gestión (posiblemente para un rol de administrador o profesor, si no están en dashboard)
-  // Si estas rutas son para el dashboard del profesor, se moverán dentro de 'dashboard-profesor'
-  { path: 'asignaturas', component: AsignaturaComponent }, // Listar/Gestionar todas las asignaturas
-  { path: 'estudiantes-gestion', component: EstudianteComponent }, // Listar/Gestionar todos los estudiantes
-  { path: 'notas-gestion', component: NotaListarComponent }, // Listar/Gestionar todas las notas
-  { path: 'eventos-registrar', component: EventoRegistrarComponent },
-  { path: 'recompensas-registrar', component: RecompensaRegistrarComponent },
-  { path: 'recursos-registrar', component: RecursoRegistrarComponent },
-  { path: 'tareas-registrar', component: TareaRegistrarComponent },
-
-
-  // Rutas del Dashboard del Estudiante (Protegidas)
-  {
-    path: 'dashboard-estudiante',
-    component: EstudianteDashboardComponent,
-   // canActivate: [AuthGuard], // Protege esta ruta y sus hijos
-    data: { roles: ['ESTUDIANTE'] }, // Define los roles permitidos para este dashboard
-    children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Redirección por defecto dentro del dashboard
-      { path: 'home', component: EstudianteDashboardComponent },
-      { path: 'notas', component: NotasAsignaturaComponent }, // Notas del estudiante
-      { path: 'eventos', component: EventoListarComponent }, // Eventos para el estudiante
-      { path: 'recompensas', component: RecompensaListarComponent }, // Recompensas del estudiante
-      { path: 'tareas', component: TareaListarComponent }, // Tareas del estudiante
-      { path: 'horario', component: HorarioListarComponent }, // Horario del estudiante
-
-      // Rutas anidadas para la sección de Foro
-      {
-        path: 'foro', // Ruta para el listado de grupos de foro
-        children: [
-          { path: '', component: ForoListarComponent }, // /dashboard-estudiante/foro
-          { path: ':idGrupoForo/publicaciones', component: PublicacionListarComponent }, // /dashboard-estudiante/foro/123/publicaciones
-          { path: ':idGrupoForo/publicaciones/registrar', component: PublicacionRegistroComponent }, // /dashboard-estudiante/foro/123/publicaciones/registrar
-          { path: ':idPublicacion/recursos', component: RecursoListarComponent }, // /dashboard-estudiante/foro/123/publicaciones/456/recursos
-          // Si necesitas registrar recursos para una publicación:
-          // { path: ':idPublicacion/recursos/registrar', component: RecursoRegistrarComponent },
-        ]
-      },
-    ]
-  },
-
-  // Rutas del Dashboard del Profesor (Protegidas)
-  {
-    path: 'dashboard-profesor',
-    component: ProfesorDashboardComponent,
-    //canActivate: [AuthGuard], // Protege esta ruta y sus hijos
-    data: { roles: ['PROFESOR'] }, // Define los roles permitidos
-    children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' }, // Ejemplo: un componente home para el profesor
-      // Aquí irían las rutas específicas del profesor:
-      // { path: 'mis-asignaturas', component: ProfesorAsignaturasComponent },
-      // { path: 'crear-evento', component: EventoRegistrarComponent },
-      // { path: 'gestionar-notas', component: ProfesorGestionNotasComponent },
-      // etc.
-    ]
-  },
-
-  // Ruta comodín para cualquier otra URL no reconocida
+  { path: 'registrar-evento', component: EventoRegistrarComponent },
+  
+  { path: 'listar-evento', component: EventoListarComponent },
+  { path: 'listar-grupo-foro', component: ForoListarComponent },
+  { path: 'registrar-publicacion', component: PublicacionRegistroComponent },
+  { path: 'listar-publicacion', component: PublicacionListarComponent },
+  { path: 'listar-publicacion', component: PublicacionListarComponent },
+  { path: 'listar-horario', component: HorarioListarComponent },
+  //{ path: 'listar-nota', component: NotaListarComponent },
+  { path: 'listar-tareas', component: TareaListarComponent },
+  { path: 'tarea/registrar', component: TareaRegistrarComponent },
+  { path: 'index', component: IndexComponent },
+  { path: 'marcas', component: MarcasComponent },
+  { path: 'dashboard-estudiante', component: EstudianteDashboardComponent },
+  { path: 'dashboard-profesor', component: ProfesorDashboardComponent },
+  { path: 'error-carga', component: ErrorDashboardComponent },
+  { path: 'registrar-recompensa', component: RecompensaRegistrarComponent },
+  { path: 'listar-recompensa', component: RecompensaListarComponent },
+  { path: 'registrar-recurso', component: RecursoRegistrarComponent },
+  { path: 'listar-recurso', component: RecursoListarComponent },
+  { path: 'nota', component: NotasAsignaturaComponent },
+  { path: 'notas', component: NotasAsignaturaComponent },
+  {path: 'recurso', component: RecursoListarComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'publicacion', component: PublicacionListarComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'tarea', component: TareaListarComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'horario', component: HorarioListarComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'grupo-foro', component: ForoListarComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'nuevo/grupo-foro', component: CrearForoProfesorComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'registrar-notas', component: RegistrarNotasComponent }, 
   { path: '**', redirectTo: '/index' },
 ];
