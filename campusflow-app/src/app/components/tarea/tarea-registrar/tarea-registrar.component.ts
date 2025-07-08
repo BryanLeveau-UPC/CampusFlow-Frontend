@@ -72,7 +72,7 @@ ngOnInit(): void {
   // Aquí haces la llamada para obtener el ID del estudiante asociado
   this.estudianteService.getEstudianteByUserId(idUsuario).subscribe({
     next: (estudiante) => {
-      this.idEstudiante = estudiante.IdEstudiante !== undefined ? estudiante.IdEstudiante : null;
+      this.idEstudiante = estudiante.idEstudiante !== undefined ? estudiante.idEstudiante : null;
     },
     error: () => {
       this.snackBar.open('No se pudo obtener el estudiante vinculado al usuario.', 'Cerrar', { duration: 5000 });

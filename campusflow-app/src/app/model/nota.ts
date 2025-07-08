@@ -1,8 +1,8 @@
 export interface Nota {
   idNota?: number; 
-  Tipo: string;
-  Puntaje: number;
-  Peso_Nota: number;
+  tipo: string;
+  puntaje: number;
+  peso_Nota: number;
   id_asignatura: number;
   nombreAsignatura: string; 
   id_estudiante: number; 

@@ -105,7 +105,7 @@ export class AuthService {
         }
 
         const estudianteDTO: Estudiante = {
-          IdEstudiante: 0,
+          idEstudiante: 0,
           Ciclo: payload.ciclo,
           idCarrera: payload.idCarrera,
           idUsuario: responseUsuario.idUsuario,

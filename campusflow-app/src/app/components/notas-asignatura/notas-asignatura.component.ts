@@ -18,7 +18,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     CommonModule,
     MatCardModule,
     MatTableModule,
-    // MatExpansionModule, // Removido
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule
@@ -41,25 +40,26 @@ export class NotasAsignaturaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadNotas();
   }
 
   loadNotas(): void {
     this.isLoading = true;
     const userId = this.authService.getUserId();
+    console.log('User ID obtenido:', userId);
 
     if (!userId) {
       this.snackBar.open('Error: ID de usuario no encontrado. Por favor, inicie sesión nuevamente.', 'Cerrar', { duration: 5000 });
       this.isLoading = false;
       return;
     }
-
-    // Paso 1: Obtener el IdEstudiante a partir del userId
+    console.log('Iniciando carga de notas para el usuario con ID:', userId);
     this.estudianteService.getEstudianteByUserId(userId).subscribe({
       next: (estudiante: Estudiante) => {
-        if (estudiante && estudiante.IdEstudiante) {
-          console.log('Estudiante ID encontrado:', estudiante.IdEstudiante);
+        if (estudiante && estudiante.idEstudiante) {
+          console.log('Estudiante ID encontrado:', estudiante.idEstudiante);
           // Paso 2: Obtener todas las notas para ese IdEstudiante
-          this.notaService.getNotasByEstudianteId(estudiante.IdEstudiante).subscribe({
+          this.notaService.getNotasByEstudianteId(estudiante.idEstudiante).subscribe({
             next: (notas: Nota[]) => {
               console.log('Notas recibidas:', notas);
               this.allNotas = notas; // Asigna directamente todas las notas al dataSource

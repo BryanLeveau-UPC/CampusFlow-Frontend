@@ -1,5 +1,5 @@
 export interface Estudiante {
-  IdEstudiante?: number;
+  idEstudiante?: number;
   Ciclo: number;
   idCarrera: number; 
   idUsuario: number; 

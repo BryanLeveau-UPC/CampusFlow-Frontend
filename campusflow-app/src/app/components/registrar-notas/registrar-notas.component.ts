@@ -78,7 +78,7 @@ export class RegistrarNotasComponent implements OnInit {
 
     this.notaForm.get('id_estudiante')?.valueChanges.subscribe(idEstudiante => {
       // FIX: Use 'IdEstudiante' as per the Estudiante interface
-      this.selectedEstudiante = this.estudiantes.find(e => e.IdEstudiante === idEstudiante) || null;
+      this.selectedEstudiante = this.estudiantes.find(e => e.idEstudiante === idEstudiante) || null;
       if (this.selectedEstudiante && this.selectedEstudiante.idCarrera) {
         this.filterAsignaturasByCarrera(this.selectedEstudiante.idCarrera);
         if (this.selectedCarreraId !== this.selectedEstudiante.idCarrera) {
@@ -223,7 +223,7 @@ export class RegistrarNotasComponent implements OnInit {
     this.isLoading = true;
     this.notaService.guardarNota(notaToSave).subscribe(
       (response: Nota) => {
-        this.successMessage = `Nota de ${response.Puntaje} guardada exitosamente!`;
+        this.successMessage = `Nota de ${response.puntaje} guardada exitosamente!`;
         this.resetForm();
         this.isLoading = false;
       },
@@ -237,7 +237,7 @@ export class RegistrarNotasComponent implements OnInit {
 
   resetForm(): void {
     this.notaForm.reset({
-      id_estudiante: this.selectedEstudiante?.IdEstudiante || null, // Keep student selected or reset
+      id_estudiante: this.selectedEstudiante?.idEstudiante || null, // Keep student selected or reset
       id_asignatura: null,
       nombreAsignatura: '',
       Tipo: '',
