@@ -10,8 +10,8 @@ import { Tarea } from '../../../model/tarea';
 import { AuthService } from '../../../services/auth.service';
 import { TareaService } from '../../../services/tarea.service';
 import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
-import { Estudiante } from '../../../model/estudiante';
 import { EstudianteService } from '../../../services/estudiante.service';
+import { Estudiante } from '../../../model/estudiante';
 
 @Component({
   selector: 'app-tarea-listar',

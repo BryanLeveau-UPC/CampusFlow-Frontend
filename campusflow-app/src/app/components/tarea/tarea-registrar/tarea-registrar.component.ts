@@ -137,6 +137,6 @@ export class TareaRegistrarComponent implements OnInit {
   }
 
   goBackToList(): void {
-    this.router.navigate(['/dashboard-estudiante/tareas']);
+    this.router.navigate(['/tarea']);
   }
 }
