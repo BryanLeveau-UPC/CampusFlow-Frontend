@@ -9,6 +9,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Publicacion } from '../../../model/publicacion';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PublicacionService } from '../../../services/publicacion.service';
+import { DashboardNavbarComponent } from "../../dashboard/dashboard-navbar/dashboard-navbar.component";
 
 @Component({
   selector: 'app-publicacion-listar',
@@ -19,8 +20,9 @@ import { PublicacionService } from '../../../services/publicacion.service';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    RouterModule, 
-  ],
+    RouterModule,
+    DashboardNavbarComponent
+],
   templateUrl: './publicacion-listar.component.html',
   styleUrl: './publicacion-listar.component.css',
 })

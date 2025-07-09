@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 import { EstudianteService } from '../../services/estudiante.service';
 import { NotaService } from '../../services/nota.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DashboardNavbarComponent } from "../dashboard/dashboard-navbar/dashboard-navbar.component";
 
 @Component({
   selector: 'app-notas-asignatura',
@@ -20,8 +21,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    MatProgressSpinnerModule
-  ],
+    MatProgressSpinnerModule,
+    DashboardNavbarComponent
+],
   templateUrl: './notas-asignatura.component.html',
   styleUrl: './notas-asignatura.component.css'
 })

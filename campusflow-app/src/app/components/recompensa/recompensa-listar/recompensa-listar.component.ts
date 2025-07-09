@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Recompensa } from '../../../model/recompensa';
 import { AuthService } from '../../../services/auth.service';
 import { RecompensaService } from '../../../services/recompensa.service';
+import { DashboardNavbarComponent } from "../../dashboard/dashboard-navbar/dashboard-navbar.component";
 
 @Component({
   selector: 'app-recompensa-listar',
@@ -20,8 +21,9 @@ import { RecompensaService } from '../../../services/recompensa.service';
     MatIconModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    MatTableModule
-  ],
+    MatTableModule,
+    DashboardNavbarComponent
+],
   templateUrl: './recompensa-listar.component.html',
   styleUrl: './recompensa-listar.component.css'
 })

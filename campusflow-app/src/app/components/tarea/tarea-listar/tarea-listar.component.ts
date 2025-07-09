@@ -12,6 +12,7 @@ import { TareaService } from '../../../services/tarea.service';
 import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
 import { EstudianteService } from '../../../services/estudiante.service';
 import { Estudiante } from '../../../model/estudiante';
+import { DashboardNavbarComponent } from "../../dashboard/dashboard-navbar/dashboard-navbar.component";
 
 @Component({
   selector: 'app-tarea-listar',
@@ -24,8 +25,9 @@ import { Estudiante } from '../../../model/estudiante';
     MatListModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatSpinner
-  ],
+    MatSpinner,
+    DashboardNavbarComponent
+],
   templateUrl: './tarea-listar.component.html',
   styleUrl: './tarea-listar.component.css'
 })

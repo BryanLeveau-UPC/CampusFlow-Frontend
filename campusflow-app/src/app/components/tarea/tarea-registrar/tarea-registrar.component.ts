@@ -15,6 +15,7 @@ import { Tarea } from '../../../model/tarea';
 import { AuthService } from '../../../services/auth.service';
 import { TareaService } from '../../../services/tarea.service';
 import { EstudianteService } from '../../../services/estudiante.service';
+import { DashboardNavbarComponent } from "../../dashboard/dashboard-navbar/dashboard-navbar.component";
 
 @Component({
   selector: 'app-tarea-registrar',
@@ -32,7 +33,8 @@ import { EstudianteService } from '../../../services/estudiante.service';
     MatNativeDateModule,
     MatSnackBarModule,
     RouterModule,
-  ],
+    DashboardNavbarComponent
+],
   templateUrl: './tarea-registrar.component.html',
   styleUrl: './tarea-registrar.component.css',
 })

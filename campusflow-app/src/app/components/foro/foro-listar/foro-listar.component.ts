@@ -10,6 +10,7 @@ import { Router, RouterModule } from '@angular/router';
 import { GrupoForoService } from '../../../services/grupo-foro.service';
 import { GrupoForo } from '../../../model/grupoForo';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DashboardNavbarComponent } from "../../dashboard/dashboard-navbar/dashboard-navbar.component";
 
 @Component({
   selector: 'app-foro-listar',
@@ -22,7 +23,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatProgressSpinnerModule,
     RouterModule,
     MatTooltipModule,
-  ],
+    DashboardNavbarComponent
+],
   templateUrl: './foro-listar.component.html',
   styleUrl: './foro-listar.component.css',
 })

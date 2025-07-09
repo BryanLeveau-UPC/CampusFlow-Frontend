@@ -12,6 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 import { EstudianteService } from '../../../services/estudiante.service';
 import { EventoService } from '../../../services/evento.service';
 import { Estudiante } from '../../../model/estudiante';
+import { DashboardNavbarComponent } from "../../dashboard/dashboard-navbar/dashboard-navbar.component";
 
 @Component({
   selector: 'app-evento-listar',
@@ -22,7 +23,8 @@ import { Estudiante } from '../../../model/estudiante';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
-  ],
+    DashboardNavbarComponent
+],
   templateUrl: './evento-listar.component.html',
   styleUrl: './evento-listar.component.css',
 })
