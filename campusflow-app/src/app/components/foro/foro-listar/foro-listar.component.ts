@@ -65,7 +65,7 @@ export class ForoListarComponent implements OnInit {
   verPublicaciones(idGrupoForo: number | undefined): void {
     if (idGrupoForo) {
       // Navega a la ruta de publicaciones, pasando el ID del grupo de foro
-      this.router.navigate(['/estudiante-dashboard/foro', idGrupoForo, 'publicaciones']);
+      this.router.navigate(['/foro', idGrupoForo, 'publicaciones']);
     } else {
       this.snackBar.open('ID de foro no disponible.', 'Cerrar', { duration: 3000 });
     }

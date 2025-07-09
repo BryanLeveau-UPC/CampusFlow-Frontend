@@ -59,12 +59,12 @@ export const routes: Routes = [
   { path: 'listar-recurso', component: RecursoListarComponent },
   { path: 'nota', component: NotasAsignaturaComponent },
   { path: 'notas', component: NotasAsignaturaComponent },
-  {path: 'recurso', component: RecursoListarComponent }, // Asegúrate de que esta ruta esté aquí
-  {path: 'publicacion', component: PublicacionListarComponent }, // Asegúrate de que esta ruta esté aquí
-  {path: 'tarea', component: TareaListarComponent }, // Asegúrate de que esta ruta esté aquí
-  {path: 'horario', component: HorarioListarComponent }, // Asegúrate de que esta ruta esté aquí
-  {path: 'grupo-foro', component: ForoListarComponent }, // Asegúrate de que esta ruta esté aquí
-  {path: 'nuevo/grupo-foro', component: CrearForoProfesorComponent }, // Asegúrate de que esta ruta esté aquí
+  {path: 'recurso', component: RecursoListarComponent },
+  {path: 'publicacion', component: PublicacionListarComponent },
+  {path: 'tarea', component: TareaListarComponent }, 
+  {path: 'horario', component: HorarioListarComponent }, 
+  {path: 'grupo-foro', component: ForoListarComponent }, 
+  {path: 'nuevo/grupo-foro', component: CrearForoProfesorComponent }, 
   {path: 'registrar-notas', component: RegistrarNotasComponent }, 
   { path: '**', redirectTo: '/index' },
 ];

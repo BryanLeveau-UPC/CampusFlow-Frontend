@@ -134,17 +134,17 @@ export class CrearForoProfesorComponent implements OnInit {
   onSubmit(): void {
     if (this.foroForm.valid) { // No longer checking profesorCarreraId
       const newGrupoForo: GrupoForo = {
-        Titulo: this.foroForm.value.Titulo,
-        Descripcion: this.foroForm.value.Descripcion,
-        Campo: this.foroForm.value.Campo,
-        FechaCreacion: new Date(),
+        titulo: this.foroForm.value.Titulo,
+        descripcion: this.foroForm.value.Descripcion,
+        campo: this.foroForm.value.Campo,
+        fechaCreacion: String(new Date()), // Use current date as creation date
         id_Asigneatura: this.foroForm.value.selectedAsignaturaId,
-        Estado: true
+        estado: true
       };
 
       this.grupoForoService.createGrupoForo(newGrupoForo).subscribe({
         next: (response: GrupoForo) => {
-          this.snackBar.open(`Forum group "${response.Titulo}" created successfully!`, 'Close', { duration: 3000 });
+          this.snackBar.open(`Forum group "${response.titulo}" created successfully!`, 'Close', { duration: 3000 });
           this.resetForm();
         },
         error: (err) => {
