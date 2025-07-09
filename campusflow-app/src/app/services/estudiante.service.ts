@@ -127,4 +127,12 @@ export class EstudianteService {
     console.error('Error en EstudianteService:', errorMessage);
     return throwError(() => new Error(errorMessage));
   }
+
+    // Obtener ID de carrera por ID de usuario
+  getCarreraIdByUserId(userId: number): Observable<number> {
+    return this.http.get<number>(
+      `${this.apiUrl}/carrera-por-usuario/${userId}`
+    );
+  }
+
 }

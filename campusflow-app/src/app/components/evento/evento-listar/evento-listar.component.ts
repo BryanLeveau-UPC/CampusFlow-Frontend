@@ -42,31 +42,31 @@ export class EventoListarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentStudentId = this.authService.getUserId();
-
-    if (this.currentStudentId) {
-      this.estudianteService.getEstudianteByUserId(this.currentStudentId).subscribe({
-        next: (estudiante: Estudiante) => {
-          this.currentStudentCarreraId = estudiante.idCarrera;
-          if (this.currentStudentCarreraId) {
-            this.loadEventosPorCarrera(this.currentStudentCarreraId);
-          } else {
-            this.snackBar.open('No se pudo obtener la carrera del estudiante.', 'Cerrar', { duration: 3000 });
-            this.isLoading = false;
-          }
-        },
-        error: (err) => {
-          console.error('Error al obtener datos del estudiante:', err);
-          this.snackBar.open('Error al cargar datos del estudiante: ' + (err.message || 'Error desconocido'), 'Cerrar', { duration: 5000 });
-          this.isLoading = false;
-        }
-      });
-    } else {
-      this.snackBar.open('ID de estudiante no disponible. Por favor, inicie sesión.', 'Cerrar', { duration: 5000 });
-      this.isLoading = false;
-      this.router.navigate(['/login']); // Redirigir al login si no hay ID de estudiante
-    }
+    this.cargarEventosParaEstudiante();
   }
+
+  private cargarEventosParaEstudiante(): void {
+  this.currentStudentId = this.authService.getUserId();
+
+  if (!this.currentStudentId) {
+    this.snackBar.open('ID de estudiante no disponible. Por favor, inicie sesión.', 'Cerrar', { duration: 5000 });
+    this.isLoading = false;
+    this.router.navigate(['/login']);
+    return;
+  }
+
+  this.estudianteService.getCarreraIdByUserId(this.currentStudentId).subscribe({
+    next: (idCarrera: number) => {
+      this.currentStudentCarreraId = idCarrera;
+      this.loadEventosPorCarrera(idCarrera);
+    },
+    error: (err) => {
+      console.error('Error al obtener la carrera:', err);
+      this.snackBar.open('No se pudo obtener la carrera del estudiante.', 'Cerrar', { duration: 3000 });
+      this.isLoading = false;
+    }
+  });
+}
 
   /**
    * Carga los eventos relevantes para la carrera del estudiante.
