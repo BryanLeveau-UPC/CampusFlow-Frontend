@@ -11,37 +11,50 @@
       </div>
 
       <div *ngIf="!isLoading" class="foro-table-container">
-        <table mat-table [dataSource]="gruposForo" class="full-width-table mat-elevation-z8">
-
+        <table
+          mat-table
+          [dataSource]="gruposForo"
+          class="full-width-table mat-elevation-z8"
+        >
           <!-- Columna: Título del Foro -->
           <ng-container matColumnDef="titulo">
-            <th mat-header-cell *matHeaderCellDef> Título del Foro </th>
-            <td mat-cell *matCellDef="let grupo"> {{ grupo.titulo }} </td>
+            <th mat-header-cell *matHeaderCellDef>Título del Foro</th>
+            <td mat-cell *matCellDef="let grupo">{{ grupo.titulo }}</td>
           </ng-container>
 
           <!-- Columna: Descripción -->
           <ng-container matColumnDef="descripcion">
-            <th mat-header-cell *matHeaderCellDef> Descripción </th>
-            <td mat-cell *matCellDef="let grupo"> {{ grupo.descripcion }} </td>
+            <th mat-header-cell *matHeaderCellDef>Descripción</th>
+            <td mat-cell *matCellDef="let grupo">{{ grupo.descripcion }}</td>
           </ng-container>
 
           <!-- Columna: Nombre de la Asignatura -->
           <ng-container matColumnDef="nombreAsignatura">
-            <th mat-header-cell *matHeaderCellDef> Asignatura </th>
-            <td mat-cell *matCellDef="let grupo"> {{ grupo.nombreAsignatura || 'N/A' }} </td>
+            <th mat-header-cell *matHeaderCellDef>Asignatura</th>
+            <td mat-cell *matCellDef="let grupo">
+              {{ grupo.nombreAsignatura || "N/A" }}
+            </td>
           </ng-container>
 
           <!-- Columna: Fecha de Creación -->
           <ng-container matColumnDef="fechaCreacion">
-            <th mat-header-cell *matHeaderCellDef> Fecha de Creación </th>
-            <td mat-cell *matCellDef="let grupo"> {{ grupo.fechaCreacion | date:'dd/MM/yyyy' }} </td>
+            <th mat-header-cell *matHeaderCellDef>Fecha de Creación</th>
+            <td mat-cell *matCellDef="let grupo">
+              {{ grupo.fechaCreacion | date : "dd/MM/yyyy" }}
+            </td>
           </ng-container>
 
           <!-- Columna: Acciones -->
           <ng-container matColumnDef="acciones">
-            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let grupo">
-              <button mat-icon-button color="primary" (click)="verPublicaciones(grupo.idGrupoForo)" matTooltip="Ver Publicaciones">
+              <button
+                mat-icon-button
+                color="primary"
+                matTooltip="Ver publicaciones del foro"
+                matTooltipPosition="above"
+                (click)="verPublicaciones(grupo.idGrupoForo)"
+              >
                 <mat-icon>visibility</mat-icon>
               </button>
             </td>
@@ -50,7 +63,7 @@
           <!-- Definición de la fila de encabezado -->
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <!-- Definición de las filas de datos -->
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
           <!-- Fila que se muestra cuando no hay datos -->
           <tr class="mat-row no-data-row" *matNoDataRow>

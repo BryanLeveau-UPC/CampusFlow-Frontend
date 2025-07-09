@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { Router, RouterModule } from '@angular/router';
 import { GrupoForoService } from '../../../services/grupo-foro.service';
 import { GrupoForo } from '../../../model/grupoForo';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-foro-listar',
@@ -20,6 +21,7 @@ import { GrupoForo } from '../../../model/grupoForo';
     MatIconModule,
     MatProgressSpinnerModule,
     RouterModule,
+    MatTooltipModule,
   ],
   templateUrl: './foro-listar.component.html',
   styleUrl: './foro-listar.component.css',
@@ -28,13 +30,19 @@ export class ForoListarComponent implements OnInit {
   gruposForo: GrupoForo[] = [];
   isLoading: boolean = true;
   // Columnas a mostrar en la tabla de foros
-  displayedColumns: string[] = ['titulo', 'descripcion', 'nombreAsignatura', 'fechaCreacion', 'acciones'];
+  displayedColumns: string[] = [
+    'titulo',
+    'descripcion',
+    'nombreAsignatura',
+    'fechaCreacion',
+    'acciones',
+  ];
 
   constructor(
     private grupoForoService: GrupoForoService,
     private snackBar: MatSnackBar,
     private router: Router // Inyectar Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadGruposForo();
@@ -52,9 +60,13 @@ export class ForoListarComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al cargar los grupos de foro:', err);
-        this.snackBar.open('Error al cargar los foros: ' + (err.message || 'Error desconocido'), 'Cerrar', { duration: 5000 });
+        this.snackBar.open(
+          'Error al cargar los foros: ' + (err.message || 'Error desconocido'),
+          'Cerrar',
+          { duration: 5000 }
+        );
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -63,11 +75,13 @@ export class ForoListarComponent implements OnInit {
    * @param idGrupoForo El ID del grupo de foro.
    */
   verPublicaciones(idGrupoForo: number | undefined): void {
+    console.log('ID del grupo de foro:', idGrupoForo);
     if (idGrupoForo) {
-      // Navega a la ruta de publicaciones, pasando el ID del grupo de foro
-      this.router.navigate(['/foro', idGrupoForo, 'publicaciones']);
+      this.router.navigate(['/grupo-foro', idGrupoForo, 'publicaciones']);
     } else {
-      this.snackBar.open('ID de foro no disponible.', 'Cerrar', { duration: 3000 });
+      this.snackBar.open('ID de foro no disponible.', 'Cerrar', {
+        duration: 3000,
+      });
     }
   }
 }

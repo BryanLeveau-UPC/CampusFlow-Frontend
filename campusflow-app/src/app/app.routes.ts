@@ -42,7 +42,7 @@ export const routes: Routes = [
   { path: 'listar-evento', component: EventoListarComponent },
   { path: 'listar-grupo-foro', component: ForoListarComponent },
   { path: 'registrar-publicacion', component: PublicacionRegistroComponent },
-  { path: 'listar-publicacion', component: PublicacionListarComponent },
+  { path: 'publicaciones', component: PublicacionListarComponent },
   { path: 'listar-publicacion', component: PublicacionListarComponent },
   { path: 'listar-horario', component: HorarioListarComponent },
   //{ path: 'listar-nota', component: NotaListarComponent },
@@ -66,5 +66,6 @@ export const routes: Routes = [
   {path: 'grupo-foro', component: ForoListarComponent }, 
   {path: 'nuevo/grupo-foro', component: CrearForoProfesorComponent }, 
   {path: 'registrar-notas', component: RegistrarNotasComponent }, 
+  { path: 'grupo-foro/:idGrupoForo/publicaciones', component: PublicacionListarComponent },
   { path: '**', redirectTo: '/index' },
 ];

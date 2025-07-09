@@ -1,4 +1,5 @@
 /* src/app/components/foro-listar/foro-listar.component.css */
+
 .foro-container {
   display: flex;
   justify-content: center;
@@ -45,26 +46,34 @@
 
 .full-width-table {
   width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
+/* --- Encabezado de tabla más atractivo --- */
 .mat-header-cell {
-  background-color: #e0e0e0;
-  color: #333;
-  font-weight: 600;
-  padding: 10px 15px;
+  background: linear-gradient(to right, #3f51b5, #5c6bc0);
+  color: white;
+  font-weight: bold;
+  padding: 12px 16px;
   text-align: left;
+  border-bottom: 2px solid #c5cae9;
 }
 
+/* --- Filas de datos --- */
 .mat-cell {
-  padding: 10px 15px;
-  color: #555;
-  border-bottom: 1px solid #eee;
+  padding: 12px 16px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.3s;
 }
 
-.mat-cell:last-child {
-  border-bottom: none;
+/* --- Hover en filas --- */
+.mat-row:hover {
+  background-color: #f3f4f6;
 }
 
+/* --- Fila que se muestra cuando no hay datos --- */
 .mat-row.no-data-row {
   text-align: center;
   font-style: italic;
@@ -73,31 +82,44 @@
   background-color: #f9f9f9;
 }
 
+/* --- Botón de acción --- */
 .mat-icon-button {
   width: 36px;
   height: 36px;
   line-height: 36px;
   font-size: 20px;
+  background-color: transparent;
+  transition: transform 0.2s, background-color 0.3s;
 }
 
+.mat-icon-button:hover {
+  transform: scale(1.15);
+  background-color: #e8eaf6;
+  border-radius: 50%;
+}
+
+/* --- Icono más visible --- */
 .mat-icon-button mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
+  font-size: 22px;
+  color: #3f51b5;
 }
 
-/* Responsive adjustments */
+/* --- Responsive adjustments --- */
 @media (max-width: 768px) {
   .foro-container {
     padding: 15px;
   }
+
   .foro-card {
     padding: 15px;
   }
+
   .foro-card mat-card-title {
     font-size: 1.5em;
   }
-  .mat-header-cell, .mat-cell {
+
+  .mat-header-cell,
+  .mat-cell {
     padding: 8px 10px;
     font-size: 0.9em;
   }
@@ -107,18 +129,22 @@
   .foro-container {
     padding: 10px;
   }
+
   .foro-card {
     padding: 10px;
   }
+
   .foro-card mat-card-title {
     font-size: 1.3em;
   }
+
   .mat-icon-button {
     width: 32px;
     height: 32px;
     line-height: 32px;
     font-size: 18px;
   }
+
   .mat-icon-button mat-icon {
     font-size: 18px;
     width: 18px;
