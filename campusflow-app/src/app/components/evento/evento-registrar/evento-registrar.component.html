@@ -1,1 +1,53 @@
-<p>evento-registrar works!</p>
+<app-dashboard-navbar-profesor></app-dashboard-navbar-profesor>
+
+<div class="container">
+  <mat-card class="form-card">
+    <h2 class="title">Registrar Evento</h2>
+
+    <form [formGroup]="eventoForm" (ngSubmit)="registrarEvento()">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Nombre del Evento</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error *ngIf="eventoForm.get('nombre')?.invalid">Nombre requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput rows="3" formControlName="descripcion"></textarea>
+        <mat-error *ngIf="eventoForm.get('descripcion')?.invalid">Descripción requerida</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Fecha de Inicio</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="fechaInicio" />
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error *ngIf="eventoForm.get('fechaInicio')?.invalid">Fecha requerida</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Fecha de Fin</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="fechaFin" />
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf="eventoForm.get('fechaFin')?.invalid">Fecha requerida</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Puntaje de Recompensa</mat-label>
+        <input matInput type="number" formControlName="puntajeRecompensa" />
+        <mat-error *ngIf="eventoForm.get('puntajeRecompensa')?.invalid">
+          Puntaje requerido y mayor o igual a 0
+        </mat-error>
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="estado" color="primary" class="form-toggle">
+        Evento Activo
+      </mat-slide-toggle>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="eventoForm.invalid">
+        Registrar Evento
+      </button>
+    </form>
+  </mat-card>
+</div>

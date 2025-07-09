@@ -16,13 +16,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { DashboardNavbarProfesorComponent } from "../dashboard-navbar-profesor/dashboard-navbar-profesor.component";
 
 @Component({
   selector: 'app-estudiante',
   imports: [
     // Angular Common and Forms modules
     CommonModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
@@ -35,7 +36,9 @@ import { CommonModule } from '@angular/common';
     MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule // Needed for MatDatepicker
-  ],
+    ,
+    DashboardNavbarProfesorComponent
+],
   templateUrl: './estudiante.component.html',
   styleUrl: './estudiante.component.css'
 })
