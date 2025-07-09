@@ -97,6 +97,6 @@ export class PublicacionListarComponent implements OnInit {
    * Navega de regreso al listado de grupos de foro.
    */
   goBackToForos(): void {
-    this.router.navigate(['/estudiante-dashboard/foro']);
+    this.router.navigate(['/foro']);
   }
 }

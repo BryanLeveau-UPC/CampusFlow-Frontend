@@ -64,6 +64,7 @@ export const routes: Routes = [
   {path: 'tarea', component: TareaListarComponent }, 
   {path: 'horario', component: HorarioListarComponent }, 
   {path: 'grupo-foro', component: ForoListarComponent }, 
+  {path: 'foro', component: ForoListarComponent }, 
   {path: 'nuevo/grupo-foro', component: CrearForoProfesorComponent }, 
   {path: 'registrar-notas', component: RegistrarNotasComponent }, 
   { path: 'grupo-foro/:idGrupoForo/publicaciones', component: PublicacionListarComponent },
