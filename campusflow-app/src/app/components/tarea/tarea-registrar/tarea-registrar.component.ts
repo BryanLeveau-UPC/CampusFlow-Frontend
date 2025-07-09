@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -18,6 +18,7 @@ import { EstudianteService } from '../../../services/estudiante.service';
 
 @Component({
   selector: 'app-tarea-registrar',
+  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -50,60 +51,77 @@ export class TareaRegistrarComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.tareaForm = this.fb.group({
-      titulo: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      fechaLimite: [null, Validators.required],
-      prioridad: ['Media', Validators.required], // Valor por defecto
-      // id_horario: [null, Validators.required] // Asumo que id_horario es requerido y se ingresa manualmente por ahora
-      // Si id_horario es opcional o se obtiene de otra forma, ajusta esto.
-      // Para simplificar, lo haré opcional por ahora si no hay una lista de horarios.
-      id_horario: [null] // Puede ser null si no es obligatorio al crear
+      titulo: ['', [Validators.required, Validators.minLength(6)]],
+      descripcion: ['', [Validators.required, Validators.minLength(10)]],
+      fechaLimite: [null, [Validators.required, this.fechaNoPasadaValidator]],
+      prioridad: ['Media', Validators.required],
+      id_horario: [null, this.horarioOpcionalValidator]
     });
   }
 
-ngOnInit(): void {
-  const idUsuario = this.authService.getUserId(); // Este es el ID del usuario
-  if (!idUsuario) {
-    this.snackBar.open('No se pudo obtener el ID del usuario. Inicie sesión.', 'Cerrar', { duration: 5000 });
-    this.router.navigate(['/login']);
-    return;
+  ngOnInit(): void {
+    const idUsuario = this.authService.getUserId();
+    if (!idUsuario) {
+      this.snackBar.open('No se pudo obtener el ID del usuario. Inicie sesión.', 'Cerrar', { duration: 5000 });
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.estudianteService.getEstudianteByUserId(idUsuario).subscribe({
+      next: (estudiante) => {
+        this.idEstudiante = estudiante?.idEstudiante ?? null;
+      },
+      error: () => {
+        this.snackBar.open('No se pudo obtener el estudiante vinculado al usuario.', 'Cerrar', { duration: 5000 });
+        this.router.navigate(['/login']);
+      }
+    });
   }
 
-  // Aquí haces la llamada para obtener el ID del estudiante asociado
-  this.estudianteService.getEstudianteByUserId(idUsuario).subscribe({
-    next: (estudiante) => {
-      this.idEstudiante = estudiante.idEstudiante !== undefined ? estudiante.idEstudiante : null;
-    },
-    error: () => {
-      this.snackBar.open('No se pudo obtener el estudiante vinculado al usuario.', 'Cerrar', { duration: 5000 });
-      this.router.navigate(['/login']);
-    }
-  });
-}
+  /**
+   * Validador personalizado para que la fecha no sea anterior a hoy.
+   */
+  fechaNoPasadaValidator(control: AbstractControl): ValidationErrors | null {
+    const valor = control.value;
+    if (!valor) return null;
+
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    const seleccionada = new Date(valor);
+    seleccionada.setHours(0, 0, 0, 0);
+
+    return seleccionada < hoy ? { fechaPasada: true } : null;
+  }
 
   /**
-   * Maneja el envío del formulario para registrar una nueva tarea.
+   * Validador opcional para id_horario: si se ingresa, debe ser > 0.
    */
+  horarioOpcionalValidator(control: AbstractControl): ValidationErrors | null {
+    const valor = control.value;
+    if (valor === null || valor === undefined || valor === '') return null;
+    return valor > 0 ? null : { horarioInvalido: true };
+  }
+
   onSubmit(): void {
     if (this.tareaForm.valid && this.idEstudiante) {
       this.loading = true;
       const nuevaTarea: Tarea = {
         ...this.tareaForm.value,
         id_estudiante: this.idEstudiante,
-        estado: true, // Por defecto, una nueva tarea está activa
-        fechaLimite: this.tareaForm.value.fechaLimite.toISOString().split('T')[0] // Formato YYYY-MM-DD para LocalDate en Java
+        estado: true,
+        fechaLimite: this.tareaForm.value.fechaLimite.toISOString().split('T')[0]
       };
 
-      // Si id_horario es opcional y no se ingresa, asegúrate de que sea null o undefined
-      if (nuevaTarea.id_horario === 0.0) {
-        nuevaTarea.id_horario = null as any; // Castear a null para backend si es un string vacío
+      if ( nuevaTarea.id_horario === '') {
+        nuevaTarea.id_horario = null as any;
       }
 
       this.tareaService.createTarea(nuevaTarea).subscribe({
-        next: (response) => {
+        next: () => {
           this.snackBar.open('Tarea registrada exitosamente!', 'Cerrar', { duration: 3000 });
           this.loading = false;
-          this.router.navigate(['/dashboard-estudiante/tareas']); // Redirigir a la lista de tareas
+          this.router.navigate(['/dashboard-estudiante/tareas']);
         },
         error: (err) => {
           const msg = `Error al registrar tarea: ${err.message}`;
@@ -113,14 +131,11 @@ ngOnInit(): void {
         }
       });
     } else {
-      this.snackBar.open('Por favor, complete todos los campos requeridos.', 'Cerrar', { duration: 3000 });
-      this.tareaForm.markAllAsTouched(); // Marcar todos los campos como tocados para mostrar errores
+      this.snackBar.open('Complete todos los campos correctamente.', 'Cerrar', { duration: 3000 });
+      this.tareaForm.markAllAsTouched();
     }
   }
 
-  /**
-   * Navega de vuelta a la lista de tareas.
-   */
   goBackToList(): void {
     this.router.navigate(['/dashboard-estudiante/tareas']);
   }

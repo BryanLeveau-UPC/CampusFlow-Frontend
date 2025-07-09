@@ -5,6 +5,6 @@ export interface Tarea {
   fechaLimite: Date; 
   prioridad: string;
   id_estudiante: number; 
-  id_horario: number; 
+  id_horario: string; 
   estado: boolean;
 }

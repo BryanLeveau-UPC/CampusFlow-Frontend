@@ -46,16 +46,6 @@
           </mat-error>
         </mat-form-field>
 
-        <!-- Campo id_horario (opcional o requerido según tu lógica de negocio) -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>ID Horario (Opcional)</mat-label>
-          <input matInput type="number" formControlName="id_horario" placeholder="Ej. 1">
-          <!-- Puedes añadir validación si id_horario es requerido -->
-          <!-- <mat-error *ngIf="tareaForm.get('id_horario')?.hasError('required') && tareaForm.get('id_horario')?.touched">
-            El ID de horario es requerido.
-          </mat-error> -->
-        </mat-form-field>
-
         <div class="form-actions">
           <button mat-stroked-button color="warn" type="button" (click)="goBackToList()" [disabled]="loading">
             <mat-icon>cancel</mat-icon> Cancelar

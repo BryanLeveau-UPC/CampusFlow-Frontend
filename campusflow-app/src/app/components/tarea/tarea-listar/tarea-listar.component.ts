@@ -10,6 +10,8 @@ import { Tarea } from '../../../model/tarea';
 import { AuthService } from '../../../services/auth.service';
 import { TareaService } from '../../../services/tarea.service';
 import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
+import { Estudiante } from '../../../model/estudiante';
+import { EstudianteService } from '../../../services/estudiante.service';
 
 @Component({
   selector: 'app-tarea-listar',
@@ -37,27 +39,47 @@ export class TareaListarComponent implements OnInit {
   constructor(
     private tareaService: TareaService,
     private authService: AuthService,
+    private estudianteService: EstudianteService,
     private router: Router,
     private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
-    this.idEstudiante = this.authService.getUserId(); // Obtener el ID del estudiante logueado
-    if (this.idEstudiante) {
-      this.loadTareas(this.idEstudiante);
-    } else {
-      this.errorMessage = 'No se pudo obtener el ID del estudiante. Por favor, inicie sesión.';
-      this.loading = false;
-      this.snackBar.open(this.errorMessage, 'Cerrar', { duration: 5000 });
-      // Opcional: Redirigir al login si no hay ID de usuario
-      // this.router.navigate(['/login']);
-    }
+    this.initCargaTareas();
   }
 
-  /**
-   * Carga las tareas activas para el estudiante.
-   * @param idEstudiante El ID del estudiante.
-   */
+  initCargaTareas(): void {
+    const userId = this.authService.getUserId();
+    console.log('User ID:', userId);
+
+    if (!userId) {
+      this.errorMessage = 'No se pudo obtener el ID del usuario. Por favor, inicie sesión.';
+      this.snackBar.open(this.errorMessage, 'Cerrar', { duration: 5000 });
+      this.loading = false;
+      return;
+    }
+
+    this.estudianteService.getEstudianteByUserId(userId).subscribe({
+      next: (estudiante: Estudiante) => {
+        if (estudiante && estudiante.idEstudiante) {
+          this.idEstudiante = estudiante.idEstudiante;
+          console.log('ID Estudiante encontrado:', this.idEstudiante);
+          this.loadTareas(this.idEstudiante);
+        } else {
+          this.errorMessage = 'No se encontró el estudiante asociado al usuario.';
+          this.snackBar.open(this.errorMessage, 'Cerrar', { duration: 5000 });
+          this.loading = false;
+        }
+      },
+      error: (err) => {
+        this.errorMessage = `Error al obtener el estudiante: ${err.message || 'Error desconocido'}`;
+        console.error('Error EstudianteService:', err);
+        this.snackBar.open(this.errorMessage, 'Cerrar', { duration: 5000 });
+        this.loading = false;
+      }
+    });
+  }
+
   loadTareas(idEstudiante: number): void {
     this.loading = true;
     this.errorMessage = null;
@@ -76,23 +98,15 @@ export class TareaListarComponent implements OnInit {
     });
   }
 
-  /**
-   * Navega al formulario de registro de tareas.
-   */
   goToRegisterTarea(): void {
     this.router.navigate(['tarea/registrar']);
   }
 
-  /**
-   * Marca una tarea como completada (lógicamente la elimina).
-   * @param tarea La tarea a marcar como completada.
-   */
   markAsCompleted(tarea: Tarea): void {
     if (tarea.idTarea) {
       this.tareaService.deleteTarea(tarea.idTarea).subscribe({
         next: () => {
           this.snackBar.open('Tarea marcada como completada.', 'Cerrar', { duration: 3000 });
-          // Recargar la lista de tareas para reflejar el cambio
           if (this.idEstudiante) {
             this.loadTareas(this.idEstudiante);
           }
@@ -106,11 +120,6 @@ export class TareaListarComponent implements OnInit {
     }
   }
 
-  /**
-   * Formatea la fecha para una mejor visualización.
-   * @param date La fecha a formatear.
-   * @returns La fecha formateada.
-   */
   formatDate(date: Date | string): string {
     if (!date) return '';
     const d = new Date(date);

@@ -14,7 +14,6 @@ import { RecompensaService } from '../../../services/recompensa.service';
 @Component({
   selector: 'app-recompensa-listar',
   imports: [
-    
     CommonModule,
     MatCardModule,
     MatButtonModule,
