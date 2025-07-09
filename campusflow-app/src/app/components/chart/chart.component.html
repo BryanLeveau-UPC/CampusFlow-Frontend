@@ -1,0 +1,16 @@
+<!--<mat-toolbar color="accent">
+  <span>Gráfico de Tareas por Semana</span>
+  <span class="spacer"></span>
+   <button mat-button routerLink="/dashboard">Volver</button> -->
+<!--</mat-toolbar> -->
+
+<div class="chart-container">
+  <canvas
+    baseChart
+    [data]="chartData"
+    [options]="chartOptions"
+    [type]="chartType"
+    [legend]="chartLegend">
+  </canvas>
+</div>
+
