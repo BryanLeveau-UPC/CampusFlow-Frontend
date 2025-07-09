@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { DashboardNavbarComponent } from '../dashboard-navbar/dashboard-navbar.component';
+import { ChartComponent } from "../../chart/chart.component";
 
 @Component({
   selector: 'app-estudiante-dashboard',
@@ -21,7 +22,8 @@ import { DashboardNavbarComponent } from '../dashboard-navbar/dashboard-navbar.c
     MatButtonModule,
     RouterModule,
     DashboardNavbarComponent,
-  ],
+    ChartComponent
+],
   templateUrl: './estudiante-dashboard.component.html',
   styleUrl: './estudiante-dashboard.component.css'
 })
